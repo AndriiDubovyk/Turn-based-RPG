@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         Vector3Int currentPlayerGridPos = tilemap.WorldToCell(transform.position);
     }
 
-    public void setMoveDestination(Vector3Int newDestinationTileGridPos)
+    public void SetMoveDestination(Vector3Int newDestinationTileGridPos)
     {
         destinationTileGridPos = newDestinationTileGridPos;
     }

@@ -38,7 +38,7 @@ public class GridSystem : MonoBehaviour
             if (currentCellGridPos == selectedTileGridPos)
             {
                 // Move character to the selected grid
-                playerController.setMoveDestination(currentCellGridPos);
+                playerController.SetMoveDestination(currentCellGridPos);
                 selectedTileGridPos = null;
             } else
             {
