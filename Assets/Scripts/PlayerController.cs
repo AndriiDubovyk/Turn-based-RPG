@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector3Int? destinationTileGridPos = null;
 
+    private float tileSize = 1f;
+    private float xPivot = 0.5f;
+    private float yPivot = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         if(destinationTileGridPos != null)
         {
-            Vector3 destinationPoint = new Vector3(destinationTileGridPos.Value.x * 0.16f + 0.08f, destinationTileGridPos.Value.y * 0.16f + 0.08f, 0);
+            Vector3 destinationPoint = new Vector3(destinationTileGridPos.Value.x * tileSize + tileSize * xPivot, destinationTileGridPos.Value.y * tileSize + tileSize * yPivot, 0);
             transform.position = Vector3.MoveTowards(transform.position, destinationPoint, moveSpeed * Time.deltaTime);
 
             if(destinationPoint == transform.position)
