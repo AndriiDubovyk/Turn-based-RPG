@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
-    public Tilemap tilemap;
+    public Tilemap groundTilemap;
+    public Tilemap collidersTilemap;
 
     private Vector3Int? destinationTileGridPos = null;
 
@@ -35,11 +36,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Vector3Int currentPlayerGridPos = tilemap.WorldToCell(transform.position);
+        Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(transform.position);
     }
 
     public void SetMoveDestination(Vector3Int newDestinationTileGridPos)
     {
+        
         destinationTileGridPos = newDestinationTileGridPos;
     }
 }

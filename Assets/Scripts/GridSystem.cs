@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class GridSystem : MonoBehaviour
 {
     public GameObject player;
+    public Tilemap groundTilemap;
     public Tilemap uiOverlayTilemap;
     public Tilemap collidersTilemap;
     public Tile selectionTile;
+    public Tile pathMarkTile;
 
     private Vector3Int? selectedTileGridPos;
+    private List<Vector3Int> movementPath;
     private PlayerController playerController;
 
     // Start is called before the first frame update
@@ -46,9 +50,49 @@ public class GridSystem : MonoBehaviour
             {
                 // Select new tile if it don't have objects that block moving
                 selectedTileGridPos = currentCellGridPos;
+                SetPlayerPath(currentCellGridPos);
                 uiOverlayTilemap.SetTile(currentCellGridPos, selectionTile);
             }
             
+        }
+
+        // If player reach destination clear path marks
+        if(movementPath != null)
+        {
+            Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(player.transform.position);
+            if(movementPath.Last()==currentPlayerGridPos)
+            {
+                ClearPathMarks();
+            }
+        }
+    }
+
+    private void SetPlayerPath(Vector3Int destinationTileGridPos)
+    {
+        ClearPathMarks();
+
+        int searchPathZoneWidth = 30;
+        int searchPathZoneHeight = 20;
+
+        Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(player.transform.position);
+        int offsetX = currentPlayerGridPos.x - searchPathZoneWidth/2;
+        int offsetY = currentPlayerGridPos.y - searchPathZoneHeight/2;
+        Pathfinder pf = new Pathfinder(offsetX, offsetY, searchPathZoneWidth, searchPathZoneHeight, collidersTilemap);
+        movementPath = pf.GetPath(currentPlayerGridPos.x - offsetX, currentPlayerGridPos.y - offsetY, destinationTileGridPos.x - offsetX, destinationTileGridPos.y - offsetY);
+        for (int i = 0; i < movementPath.Count; i++)
+        {
+            uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
+        }
+    }
+
+    private void ClearPathMarks()
+    {
+        if (movementPath != null)
+        {
+            for (int i = 0; i < movementPath.Count; i++)
+            {
+                uiOverlayTilemap.SetTile(movementPath[i], null);
+            }
         }
     }
 }

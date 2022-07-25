@@ -10395,7 +10395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  tilemap: {fileID: 1000475247}
+  groundTilemap: {fileID: 1000475247}
+  collidersTilemap: {fileID: 897360980}
+  uiOverrlayTilemap: {fileID: 0}
 --- !u!114 &1557100796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10455,6 +10457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1557100792}
+  groundTilemap: {fileID: 0}
   uiOverlayTilemap: {fileID: 1411383210}
   collidersTilemap: {fileID: 897360980}
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
+  pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
