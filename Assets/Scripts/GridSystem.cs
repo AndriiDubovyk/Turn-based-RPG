@@ -71,8 +71,8 @@ public class GridSystem : MonoBehaviour
     {
         ClearPathMarks();
 
-        int searchPathZoneWidth = 30;
-        int searchPathZoneHeight = 20;
+        int searchPathZoneWidth = 24;
+        int searchPathZoneHeight = 16;
 
         Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(player.transform.position);
         int offsetX = currentPlayerGridPos.x - searchPathZoneWidth/2;

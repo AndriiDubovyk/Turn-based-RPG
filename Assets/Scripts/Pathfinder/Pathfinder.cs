@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,11 +7,11 @@ using UnityEngine.Tilemaps;
 
 public class Pathfinder
 {
-    Grid grid;
-    int endX;
-    int endY;
-    int offsetX;
-    int offsetY;
+    private Grid grid;
+    private int endX;
+    private int endY;
+    private int offsetX;
+    private int offsetY;
 
     public Pathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap)
     {
@@ -117,105 +116,5 @@ public class Pathfinder
         // Use Manhattan Distance because we we are allowed to move only in four directions only
         return Math.Abs(endX - currentX) + Math.Abs(endY - currentY);
     }
-
-    class GridTile
-    {
-        public int x;
-        public int y;
-        public bool isMovementAllowed;
-
-        public GridTile(int x, int y, bool isMovementAllowed)
-        {
-            this.x = x;
-            this.y = y;
-            this.isMovementAllowed = isMovementAllowed;
-        }
-
-    }
-
-    class PathNode
-    {
-        public GridTile gridTile;
-
-        public int gCost;
-        public int hCost;
-        public int fCost;
-
-        public PathNode parent;
-
-        public PathNode(GridTile gridTile, int gCost, int hCost, PathNode parent)
-        {
-            this.gridTile = gridTile;
-            this.gCost = gCost;
-            this.hCost = hCost;
-            this.fCost = gCost + hCost;
-            this.parent = parent;
-        }
-
-    }
-
-    class Grid
-    {
-        private GridTile[,] gridArray;
-
-        public int offsetX;
-        public int offsetY;
-
-        public Grid(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap)
-        {
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
-            gridArray = new GridTile[width, height];
-            for (int x = 0; x < gridArray.GetLength(0); x++)
-            {
-                for (int y = 0; y < gridArray.GetLength(1); y++)
-                {
-                    Vector3Int realTilePos = new Vector3Int(x + offsetX, y + offsetY);
-                    // allow movement if there no colliders
-                    gridArray[x, y] = new GridTile(x, y, collidersTilemap.GetTile(realTilePos) == null);
-                }
-            }
-        }
-
-        public List<GridTile> GetNeighbours(GridTile tile)
-        {
-            List<GridTile> neighbours = new List<GridTile>();
-            // Check for left neighbour
-            int leftNeighbourIndexX = tile.x - 1;
-            int leftNeighbourIndexY = tile.y;
-            if (leftNeighbourIndexX > 0 && gridArray[leftNeighbourIndexX, leftNeighbourIndexY].isMovementAllowed)
-            {
-                neighbours.Add(gridArray[leftNeighbourIndexX, leftNeighbourIndexY]);
-            }
-            // Check for right neighbour
-            int rightNeighbourIndexX = tile.x + 1;
-            int rightNeighbourIndexY = tile.y;
-            if (leftNeighbourIndexX > 0 && gridArray[rightNeighbourIndexX, rightNeighbourIndexY].isMovementAllowed)
-            {
-                neighbours.Add(gridArray[rightNeighbourIndexX, rightNeighbourIndexY]);
-            }
-            // Check for top neighbour
-            int topNeighbourIndexX = tile.x;
-            int topNeighbourIndexY = tile.y + 1;
-            if (leftNeighbourIndexX > 0 && gridArray[topNeighbourIndexX, topNeighbourIndexY].isMovementAllowed)
-            {
-                neighbours.Add(gridArray[topNeighbourIndexX, topNeighbourIndexY]);
-            }
-            // Check for bottom neighbour
-            int bottomNeighbourIndexX = tile.x;
-            int bottomNeighbourIndexY = tile.y - 1;
-            if (leftNeighbourIndexX > 0 && gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY].isMovementAllowed)
-            {
-                neighbours.Add(gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY]);
-            }
-            return neighbours;
-        }
-
-        public GridTile Get(int x, int y)
-        {
-            return gridArray[x, y];
-        }
-
-    }
-
+ 
 }
