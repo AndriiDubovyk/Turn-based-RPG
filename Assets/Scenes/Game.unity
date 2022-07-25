@@ -10476,7 +10476,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   groundTilemap: {fileID: 1000475247}
+  uiOverlayTilemap: {fileID: 1411383210}
   collidersTilemap: {fileID: 897360980}
+  selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
+  pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
+  movementPath: []
 --- !u!114 &1557100796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10539,5 +10543,3 @@ MonoBehaviour:
   groundTilemap: {fileID: 1000475247}
   uiOverlayTilemap: {fileID: 1411383210}
   collidersTilemap: {fileID: 897360980}
-  selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
-  pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}

@@ -23,6 +23,9 @@ public class Grid
 
     public List<GridTile> GetNeighbours(GridTile tile)
     {
+        int gridWidth = gridArray.GetLength(0);
+        int gridHeight = gridArray.GetLength(1);
+
         List<GridTile> neighbours = new List<GridTile>();
         // Check for left neighbour
         int leftNeighbourIndexX = tile.x - 1;
@@ -34,21 +37,21 @@ public class Grid
         // Check for right neighbour
         int rightNeighbourIndexX = tile.x + 1;
         int rightNeighbourIndexY = tile.y;
-        if (leftNeighbourIndexX > 0 && gridArray[rightNeighbourIndexX, rightNeighbourIndexY].isMovementAllowed)
+        if (rightNeighbourIndexX < gridWidth && gridArray[rightNeighbourIndexX, rightNeighbourIndexY].isMovementAllowed)
         {
             neighbours.Add(gridArray[rightNeighbourIndexX, rightNeighbourIndexY]);
         }
         // Check for top neighbour
         int topNeighbourIndexX = tile.x;
         int topNeighbourIndexY = tile.y + 1;
-        if (leftNeighbourIndexX > 0 && gridArray[topNeighbourIndexX, topNeighbourIndexY].isMovementAllowed)
+        if (topNeighbourIndexY < gridHeight && gridArray[topNeighbourIndexX, topNeighbourIndexY].isMovementAllowed)
         {
             neighbours.Add(gridArray[topNeighbourIndexX, topNeighbourIndexY]);
         }
         // Check for bottom neighbour
         int bottomNeighbourIndexX = tile.x;
         int bottomNeighbourIndexY = tile.y - 1;
-        if (leftNeighbourIndexX > 0 && gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY].isMovementAllowed)
+        if (bottomNeighbourIndexY > 0 && gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY].isMovementAllowed)
         {
             neighbours.Add(gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY]);
         }
