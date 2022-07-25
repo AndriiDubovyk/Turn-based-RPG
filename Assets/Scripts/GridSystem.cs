@@ -7,6 +7,7 @@ public class GridSystem : MonoBehaviour
 {
     public GameObject player;
     public Tilemap uiOverlayTilemap;
+    public Tilemap collidersTilemap;
     public Tile selectionTile;
 
     private Vector3Int? selectedTileGridPos;
@@ -40,9 +41,10 @@ public class GridSystem : MonoBehaviour
                 // Move character to the selected grid
                 playerController.SetMoveDestination(currentCellGridPos);
                 selectedTileGridPos = null;
-            } else
+            } 
+            else if (collidersTilemap.GetTile(currentCellGridPos) == null)
             {
-                // Select new tile
+                // Select new tile if it don't have objects that block moving
                 selectedTileGridPos = currentCellGridPos;
                 uiOverlayTilemap.SetTile(currentCellGridPos, selectionTile);
             }
