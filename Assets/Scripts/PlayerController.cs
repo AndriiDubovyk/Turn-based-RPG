@@ -6,110 +6,60 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-
-    public Tilemap groundTilemap;
-    public Tilemap uiOverlayTilemap;
-    public Tilemap collidersTilemap;
+    public GameObject grid;
 
     public Tile selectionTile;
     public Tile pathMarkTile;
 
-    public List<Vector3Int> movementPath;
+    private GridManager gridManager;
+    private UnitController unitController;
 
-    private float tileSize = 1f;
-    private float xPivot = 0.5f;
-    private float yPivot = 0.5f;
-    private int pathfindingXMaxDistance = 22;
-    private int pathfindingYMaxDistance = 14;
-
-    private bool canMove = false;
+    public bool pathConfirmed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gridManager = grid.GetComponent<GridManager>();
+        unitController = GetComponent<UnitController>();
+        pathConfirmed = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectDestinationCell()
     {
-        if(canMove && movementPath != null && movementPath.Count > 0)
+        if(Input.GetMouseButtonDown(0))
         {
-            // Finx next cell point
-            Vector3 nextCellPoint = new Vector3(movementPath[0].x * tileSize + tileSize * xPivot, movementPath[0].y * tileSize + tileSize * yPivot, 0);
-
-            // Move to next cell point
-            transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
-
-            // Check if we reach next cell
-            if (nextCellPoint == transform.position)
+            Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
+            Debug.Log("Click");
+            if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
             {
-                // Remove this point from path
-                ClearNextMovementPathMark();
-
-                // If it was last point it means we reach the destination
-                if(movementPath.Count == 0)
-                {
-                    ClearMovementPath();  
-                    canMove = false;
-                }
+                pathConfirmed = true;
+                unitController.ConfirmTurn();
             }
-
-        }
-
-    }
-
-    public void SetMovementPathTo(Vector3Int destinationCell)
-    {
-        ClearMovementPath();
-        Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(transform.position);
-        int offsetX = currentPlayerGridPos.x- pathfindingXMaxDistance;
-        int offsetY = currentPlayerGridPos.y - pathfindingYMaxDistance;
-        Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, collidersTilemap);
-        movementPath = pf.GetPath(currentPlayerGridPos.x - offsetX, currentPlayerGridPos.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
-        ShowPathMarks();
-    }
-
-    private void ShowPathMarks()
-    {
-        if(movementPath != null) {
-            for (int i = 0; i < movementPath.Count - 1; i++)
+            else
             {
-                uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
+                pathConfirmed = false;
+                Debug.Log("Set path");
+                unitController.SetMovementPathTo(clickedCell);
+                ShowPathMarks();
             }
-            uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
         }
     }
 
-    private void ClearMovementPath()
+
+    public void ShowPathMarks()
     {
-        if (movementPath != null)
+        gridManager.uiOverlayTilemap.ClearAllTiles();
+        List<Vector3Int> movementPath = unitController.GetMovementPath();
+
+        if (movementPath != null && movementPath.Count > 0)
         {
             for (int i = 0; i < movementPath.Count; i++)
             {
-                uiOverlayTilemap.SetTile(movementPath[i], null);
+                gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
             }
-        }
-        movementPath = null;
-    }
-
-    private void ClearNextMovementPathMark()
-    {
-        if (movementPath != null && movementPath.Count > 0)
-        {
-            uiOverlayTilemap.SetTile(movementPath[0], null);
-            movementPath.RemoveAt(0);
+            gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
         }
     }
 
-    public void StartMoving()
-    {
-        canMove = true;
-    }
-
-    private Vector3Int GetPosition()
-    {
-        return groundTilemap.WorldToCell(transform.position); ;
-    }
 }

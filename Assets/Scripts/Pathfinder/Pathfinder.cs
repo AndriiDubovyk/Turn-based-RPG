@@ -31,9 +31,14 @@ public class Pathfinder
         {
             return null;
         }
+        // No path to the same node
+        if (startNode == endNode)
+        {
+            return null;
+        }
 
         // Nodes that are processing now
-        
+
         MinPriorityQueue<PathNode> openList = new MinPriorityQueue<PathNode>();
         openList.Enqueue(startNode);
         // Nodes that have been already processed
