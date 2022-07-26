@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private float tileSize = 1f;
     private float xPivot = 0.5f;
     private float yPivot = 0.5f;
-    private int pathfindingWidth = 40;
-    private int pathfindingHeight = 22;
+    private int pathfindingXMaxDistance = 22;
+    private int pathfindingYMaxDistance = 14;
 
     private bool canMove = false;
 
@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour
     {
         ClearMovementPath();
         Vector3Int currentPlayerGridPos = groundTilemap.WorldToCell(transform.position);
-        int offsetX = currentPlayerGridPos.x - pathfindingWidth / 2;
-        int offsetY = currentPlayerGridPos.y - pathfindingHeight / 2;
-        Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingWidth, pathfindingHeight, collidersTilemap);
+        int offsetX = currentPlayerGridPos.x- pathfindingXMaxDistance;
+        int offsetY = currentPlayerGridPos.y - pathfindingYMaxDistance;
+        Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, collidersTilemap);
         movementPath = pf.GetPath(currentPlayerGridPos.x - offsetX, currentPlayerGridPos.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
         ShowPathMarks();
     }

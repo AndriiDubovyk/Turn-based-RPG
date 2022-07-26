@@ -1,66 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class Grid
 {
-    private GridTile[,] gridArray;
+    private PathNode[,] gridArray;
 
     public Grid(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap)
     {
-        gridArray = new GridTile[width, height];
+        gridArray = new PathNode[width, height];
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 Vector3Int realTilePos = new Vector3Int(x + offsetX, y + offsetY);
                 // allow movement if there no colliders
-                gridArray[x, y] = new GridTile(x, y, collidersTilemap.GetTile(realTilePos) == null);
+                bool isWalkable = collidersTilemap.GetTile(realTilePos) == null;
+                gridArray[x, y] = new PathNode(x, y, isWalkable);
             }
         }
     }
 
-    public List<GridTile> GetNeighbours(GridTile tile)
+    public List<PathNode> GetNeighbours(PathNode node)
     {
-        int gridWidth = gridArray.GetLength(0);
-        int gridHeight = gridArray.GetLength(1);
+        int width = gridArray.GetLength(0);
+        int height = gridArray.GetLength(1);
 
-        List<GridTile> neighbours = new List<GridTile>();
+        List<PathNode> neighbours = new List<PathNode>();
         // Check for left neighbour
-        int leftNeighbourIndexX = tile.x - 1;
-        int leftNeighbourIndexY = tile.y;
-        if (leftNeighbourIndexX > 0 && gridArray[leftNeighbourIndexX, leftNeighbourIndexY].isMovementAllowed)
+        if (node.x - 1 > 0)
         {
-            neighbours.Add(gridArray[leftNeighbourIndexX, leftNeighbourIndexY]);
+            neighbours.Add(gridArray[node.x - 1, node.y]);
         }
         // Check for right neighbour
-        int rightNeighbourIndexX = tile.x + 1;
-        int rightNeighbourIndexY = tile.y;
-        if (rightNeighbourIndexX < gridWidth && gridArray[rightNeighbourIndexX, rightNeighbourIndexY].isMovementAllowed)
+        if (node.x + 1 < width)
         {
-            neighbours.Add(gridArray[rightNeighbourIndexX, rightNeighbourIndexY]);
+            neighbours.Add(gridArray[node.x + 1, node.y]);
         }
         // Check for top neighbour
-        int topNeighbourIndexX = tile.x;
-        int topNeighbourIndexY = tile.y + 1;
-        if (topNeighbourIndexY < gridHeight && gridArray[topNeighbourIndexX, topNeighbourIndexY].isMovementAllowed)
+        if (node.y + 1 < height)
         {
-            neighbours.Add(gridArray[topNeighbourIndexX, topNeighbourIndexY]);
+            neighbours.Add(gridArray[node.x, node.y + 1]);
         }
         // Check for bottom neighbour
-        int bottomNeighbourIndexX = tile.x;
-        int bottomNeighbourIndexY = tile.y - 1;
-        if (bottomNeighbourIndexY > 0 && gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY].isMovementAllowed)
+        if (node.y - 1 > 0)
         {
-            neighbours.Add(gridArray[bottomNeighbourIndexX, bottomNeighbourIndexY]);
+            neighbours.Add(gridArray[node.x, node.y - 1]);
         }
         return neighbours;
     }
 
-    public GridTile Get(int x, int y)
+    public PathNode Get(int x, int y)
     {
         return gridArray[x, y];
     }
-
 }
