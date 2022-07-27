@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
-            Debug.Log("Click");
             if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
             {
                 pathConfirmed = true;
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 pathConfirmed = false;
-                Debug.Log("Set path");
                 unitController.SetMovementPathTo(clickedCell);
                 ShowPathMarks();
             }
