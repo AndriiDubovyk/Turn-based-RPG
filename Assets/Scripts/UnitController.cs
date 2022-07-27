@@ -37,6 +37,7 @@ public class UnitController : MonoBehaviour
         Vector3Int currentCell = GetPositionOnGrid();
         int offsetX = currentCell.x - pathfindingXMaxDistance;
         int offsetY = currentCell.y - pathfindingYMaxDistance;
+        // We can't reach this cell anyway so we can just set movementPath to null
         if(Math.Abs(destinationCell.x - currentCell.x) > pathfindingXMaxDistance
             || Math.Abs(destinationCell.y - currentCell.y) > pathfindingYMaxDistance)
         {
@@ -46,7 +47,7 @@ public class UnitController : MonoBehaviour
         Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap);
         movementPath = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
         // Enemy need path to player neighbour's cell (not to player's cell)
-        if(tag=="Enemy" && movementPath!=null)
+        if (tag=="Enemy" && movementPath!=null)
         {
             movementPath.RemoveAt(movementPath.Count - 1);
             if (movementPath.Count == 0) movementPath = null;
@@ -56,7 +57,6 @@ public class UnitController : MonoBehaviour
     public void ConfirmTurn()
     {
         state = State.IsMakingTurn;
-
         // Temporary solution. TODO
         if (movementPath == null) state = State.IsWaiting;
     }
@@ -77,6 +77,7 @@ public class UnitController : MonoBehaviour
     {
         if(state == State.IsMakingTurn)
         {
+
             if (movementPath == null || movementPath.Count == 0) return;
             // Find next cell point
             Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y *  gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);

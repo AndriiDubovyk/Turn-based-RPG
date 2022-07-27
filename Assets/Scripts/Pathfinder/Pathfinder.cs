@@ -47,12 +47,11 @@ public class Pathfinder
         while(openList.Count > 0)
         {
             PathNode currentNode = openList.Dequeue();
-            if(currentNode == endNode)
+            if (currentNode == endNode)
             {
                 // We have reached needed node
                 return CalculatePathFromEndNode(endNode);
             }
-
 
             closedList.Add(currentNode);
 
@@ -82,7 +81,6 @@ public class Pathfinder
                 }
             }
         }
-
         return null; // No path was found
     }
 
