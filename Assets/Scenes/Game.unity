@@ -438,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453695044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 5.5, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -474,6 +474,8 @@ MonoBehaviour:
   moveSpeed: 10
   grid: {fileID: 1522314640}
   state: 0
+  pathfindingXMaxDistance: 4
+  pathfindingYMaxDistance: 4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: -0.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10409,6 +10411,9 @@ MonoBehaviour:
   groundTilemap: {fileID: 1000475247}
   uiOverlayTilemap: {fileID: 1411383210}
   collidersTilemap: {fileID: 897360980}
+  tileSize: 1
+  xTilePivot: 0.5
+  yTilePivot: 0.5
 --- !u!1 &1557100792
 GameObject:
   m_ObjectHideFlags: 0
@@ -10489,7 +10494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557100792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10542,6 +10547,8 @@ MonoBehaviour:
   moveSpeed: 10
   grid: {fileID: 1522314640}
   state: 0
+  pathfindingXMaxDistance: 22
+  pathfindingYMaxDistance: 14
 --- !u!1 &1775356285
 GameObject:
   m_ObjectHideFlags: 0
