@@ -5,6 +5,8 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
     public float moveSpeed = 10f;
+
+
     public GameObject grid;
 
     private GridManager gridManager;
@@ -18,11 +20,9 @@ public class UnitController : MonoBehaviour
         IsWaiting // waiting opponent's turn end
     }
 
-    private float tileSize = 1f;
-    private float xPivot = 0.5f;
-    private float yPivot = 0.5f;
-    private int pathfindingXMaxDistance = 22;
-    private int pathfindingYMaxDistance = 14;
+    
+    public int pathfindingXMaxDistance = 22;
+    public int pathfindingYMaxDistance = 14;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +45,12 @@ public class UnitController : MonoBehaviour
         }
         Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap);
         movementPath = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
+        // Enemy need path to player neighbour's cell (not to player's cell)
+        if(tag=="Enemy" && movementPath!=null)
+        {
+            movementPath.RemoveAt(movementPath.Count - 1);
+            if (movementPath.Count == 0) movementPath = null;
+        }
     }
 
     public void ConfirmTurn()
@@ -73,7 +79,7 @@ public class UnitController : MonoBehaviour
         {
             if (movementPath == null || movementPath.Count == 0) return;
             // Find next cell point
-            Vector3 nextCellPoint = new Vector3(movementPath[0].x * tileSize + tileSize * xPivot, movementPath[0].y * tileSize + tileSize * yPivot, 0);
+            Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y *  gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
 
             // Move to next cell point
             transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
