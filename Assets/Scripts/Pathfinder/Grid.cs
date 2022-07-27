@@ -28,7 +28,7 @@ public class Grid
 
         List<PathNode> neighbours = new List<PathNode>();
         // Check for left neighbour
-        if (node.x - 1 > 0)
+        if (node.x - 1 >= 0)
         {
             neighbours.Add(gridArray[node.x - 1, node.y]);
         }
@@ -43,7 +43,7 @@ public class Grid
             neighbours.Add(gridArray[node.x, node.y + 1]);
         }
         // Check for bottom neighbour
-        if (node.y - 1 > 0)
+        if (node.y - 1 >= 0)
         {
             neighbours.Add(gridArray[node.x, node.y - 1]);
         }
