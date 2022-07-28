@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,14 +45,44 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private bool IsPlayerPathBlockedByEnemy()
+    {
+        UnitController playerUC = player.GetComponent<UnitController>();
+        List<Vector3Int> path = playerUC.GetMovementPath();
+        Vector3Int[] enemiesCells = Array.ConvertAll(enemies, x => x.GetComponent<UnitController>().GetPositionOnGrid());
+        foreach(Vector3Int pathCell in path)
+        {
+            foreach (Vector3Int enemyCell in enemiesCells)
+            {
+                if (pathCell == enemyCell)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void MakePlayerTurn(UnitController uc)
     {
         switch (uc.state)
         {
             case UnitController.State.IsThinking:
-                if (uc.GetMovementPath() != null && activeUnit.GetComponent<PlayerController>().pathConfirmed)
+                if (uc.GetMovementPath() != null 
+                    && player.GetComponent<PlayerController>().pathConfirmed)
                 {
-                    uc.ConfirmTurn();
+                    if(!IsPlayerPathBlockedByEnemy())
+                    {
+                        uc.ConfirmTurn();
+                    }
+                    else
+                    {
+                        // Clear path
+                        Debug.Log("Path has been blocked by enemy");
+                        uc.SetMovementPathTo(uc.GetPositionOnGrid());
+                        player.GetComponent<PlayerController>().UpdateOverlayMarks();
+                        uc.state = UnitController.State.IsThinking;
+                    }
                 }
                 else
                 {
