@@ -100,33 +100,43 @@ public class UnitController : MonoBehaviour
         {
             if(enemyTarget!=null)
             {
-                combatUnit.Attack(enemyTarget.GetComponent<CombatUnit>());
-                enemyTarget = null;
-                if (tag == "Player") GetComponent<PlayerController>().ShowOverlayMarks();
-                else if (tag == "Enemy") GameObject.Find("Player").GetComponent<PlayerController>().UpdateHealthBar();
-                state = State.IsWaiting;
+                Attack();
             }
             else if (movementPath != null && movementPath.Count > 0)
             {
-                // Find next cell point
-                Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y * gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
-
-                // Move to next cell point
-                transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
-
-                // Check if we reach next cell and if so stop moving
-                if (nextCellPoint == transform.position)
-                {
-                    movementPath.RemoveAt(0);
-                    if (movementPath.Count == 0)
-                    {
-                        movementPath = null;
-                    }
-                    if (tag == "Player") GetComponent<PlayerController>().ShowOverlayMarks();
-                    state = State.IsWaiting;
-                }
+                Move();
             }
             
+        }
+    }
+
+    private void Attack()
+    {
+        combatUnit.Attack(enemyTarget.GetComponent<CombatUnit>());
+        enemyTarget = null;
+        if (tag == "Player") GetComponent<PlayerController>().UpdateOverlayMarks();
+        else if (tag == "Enemy") GameObject.Find("Player").GetComponent<PlayerController>().UpdateHealthBar();
+        state = State.IsWaiting;
+    }
+
+    private void Move()
+    {
+        // Find next cell point
+        Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y * gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
+
+        // Move to next cell point
+        transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
+
+        // Check if we reach next cell and if so stop moving
+        if (nextCellPoint == transform.position)
+        {
+            movementPath.RemoveAt(0);
+            if (movementPath.Count == 0)
+            {
+                movementPath = null;
+            }
+            if (tag == "Player") GetComponent<PlayerController>().UpdateOverlayMarks();
+            state = State.IsWaiting;
         }
     }
 }

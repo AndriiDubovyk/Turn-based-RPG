@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         pathConfirmed = false;
     }
 
-    public void SelectDestinationCell()
+    public void SetAction()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -37,38 +37,45 @@ public class PlayerController : MonoBehaviour
             GameObject clickedUnit = gridManager.GetUnitAtCell(clickedCell);
             if (clickedUnit == null)
             {
-                if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
-                {
-                    pathConfirmed = true;
-                    unitController.ConfirmTurn();
-                }
-                else
-                {
-                    pathConfirmed = false;
-                    unitController.SetMovementPathTo(clickedCell);
-                    ShowOverlayMarks();
-                }
+                SelectDestinationCell(clickedCell);
             } 
-            else
+            else if (clickedUnit != gameObject && unitController.CanAttack(clickedUnit))
             {
-                if(clickedUnit != gameObject && unitController.CanAttack(clickedUnit)) // player can't attack himself
-                {
-                    if(unitController.GetEnemyTarget() == clickedUnit)
-                    {
-                        unitController.ConfirmTurn();
-                    }
-                    else
-                    {
-                        unitController.SetEnemyTarget(clickedUnit);
-                        ShowOverlayMarks();
-                    }
-                }
+                SetAttackTarget(clickedUnit);
             }
         }
     }
 
+    private void SelectDestinationCell(Vector3Int clickedCell)
+    {
+        if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
+        {
+            pathConfirmed = true;
+            unitController.ConfirmTurn();
+        }
+        else
+        {
+            pathConfirmed = false;
+            unitController.SetMovementPathTo(clickedCell);
+            UpdateOverlayMarks();
+        }
+    }
 
-    public void ShowOverlayMarks()
+    private void SetAttackTarget(GameObject clickedUnit)
+    {
+        if (unitController.GetEnemyTarget() == clickedUnit)
+        {
+            unitController.ConfirmTurn();
+        }
+        else
+        {
+            unitController.SetEnemyTarget(clickedUnit);
+            UpdateOverlayMarks();
+        }
+    }
+
+
+    public void UpdateOverlayMarks()
     {
         gridManager.uiOverlayTilemap.ClearAllTiles();
 
@@ -77,17 +84,27 @@ public class PlayerController : MonoBehaviour
 
         if(enemyTarget!=null)
         {
-            Vector3Int targetCell = enemyTarget.GetComponent<UnitController>().GetPositionOnGrid();
-            gridManager.uiOverlayTilemap.SetTile(targetCell, attackSelectionTile);
+            ShowAttackTargetSelectionOverlay(enemyTarget);
         } 
         else if (movementPath != null && movementPath.Count > 0)
         {
-            for (int i = 0; i < movementPath.Count; i++)
-            {
-                gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
-            }
-            gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
+            ShowMovementPathOverlay(movementPath);
         }
+    }
+
+    private void ShowAttackTargetSelectionOverlay(GameObject enemyTarget)
+    {
+        Vector3Int targetCell = enemyTarget.GetComponent<UnitController>().GetPositionOnGrid();
+        gridManager.uiOverlayTilemap.SetTile(targetCell, attackSelectionTile);
+    }
+
+    private void ShowMovementPathOverlay(List<Vector3Int> movementPath)
+    {
+        for (int i = 0; i < movementPath.Count; i++)
+        {
+            gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
+        }
+        gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
     }
 
     public void UpdateHealthBar()

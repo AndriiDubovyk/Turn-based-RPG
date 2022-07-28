@@ -35,63 +35,73 @@ public class TurnManager : MonoBehaviour
         switch(turn)
         {
             case Turn.PlayerTurn:
-                switch(activeUnitController.state)
-                {
-                    case UnitController.State.IsThinking:
-                        if(activeUnitController.GetMovementPath() != null && activeUnit.GetComponent<PlayerController>().pathConfirmed)
-                        {
-                            activeUnitController.ConfirmTurn();
-                        } 
-                        else
-                        {
-                            activeUnit.GetComponent<PlayerController>().SelectDestinationCell();
-                        }
-                        break;
-                    case UnitController.State.IsMakingTurn:
-                        // just wait till animation end
-                        break;
-                    case UnitController.State.IsWaiting:
-                        // pass the turn to the opponent
-                        activeEnemyIndex = 0;
-                        activeUnit = enemies[activeEnemyIndex];
-                        activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
-                        turn = Turn.EnemyTurn;
-                        break;
-                }
+                MakePlayerTurn(activeUnitController);
                 break;
             case Turn.EnemyTurn:
-                switch (activeUnitController.state)
+                MakeEnemyTurn(activeUnitController);
+                break;
+        }
+    }
+
+    private void MakePlayerTurn(UnitController uc)
+    {
+        switch (uc.state)
+        {
+            case UnitController.State.IsThinking:
+                if (uc.GetMovementPath() != null && activeUnit.GetComponent<PlayerController>().pathConfirmed)
                 {
-                    case UnitController.State.IsThinking:
-                        Vector3Int playerCell = player.GetComponent<UnitController>().GetPositionOnGrid();
-                        if(activeUnitController.CanAttack(player))
-                        {
-                            activeUnitController.SetEnemyTarget(player);
-                        } 
-                        else
-                        {
-                            activeUnitController.GetComponent<UnitController>().SetMovementPathTo(playerCell);
-                        }
-                        activeUnitController.ConfirmTurn();
-                        break;
-                    case UnitController.State.IsMakingTurn:
-                        // just wait till animation end
-                        break;
-                    case UnitController.State.IsWaiting:
-                        // pass the turn to the opponent
-                        if (activeEnemyIndex < enemies.Length - 1)
-                        {
-                            activeUnit = enemies[++activeEnemyIndex];
-                            activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
-                            turn = Turn.EnemyTurn;
-                        }
-                        else
-                        {
-                            activeUnit = player;
-                            activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
-                            turn = Turn.PlayerTurn;
-                        }
-                        break;
+                    uc.ConfirmTurn();
+                }
+                else
+                {
+                    activeUnit.GetComponent<PlayerController>().SetAction();
+                }
+                break;
+            case UnitController.State.IsMakingTurn:
+                // just wait till animation end
+                break;
+            case UnitController.State.IsWaiting:
+                // pass the turn to the opponent
+                activeEnemyIndex = 0;
+                activeUnit = enemies[activeEnemyIndex];
+                activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                turn = Turn.EnemyTurn;
+                break;
+        }
+    }
+
+    private void MakeEnemyTurn(UnitController uc)
+    {
+        switch (uc.state)
+        {
+            case UnitController.State.IsThinking:
+                Vector3Int playerCell = player.GetComponent<UnitController>().GetPositionOnGrid();
+                if (uc.CanAttack(player))
+                {
+                    uc.SetEnemyTarget(player);
+                }
+                else
+                {
+                    uc.GetComponent<UnitController>().SetMovementPathTo(playerCell);
+                }
+                uc.ConfirmTurn();
+                break;
+            case UnitController.State.IsMakingTurn:
+                // just wait till animation end
+                break;
+            case UnitController.State.IsWaiting:
+                // pass the turn to the opponent
+                if (activeEnemyIndex < enemies.Length - 1)
+                {
+                    activeUnit = enemies[++activeEnemyIndex];
+                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    turn = Turn.EnemyTurn;
+                }
+                else
+                {
+                    activeUnit = player;
+                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    turn = Turn.PlayerTurn;
                 }
                 break;
         }
