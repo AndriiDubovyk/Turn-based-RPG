@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -35,8 +36,8 @@ public class GridManager : MonoBehaviour
 
     private Vector3Int[] GetEnemiesCells()
     {
-        GameObject[] enemies = turnManager.enemies;
-        Vector3Int[] enemiesCells = Array.ConvertAll(enemies, it => it.GetComponent<UnitController>().GetPositionOnGrid());
+        List<GameObject> enemies = turnManager.enemies;
+        Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), it => it.GetComponent<UnitController>().GetPositionOnGrid());
         return enemiesCells;
     }
 

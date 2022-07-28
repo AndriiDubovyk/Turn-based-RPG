@@ -66,8 +66,8 @@ public class UnitController : MonoBehaviour
          * Enemies must not consider player cell as occupied to get path to player.
          * And player anyway can't walk again on current cell
          */
-        GameObject[] enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().enemies;
-        for(int i=0; i<enemies.Length; i++)
+        List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().enemies;
+        for(int i=0; i<enemies.Count; i++)
         {
             if (gameObject != enemies[i]) otherUnitsCells.Add(enemies[i].GetComponent<UnitController>().GetPositionOnGrid());
         }

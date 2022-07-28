@@ -16,7 +16,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public GameObject player;
-    public GameObject[] enemies;
+    public List<GameObject> enemies;
     private int activeEnemyIndex;
     private GameObject activeUnit;
 
@@ -33,7 +33,11 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ClearDeadEnemies();
         UnitController activeUnitController = activeUnit.GetComponent<UnitController>();
+
+        if (enemies.Count == 0) turn = Turn.PlayerTurn;
+
         switch(turn)
         {
             case Turn.PlayerTurn:
@@ -45,11 +49,28 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private void ClearDeadEnemies()
+    {
+        List<GameObject> deadEnemies = new List<GameObject>();
+        foreach(GameObject enemy in enemies)
+        {
+            if(enemy.GetComponent<CombatUnit>().IsDead())
+            {
+                deadEnemies.Add(enemy);
+            }
+        }
+        foreach (GameObject deadEnemy in deadEnemies)
+        {
+            enemies.Remove(deadEnemy);
+            Destroy(deadEnemy);
+        }
+    }
+
     private bool IsPlayerPathBlockedByEnemy()
     {
         UnitController playerUC = player.GetComponent<UnitController>();
         List<Vector3Int> path = playerUC.GetMovementPath();
-        Vector3Int[] enemiesCells = Array.ConvertAll(enemies, x => x.GetComponent<UnitController>().GetPositionOnGrid());
+        Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), x => x.GetComponent<UnitController>().GetPositionOnGrid());
         foreach(Vector3Int pathCell in path)
         {
             foreach (Vector3Int enemyCell in enemiesCells)
@@ -94,10 +115,18 @@ public class TurnManager : MonoBehaviour
                 break;
             case UnitController.State.IsWaiting:
                 // pass the turn to the opponent
-                activeEnemyIndex = 0;
-                activeUnit = enemies[activeEnemyIndex];
-                activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
-                turn = Turn.EnemyTurn;
+                if(enemies.Count>0)
+                {
+                    activeEnemyIndex = 0;
+                    activeUnit = enemies[activeEnemyIndex];
+                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    turn = Turn.EnemyTurn;
+                }
+                else
+                {
+                    turn = Turn.PlayerTurn;
+                    uc.state = UnitController.State.IsThinking;
+                }
                 break;
         }
     }
@@ -123,7 +152,7 @@ public class TurnManager : MonoBehaviour
                 break;
             case UnitController.State.IsWaiting:
                 // pass the turn to the opponent
-                if (activeEnemyIndex < enemies.Length - 1)
+                if (activeEnemyIndex < enemies.Count - 1)
                 {
                     activeUnit = enemies[++activeEnemyIndex];
                     activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
