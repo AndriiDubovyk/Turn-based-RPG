@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: path_mark
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: ecc62c42b9a73964fbc23dcea7f196bc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_Transform:
     e00: 1
     e01: 0
