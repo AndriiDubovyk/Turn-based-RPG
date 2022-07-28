@@ -30,16 +30,34 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
-            if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
+            GameObject clickedUnit = gridManager.GetUnitAtCell(clickedCell);
+            if (clickedUnit == null)
             {
-                pathConfirmed = true;
-                unitController.ConfirmTurn();
-            }
+                if (unitController.GetMovementPath() != null && clickedCell == unitController.GetMovementPath().Last() && !pathConfirmed)
+                {
+                    pathConfirmed = true;
+                    unitController.ConfirmTurn();
+                }
+                else
+                {
+                    pathConfirmed = false;
+                    unitController.SetMovementPathTo(clickedCell);
+                    ShowPathMarks();
+                }
+            } 
             else
             {
-                pathConfirmed = false;
-                unitController.SetMovementPathTo(clickedCell);
-                ShowPathMarks();
+                if(clickedUnit != gameObject && unitController.CanAttack(clickedUnit)) // player can't attack himself
+                {
+                    if(unitController.GetEnemyTarget() == clickedUnit)
+                    {
+                        unitController.ConfirmTurn();
+                    }
+                    else
+                    {
+                        unitController.SetEnemyTarget(clickedUnit);
+                    }
+                }
             }
         }
     }

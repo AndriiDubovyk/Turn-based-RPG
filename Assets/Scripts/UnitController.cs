@@ -5,10 +5,12 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
     public float moveSpeed = 10f;
-
+    public int maxAttackDistance = 1;
 
     private GridManager gridManager;
     private List<Vector3Int> movementPath;
+    private GameObject enemyTarget;
+    private CombatUnit combatUnit;
 
     public State state;
     public enum State
@@ -26,8 +28,10 @@ public class UnitController : MonoBehaviour
     void Start()
     {
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
+        combatUnit = GetComponent<CombatUnit>();
         movementPath = null;
         state = State.IsThinking;
+        enemyTarget = null;
     }
 
     public void SetMovementPathTo(Vector3Int destinationCell)
@@ -52,11 +56,25 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    public void SetEnemyTarget(GameObject target)
+    {
+        enemyTarget = target;
+    }
+
+    public bool CanAttack(GameObject enemy)
+    {
+        Vector3Int cell = GetPositionOnGrid();
+        Vector3Int enemyCell = enemy.GetComponent<UnitController>().GetPositionOnGrid();
+        // Manhattan Distance
+        int distance = Math.Abs(cell.x - enemyCell.x) + Math.Abs(cell.y - enemyCell.y);
+        return distance <= maxAttackDistance;
+    }
+
     public void ConfirmTurn()
     {
         state = State.IsMakingTurn;
-        // Temporary solution. TODO
-        if (movementPath == null) state = State.IsWaiting;
+        // Skip turn. Temporary solution. TODO
+        if (enemyTarget==null &&movementPath == null) state = State.IsWaiting;
     }
 
 
@@ -70,30 +88,43 @@ public class UnitController : MonoBehaviour
         return movementPath;
     }
 
+    public GameObject GetEnemyTarget()
+    {
+        return enemyTarget;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(state == State.IsMakingTurn)
         {
-
-            if (movementPath == null || movementPath.Count == 0) return;
-            // Find next cell point
-            Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y *  gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
-
-            // Move to next cell point
-            transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
-
-            // Check if we reach next cell and if so stop moving
-            if (nextCellPoint == transform.position)
+            if(enemyTarget!=null)
             {
-                movementPath.RemoveAt(0);
-                if (movementPath.Count == 0)
-                {
-                    movementPath = null;
-                }
-                if (tag == "Player") GetComponent<PlayerController>().ShowPathMarks();
+                combatUnit.Attack(enemyTarget.GetComponent<CombatUnit>());
+                enemyTarget = null;
                 state = State.IsWaiting;
             }
+            else if (movementPath != null && movementPath.Count > 0)
+            {
+                // Find next cell point
+                Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y * gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
+
+                // Move to next cell point
+                transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
+
+                // Check if we reach next cell and if so stop moving
+                if (nextCellPoint == transform.position)
+                {
+                    movementPath.RemoveAt(0);
+                    if (movementPath.Count == 0)
+                    {
+                        movementPath = null;
+                    }
+                    if (tag == "Player") GetComponent<PlayerController>().ShowPathMarks();
+                    state = State.IsWaiting;
+                }
+            }
+            
         }
     }
 }

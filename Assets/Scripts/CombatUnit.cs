@@ -6,7 +6,7 @@ public class CombatUnit : MonoBehaviour
 {
     public int maxHP;
     public int attack;
-    int currentHP;
+    private int currentHP;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,24 @@ public class CombatUnit : MonoBehaviour
 
     public void Attack(CombatUnit another)
     {
-        another.currentHP -= this.attack;
+        Debug.Log(tag + " attack " + another.tag + " with " + attack + " dmg");
+        another.TakeDamage(this.attack);
+    }
+
+    public int GetCurrentHP()
+    {
+        return currentHP;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHP -= damageAmount;
+        if (currentHP < 0) currentHP = 0;
+        Debug.Log(tag + " was attacked with " + damageAmount + " dmg. Current HP: " + currentHP);
+    }
+
+    public bool IsDead()
+    {
+        return currentHP <= 0;
     }
 }

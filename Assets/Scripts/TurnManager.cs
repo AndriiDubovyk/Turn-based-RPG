@@ -64,8 +64,14 @@ public class TurnManager : MonoBehaviour
                 {
                     case UnitController.State.IsThinking:
                         Vector3Int playerCell = player.GetComponent<UnitController>().GetPositionOnGrid();
-                        activeUnitController.GetComponent<UnitController>().SetMovementPathTo(playerCell);
-                        Debug.Log("playerCell: " + playerCell);
+                        if(activeUnitController.CanAttack(player))
+                        {
+                            activeUnitController.SetEnemyTarget(player);
+                        } 
+                        else
+                        {
+                            activeUnitController.GetComponent<UnitController>().SetMovementPathTo(playerCell);
+                        }
                         activeUnitController.ConfirmTurn();
                         break;
                     case UnitController.State.IsMakingTurn:
