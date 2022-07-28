@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject grid;
 
     public Tile selectionTile;
+    public Tile attackSelectionTile;
     public Tile pathMarkTile;
 
     private GridManager gridManager;
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
                 {
                     pathConfirmed = false;
                     unitController.SetMovementPathTo(clickedCell);
-                    ShowPathMarks();
+                    ShowOverlayMarks();
                 }
             } 
             else
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         unitController.SetEnemyTarget(clickedUnit);
+                        ShowOverlayMarks();
                     }
                 }
             }
@@ -63,12 +65,19 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void ShowPathMarks()
+    public void ShowOverlayMarks()
     {
         gridManager.uiOverlayTilemap.ClearAllTiles();
-        List<Vector3Int> movementPath = unitController.GetMovementPath();
 
-        if (movementPath != null && movementPath.Count > 0)
+        GameObject enemyTarget = unitController.GetEnemyTarget();
+        List<Vector3Int> movementPath = unitController.GetMovementPath();    
+
+        if(enemyTarget!=null)
+        {
+            Vector3Int targetCell = enemyTarget.GetComponent<UnitController>().GetPositionOnGrid();
+            gridManager.uiOverlayTilemap.SetTile(targetCell, attackSelectionTile);
+        } 
+        else if (movementPath != null && movementPath.Count > 0)
         {
             for (int i = 0; i < movementPath.Count; i++)
             {

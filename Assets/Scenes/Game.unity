@@ -10550,6 +10550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1522314640}
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
+  attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
   pathConfirmed: 0
 --- !u!114 &1557100798
@@ -10565,7 +10566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  grid: {fileID: 1522314640}
+  maxAttackDistance: 1
   state: 0
   pathfindingXMaxDistance: 22
   pathfindingYMaxDistance: 14

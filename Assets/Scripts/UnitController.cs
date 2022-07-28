@@ -102,6 +102,7 @@ public class UnitController : MonoBehaviour
             {
                 combatUnit.Attack(enemyTarget.GetComponent<CombatUnit>());
                 enemyTarget = null;
+                if (tag == "Player") GetComponent<PlayerController>().ShowOverlayMarks();
                 state = State.IsWaiting;
             }
             else if (movementPath != null && movementPath.Count > 0)
@@ -120,7 +121,7 @@ public class UnitController : MonoBehaviour
                     {
                         movementPath = null;
                     }
-                    if (tag == "Player") GetComponent<PlayerController>().ShowPathMarks();
+                    if (tag == "Player") GetComponent<PlayerController>().ShowOverlayMarks();
                     state = State.IsWaiting;
                 }
             }
