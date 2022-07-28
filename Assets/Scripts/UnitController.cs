@@ -103,6 +103,7 @@ public class UnitController : MonoBehaviour
                 combatUnit.Attack(enemyTarget.GetComponent<CombatUnit>());
                 enemyTarget = null;
                 if (tag == "Player") GetComponent<PlayerController>().ShowOverlayMarks();
+                else if (tag == "Enemy") GameObject.Find("Player").GetComponent<PlayerController>().UpdateHealthBar();
                 state = State.IsWaiting;
             }
             else if (movementPath != null && movementPath.Count > 0)

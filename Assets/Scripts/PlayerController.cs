@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public Tile selectionTile;
     public Tile attackSelectionTile;
     public Tile pathMarkTile;
+
+    public TextMeshProUGUI healtBar;
 
     private GridManager gridManager;
     private UnitController unitController;
@@ -85,6 +88,11 @@ public class PlayerController : MonoBehaviour
             }
             gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
         }
+    }
+
+    public void UpdateHealthBar()
+    {
+        healtBar.text = "HP: "+GetComponent<CombatUnit>().GetCurrentHP();
     }
 
 }
