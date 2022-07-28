@@ -7,8 +7,6 @@ public class UnitController : MonoBehaviour
     public float moveSpeed = 10f;
 
 
-    public GameObject grid;
-
     private GridManager gridManager;
     private List<Vector3Int> movementPath;
 
@@ -27,7 +25,7 @@ public class UnitController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gridManager = grid.GetComponent<GridManager>();
+        gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
         state = State.IsThinking;
     }

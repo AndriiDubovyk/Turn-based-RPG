@@ -14,7 +14,8 @@ public class TurnManager : MonoBehaviour
     }
 
     public GameObject player;
-    public GameObject enemy;
+    public GameObject[] enemies;
+    private int activeEnemyIndex;
     private GameObject activeUnit;
 
     
@@ -24,13 +25,13 @@ public class TurnManager : MonoBehaviour
     {
         turn = Turn.PlayerTurn;
         activeUnit = player;
+        activeEnemyIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         UnitController activeUnitController = activeUnit.GetComponent<UnitController>();
-        
         switch(turn)
         {
             case Turn.PlayerTurn:
@@ -51,7 +52,8 @@ public class TurnManager : MonoBehaviour
                         break;
                     case UnitController.State.IsWaiting:
                         // pass the turn to the opponent
-                        activeUnit = enemy;
+                        activeEnemyIndex = 0;
+                        activeUnit = enemies[activeEnemyIndex];
                         activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
                         turn = Turn.EnemyTurn;
                         break;
@@ -63,6 +65,7 @@ public class TurnManager : MonoBehaviour
                     case UnitController.State.IsThinking:
                         Vector3Int playerCell = player.GetComponent<UnitController>().GetPositionOnGrid();
                         activeUnitController.GetComponent<UnitController>().SetMovementPathTo(playerCell);
+                        Debug.Log("playerCell: " + playerCell);
                         activeUnitController.ConfirmTurn();
                         break;
                     case UnitController.State.IsMakingTurn:
@@ -70,9 +73,18 @@ public class TurnManager : MonoBehaviour
                         break;
                     case UnitController.State.IsWaiting:
                         // pass the turn to the opponent
-                        activeUnit = player;
-                        activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
-                        turn = Turn.PlayerTurn;
+                        if (activeEnemyIndex < enemies.Length - 1)
+                        {
+                            activeUnit = enemies[++activeEnemyIndex];
+                            activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                            turn = Turn.EnemyTurn;
+                        }
+                        else
+                        {
+                            activeUnit = player;
+                            activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                            turn = Turn.PlayerTurn;
+                        }
                         break;
                 }
                 break;
