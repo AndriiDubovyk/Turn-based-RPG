@@ -5,9 +5,17 @@ using UnityEngine;
 public class Grid
 {
     private PathNode[,] gridArray;
+    private int offsetX;
+    private int offsetY;
+    private int width;
+    private int height;
 
-    public Grid(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap)
+    public Grid(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions)
     {
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.width = width;
+        this.height = height;
         gridArray = new PathNode[width, height];
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
@@ -19,13 +27,24 @@ public class Grid
                 gridArray[x, y] = new PathNode(x, y, isWalkable);
             }
         }
+        ProcessUnitsCells(otherUnitsPositions);
     }
 
+    private void ProcessUnitsCells(List<Vector3Int> unitsCells)
+    {
+        for(int i=0; i<unitsCells.Count; i++)
+        {
+            Vector3Int unitCellAtGrid = new Vector3Int(unitsCells[i].x - offsetX, unitsCells[i].y - offsetY);
+            if(unitCellAtGrid.x<0 || unitCellAtGrid.x >= width
+                 || unitCellAtGrid.y<0 || unitCellAtGrid.y >= height)
+            {
+                continue; // we can't reach this cell anyway
+            }
+            gridArray[unitCellAtGrid.x, unitCellAtGrid.y].isWalkable = false;
+        }
+    }
     public List<PathNode> GetNeighbours(PathNode node)
     {
-        int width = gridArray.GetLength(0);
-        int height = gridArray.GetLength(1);
-
         List<PathNode> neighbours = new List<PathNode>();
         // Check for left neighbour
         if (node.x - 1 >= 0)

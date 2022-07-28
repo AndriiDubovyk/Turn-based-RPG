@@ -46,7 +46,8 @@ public class UnitController : MonoBehaviour
             movementPath = null;
             return;
         }
-        Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap);
+        List<Vector3Int> otherUnitsCells = GetOtherUnitsCells();
+        Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, otherUnitsCells);
         movementPath = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
         // Enemy need path to player neighbour's cell (not to player's cell)
         if (tag=="Enemy" && movementPath!=null)
@@ -54,6 +55,24 @@ public class UnitController : MonoBehaviour
             movementPath.RemoveAt(movementPath.Count - 1);
             if (movementPath.Count == 0) movementPath = null;
         }
+    }
+
+    private List<Vector3Int> GetOtherUnitsCells()
+    {
+        List<Vector3Int> otherUnitsCells = new List<Vector3Int>();
+
+        /* 
+         * We don't need to add player. 
+         * Enemies must not consider player cell as occupied to get path to player.
+         * And player anyway can't walk again on current cell
+         */
+        GameObject[] enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().enemies;
+        for(int i=0; i<enemies.Length; i++)
+        {
+            if (gameObject != enemies[i]) otherUnitsCells.Add(enemies[i].GetComponent<UnitController>().GetPositionOnGrid());
+        }
+
+        return otherUnitsCells;
     }
 
     public void SetEnemyTarget(GameObject target)

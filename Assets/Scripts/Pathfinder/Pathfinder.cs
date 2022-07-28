@@ -10,9 +10,9 @@ public class Pathfinder
     private int offsetX;
     private int offsetY;
 
-    public Pathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap)
+    public Pathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions)
     {
-        this.grid = new Grid(offsetX, offsetY, width, height, collidersTilemap);
+        this.grid = new Grid(offsetX, offsetY, width, height, collidersTilemap, otherUnitsPositions);
         this.offsetX = offsetX;
         this.offsetY = offsetY;
     }
