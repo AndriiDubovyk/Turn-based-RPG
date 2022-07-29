@@ -111,7 +111,10 @@ public class Unit : MonoBehaviour
         currentHP -= damageAmount;
         if (currentHP < 0) currentHP = 0;
         Debug.Log(tag + " was attacked with " + damageAmount + " dmg. Current HP: " + currentHP);
+        UpdateHealthBar();
     }
+
+    public virtual void UpdateHealthBar() {}
 
     public bool IsDead()
     {

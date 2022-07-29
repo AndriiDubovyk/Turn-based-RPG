@@ -34,7 +34,6 @@ public class Enemy : Unit
 
         Pathfinder pf = new Pathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, otherUnitsCells);
         movementPath = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
-        Debug.Log("Enemy set movement path: "+(movementPath!=null));
         if (movementPath != null)
         {
             movementPath.RemoveAt(movementPath.Count - 1);
@@ -45,6 +44,10 @@ public class Enemy : Unit
     public override void Attack(Unit another)
     {
         base.Attack(another);
-        GameObject.Find("Player").GetComponent<Player>().UpdateHealthBar();
+    }
+
+    public override void UpdateHealthBar()
+    {
+        healthBar.UpdateHealth(currentHP, maxHP);
     }
 }

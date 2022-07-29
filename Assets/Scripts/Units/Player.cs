@@ -101,6 +101,11 @@ public class Player : Unit
         }
     }
 
+    public override void UpdateHealthBar()
+    {
+        healtBar.text = "HP: " + GetCurrentHP();
+    }
+
     private void ShowAttackTargetSelectionOverlay(Unit attackTarget)
     {
         Vector3Int targetCell = attackTarget.GetCell();
@@ -114,11 +119,6 @@ public class Player : Unit
             gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
         }
         gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
-    }
-
-    public void UpdateHealthBar()
-    {
-        healtBar.text = "HP: " + GetCurrentHP();
     }
 
     protected override void MoveUpdate()
