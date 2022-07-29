@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
 
-public class Player : Unit
+public class PlayerUnit : Unit
 {
     // Movement and taget selection overlay tile
     [SerializeField]
@@ -16,7 +16,7 @@ public class Player : Unit
     private Tile pathMarkTile;
 
     [SerializeField]
-    private TextMeshProUGUI healtBar;
+    private TextMeshProUGUI healthBar;
 
     private bool isPathConfirmed;
 
@@ -103,7 +103,7 @@ public class Player : Unit
 
     public override void UpdateHealthBar()
     {
-        healtBar.text = "HP: " + GetCurrentHP();
+        healthBar.text = "HP: " + GetCurrentHP();
     }
 
     private void ShowAttackTargetSelectionOverlay(Unit attackTarget)

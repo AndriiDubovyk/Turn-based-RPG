@@ -18,8 +18,8 @@ public class TurnManager : MonoBehaviour
     public GameObject playerGO;
     public List<GameObject> enemiesGO;
 
-    private Player playerUnit;
-    private List<Enemy> enemiesUnits;
+    private PlayerUnit playerUnit;
+    private List<EnemyUnit> enemiesUnits;
 
     private int activeEnemyIndex;
     private Unit activeUnit;
@@ -29,11 +29,11 @@ public class TurnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerUnit = playerGO.GetComponent<Player>();
-        enemiesUnits = new List<Enemy>();
+        playerUnit = playerGO.GetComponent<PlayerUnit>();
+        enemiesUnits = new List<EnemyUnit>();
         foreach(GameObject enemyGO in enemiesGO)
         {
-            enemiesUnits.Add(enemyGO.GetComponent<Enemy>());
+            enemiesUnits.Add(enemyGO.GetComponent<EnemyUnit>());
         }
         turn = Turn.PlayerTurn;
         activeUnit = playerUnit;
@@ -71,7 +71,7 @@ public class TurnManager : MonoBehaviour
         foreach (GameObject deadEnemyGO in deadEnemiesGO)
         {
             enemiesGO.Remove(deadEnemyGO);
-            enemiesUnits.Remove(deadEnemyGO.GetComponent<Enemy>());
+            enemiesUnits.Remove(deadEnemyGO.GetComponent<EnemyUnit>());
             Destroy(deadEnemyGO);
         }
     }
@@ -142,7 +142,7 @@ public class TurnManager : MonoBehaviour
 
     private void MakeEnemyTurn()
     {
-        Enemy enemyUnit = enemiesUnits[activeEnemyIndex];
+        EnemyUnit enemyUnit = enemiesUnits[activeEnemyIndex];
         switch (enemyUnit.GetState())
         {
             case Unit.State.IsThinking:
@@ -178,7 +178,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public List<Enemy> GetEnemiesUnits()
+    public List<EnemyUnit> GetEnemiesUnits()
     {
         return enemiesUnits;
     }

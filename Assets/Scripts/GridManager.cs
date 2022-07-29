@@ -52,7 +52,7 @@ public class GridManager : MonoBehaviour
     {
         if(cell == GetPlayerCell())
         {
-            return player.GetComponent<Player>(); ;
+            return player.GetComponent<PlayerUnit>(); ;
         } else
         {
             Vector3Int[] enemiesCells = GetEnemiesCells();
