@@ -15,18 +15,28 @@ public class TurnManager : MonoBehaviour
         EnemyTurn
     }
 
-    public GameObject player;
-    public List<GameObject> enemies;
+    public GameObject playerGO;
+    public List<GameObject> enemiesGO;
+
+    private Player playerUnit;
+    private List<Enemy> enemiesUnits;
+
     private int activeEnemyIndex;
-    private GameObject activeUnit;
+    private Unit activeUnit;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+        playerUnit = playerGO.GetComponent<Player>();
+        enemiesUnits = new List<Enemy>();
+        foreach(GameObject enemyGO in enemiesGO)
+        {
+            enemiesUnits.Add(enemyGO.GetComponent<Enemy>());
+        }
         turn = Turn.PlayerTurn;
-        activeUnit = player;
+        activeUnit = playerUnit;
         activeEnemyIndex = 0;
     }
 
@@ -34,43 +44,42 @@ public class TurnManager : MonoBehaviour
     void Update()
     {
         ClearDeadEnemies();
-        UnitController activeUnitController = activeUnit.GetComponent<UnitController>();
 
-        if (enemies.Count == 0) turn = Turn.PlayerTurn;
+        if (enemiesGO.Count == 0) turn = Turn.PlayerTurn;
 
         switch(turn)
         {
             case Turn.PlayerTurn:
-                MakePlayerTurn(activeUnitController);
+                MakePlayerTurn();
                 break;
             case Turn.EnemyTurn:
-                MakeEnemyTurn(activeUnitController);
+                MakeEnemyTurn();
                 break;
         }
     }
 
     private void ClearDeadEnemies()
     {
-        List<GameObject> deadEnemies = new List<GameObject>();
-        foreach(GameObject enemy in enemies)
+        List<GameObject> deadEnemiesGO = new List<GameObject>();
+        foreach(GameObject enemyGO in enemiesGO)
         {
-            if(enemy.GetComponent<CombatUnit>().IsDead())
+            if(enemyGO.GetComponent<Unit>().IsDead())
             {
-                deadEnemies.Add(enemy);
+                deadEnemiesGO.Add(enemyGO);
             }
         }
-        foreach (GameObject deadEnemy in deadEnemies)
+        foreach (GameObject deadEnemyGO in deadEnemiesGO)
         {
-            enemies.Remove(deadEnemy);
-            Destroy(deadEnemy);
+            enemiesGO.Remove(deadEnemyGO);
+            enemiesUnits.Remove(deadEnemyGO.GetComponent<Enemy>());
+            Destroy(deadEnemyGO);
         }
     }
 
     private bool IsPlayerPathBlockedByEnemy()
     {
-        UnitController playerUC = player.GetComponent<UnitController>();
-        List<Vector3Int> path = playerUC.GetMovementPath();
-        Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), x => x.GetComponent<UnitController>().GetPositionOnGrid());
+        List<Vector3Int> path = playerUnit.GetMovementPath();
+        Vector3Int[] enemiesCells = Array.ConvertAll(enemiesUnits.ToArray(), x => x.GetCell());
         foreach(Vector3Int pathCell in path)
         {
             foreach (Vector3Int enemyCell in enemiesCells)
@@ -84,87 +93,93 @@ public class TurnManager : MonoBehaviour
         return false;
     }
 
-    private void MakePlayerTurn(UnitController uc)
+    private void MakePlayerTurn()
     {
-        switch (uc.state)
+        switch (playerUnit.GetState())
         {
-            case UnitController.State.IsThinking:
-                if (uc.GetMovementPath() != null 
-                    && player.GetComponent<PlayerController>().pathConfirmed)
+            case Unit.State.IsThinking:
+                if (playerUnit.GetMovementPath() != null 
+                    && playerUnit.IsPathConfirmed())
                 {
                     if(!IsPlayerPathBlockedByEnemy())
                     {
-                        uc.ConfirmTurn();
+                        playerUnit.ConfirmTurn();
                     }
                     else
                     {
                         // Clear path
                         Debug.Log("Path has been blocked by enemy");
-                        uc.SetMovementPathTo(uc.GetPositionOnGrid());
-                        player.GetComponent<PlayerController>().UpdateOverlayMarks();
-                        uc.state = UnitController.State.IsThinking;
+                        playerUnit.SetMovementPathTo(playerUnit.GetCell());
+                        playerUnit.UpdateOverlayMarks();
+                        playerUnit.SetState(Unit.State.IsThinking);
                     }
                 }
                 else
                 {
-                    activeUnit.GetComponent<PlayerController>().SetAction();
+                    playerUnit.SetAction();
                 }
                 break;
-            case UnitController.State.IsMakingTurn:
+            case Unit.State.IsMakingTurn:
                 // just wait till animation end
                 break;
-            case UnitController.State.IsWaiting:
+            case Unit.State.IsWaiting:
                 // pass the turn to the opponent
-                if(enemies.Count>0)
+                if(enemiesGO.Count>0)
                 {
                     activeEnemyIndex = 0;
-                    activeUnit = enemies[activeEnemyIndex];
-                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    activeUnit = enemiesUnits[activeEnemyIndex];
+                    activeUnit.SetState(Unit.State.IsThinking);
                     turn = Turn.EnemyTurn;
                 }
                 else
                 {
                     turn = Turn.PlayerTurn;
-                    uc.state = UnitController.State.IsThinking;
+                    playerUnit.SetState(Unit.State.IsThinking);
                 }
                 break;
         }
     }
 
-    private void MakeEnemyTurn(UnitController uc)
+    private void MakeEnemyTurn()
     {
-        switch (uc.state)
+        Enemy enemyUnit = enemiesUnits[activeEnemyIndex];
+        switch (enemyUnit.GetState())
         {
-            case UnitController.State.IsThinking:
-                Vector3Int playerCell = player.GetComponent<UnitController>().GetPositionOnGrid();
-                if (uc.CanAttack(player))
+            case Unit.State.IsThinking:
+                Vector3Int playerCell = playerUnit.GetCell();
+                if (enemyUnit.CanAttack(playerUnit))
                 {
-                    uc.SetEnemyTarget(player);
+                    enemyUnit.SetAttackTarget(playerUnit);
                 }
                 else
                 {
-                    uc.GetComponent<UnitController>().SetMovementPathTo(playerCell);
+                    enemyUnit.SetMovementPathTo(playerCell);               
                 }
-                uc.ConfirmTurn();
+                enemyUnit.ConfirmTurn();
                 break;
-            case UnitController.State.IsMakingTurn:
+            case Unit.State.IsMakingTurn:
                 // just wait till animation end
                 break;
-            case UnitController.State.IsWaiting:
+            case Unit.State.IsWaiting:
                 // pass the turn to the opponent
-                if (activeEnemyIndex < enemies.Count - 1)
+                if (activeEnemyIndex < enemiesGO.Count - 1)
                 {
-                    activeUnit = enemies[++activeEnemyIndex];
-                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    activeUnit = enemiesUnits[++activeEnemyIndex];
+                    activeUnit.SetState(Unit.State.IsThinking);
                     turn = Turn.EnemyTurn;
                 }
                 else
                 {
-                    activeUnit = player;
-                    activeUnit.GetComponent<UnitController>().state = UnitController.State.IsThinking;
+                    activeUnit = playerUnit;
+                    activeUnit.SetState(Unit.State.IsThinking);
                     turn = Turn.PlayerTurn;
                 }
                 break;
         }
+    }
+
+    public List<Enemy> GetEnemiesUnits()
+    {
+        return enemiesUnits;
     }
 }

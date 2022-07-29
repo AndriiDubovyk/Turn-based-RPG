@@ -10460,9 +10460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1557100794}
   - component: {fileID: 1557100793}
-  - component: {fileID: 1557100798}
-  - component: {fileID: 1557100797}
-  - component: {fileID: 1557100796}
+  - component: {fileID: 1557100795}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10538,7 +10536,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1557100796
+--- !u!114 &1557100795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10547,46 +10545,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1557100792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2051275996072484f9bf6fd31e1b590a, type: 3}
+  m_Script: {fileID: 11500000, guid: 38c17a493d0ca4b4c8852aef963f89a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  attack: 15
---- !u!114 &1557100797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557100792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3762508c3da42bc48ad089476466b801, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 1522314640}
+  attack: 18
+  maxAttackDistance: 1
+  moveSpeed: 10
+  pathfindingXMaxDistance: 22
+  pathfindingYMaxDistance: 14
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
   attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
   healtBar: {fileID: 447065657}
-  pathConfirmed: 0
---- !u!114 &1557100798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557100792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0605bf84345b14a8dc172661e4bf73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  maxAttackDistance: 1
-  state: 0
-  pathfindingXMaxDistance: 22
-  pathfindingYMaxDistance: 14
 --- !u!1 &1775356285
 GameObject:
   m_ObjectHideFlags: 0
@@ -10632,8 +10603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1522314640}
-  player: {fileID: 1557100792}
-  enemies:
+  playerGO: {fileID: 1557100792}
+  enemiesGO:
   - {fileID: 453695044}
   - {fileID: 214138789}
   - {fileID: 1493579498}

@@ -29,29 +29,36 @@ public class GridManager : MonoBehaviour
         
     }
 
-    private Vector3Int GetPlayerCell()
+    public Vector3Int GetPlayerCell()
     {
-        return player.GetComponent<UnitController>().GetPositionOnGrid();
+        return player.GetComponent<Unit>().GetCell();
     }
 
     private Vector3Int[] GetEnemiesCells()
     {
-        List<GameObject> enemies = turnManager.enemies;
-        Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), it => it.GetComponent<UnitController>().GetPositionOnGrid());
+        List<GameObject> enemies = turnManager.enemiesGO;
+        Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), it => it.GetComponent<Unit>().GetCell());
         return enemiesCells;
     }
 
-    public GameObject GetUnitAtCell(Vector3Int cell)
+    public List<Vector3Int> GetOccupiedCells()
+    {
+        List<Vector3Int> occupiedCells = turnManager.enemiesGO.ConvertAll(x => x.GetComponent<Unit>().GetCell());
+        occupiedCells.Add(player.GetComponent<Unit>().GetCell());
+        return occupiedCells;
+    }
+
+    public Unit GetUnitAtCell(Vector3Int cell)
     {
         if(cell == GetPlayerCell())
         {
-            return player;
+            return player.GetComponent<Player>(); ;
         } else
         {
             Vector3Int[] enemiesCells = GetEnemiesCells();
             for(int i = 0; i<enemiesCells.Length; i++)
             {
-                if (cell == enemiesCells[i]) return turnManager.enemies[i];
+                if (cell == enemiesCells[i]) return turnManager.GetEnemiesUnits()[i];
             }
         }
         return null;

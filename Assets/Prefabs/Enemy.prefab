@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 569387430450957852}
   - component: {fileID: 569387430450957855}
-  - component: {fileID: 569387430450957842}
-  - component: {fileID: 569387430450957853}
+  - component: {fileID: 2700230964628959031}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -87,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &569387430450957842
+--- !u!114 &2700230964628959031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,28 +95,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 569387430450957854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0605bf84345b14a8dc172661e4bf73, type: 3}
+  m_Script: {fileID: 11500000, guid: 7192ecdf6e9e58a49a67364f490975b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  maxHP: 100
+  attack: 5
   maxAttackDistance: 1
-  state: 0
+  moveSpeed: 10
   pathfindingXMaxDistance: 4
   pathfindingYMaxDistance: 4
---- !u!114 &569387430450957853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569387430450957854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2051275996072484f9bf6fd31e1b590a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 80
-  attack: 5
 --- !u!1 &856846650111277935
 GameObject:
   m_ObjectHideFlags: 0
