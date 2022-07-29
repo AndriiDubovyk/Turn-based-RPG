@@ -171,6 +171,7 @@ public class Unit : MonoBehaviour
 
     public bool CanAttack(Unit enemy)
     {
+        if (enemy == this) return false;
         Vector3Int cell = GetCell();
         Vector3Int enemyCell = enemy.GetCell();
         // Manhattan Distance
