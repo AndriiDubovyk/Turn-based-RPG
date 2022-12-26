@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
-
 
 public class Pathfinder
 {
@@ -10,15 +7,15 @@ public class Pathfinder
     private int offsetX;
     private int offsetY;
 
-    public Pathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions)
+    public Pathfinder(int offsetX, int offsetY, int width, int height, bool[,] obstacles)
     {
-        this.grid = new Grid(offsetX, offsetY, width, height, collidersTilemap, otherUnitsPositions);
+        this.grid = new Grid(width, height, obstacles);
         this.offsetX = offsetX;
         this.offsetY = offsetY;
     }
 
     // A* pathfinding
-    public List<Vector3Int> GetPath(int startX, int startY, int endX, int endY)
+    public List<Coords> GetPath(int startX, int startY, int endX, int endY)
     {
         PathNode startNode = grid.Get(startX, startY);
         PathNode endNode = grid.Get(endX, endY);
@@ -97,13 +94,13 @@ public class Pathfinder
         return lowestFCostNode;
     }
 
-    private List<Vector3Int> CalculatePathFromEndNode(PathNode endNode)
+    private List<Coords> CalculatePathFromEndNode(PathNode endNode)
     {
-        List<Vector3Int> path = new List<Vector3Int>();
+        List<Coords> path = new List<Coords>();
         PathNode current = endNode;
         while(current.parent != null)
         {
-            path.Add(new Vector3Int(current.x + offsetX, current.y + offsetY));
+            path.Add(new Coords(current.x + offsetX, current.y + offsetY));
             current = current.parent;
         }
         path.Reverse();
@@ -117,4 +114,18 @@ public class Pathfinder
         return Math.Abs(target.x - current.x) + Math.Abs(target.y- current.y);
     }
  
+}
+
+public struct Coords
+{
+    public Coords(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public int X { get; }
+    public int Y { get; }
+
+    public override string ToString() => $"({X}, {Y})";
 }

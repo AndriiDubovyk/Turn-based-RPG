@@ -35,6 +35,6 @@ public class PathNode : IComparable
         if (otherPathNode != null)
             return this.fCost.CompareTo(otherPathNode.fCost);
         else
-            throw new ArgumentException("Object is not a Temperature");
+            throw new ArgumentException("");
     }
 }

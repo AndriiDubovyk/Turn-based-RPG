@@ -1,19 +1,13 @@
 ﻿using System.Collections.Generic;
-using UnityEngine.Tilemaps;
-using UnityEngine;
 
 public class Grid
 {
     private PathNode[,] gridArray;
-    private int offsetX;
-    private int offsetY;
     private int width;
     private int height;
 
-    public Grid(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions)
+    public Grid(int width, int height, bool[,] obstacles)
     {
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
         this.width = width;
         this.height = height;
         gridArray = new PathNode[width, height];
@@ -21,26 +15,8 @@ public class Grid
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
-                Vector3Int realTilePos = new Vector3Int(x + offsetX, y + offsetY);
-                // allow movement if there no colliders
-                bool isWalkable = collidersTilemap.GetTile(realTilePos) == null;
-                gridArray[x, y] = new PathNode(x, y, isWalkable);
+                gridArray[x, y] = new PathNode(x, y, !obstacles[x,y]);
             }
-        }
-        ProcessUnitsCells(otherUnitsPositions);
-    }
-
-    private void ProcessUnitsCells(List<Vector3Int> unitsCells)
-    {
-        for(int i=0; i<unitsCells.Count; i++)
-        {
-            Vector3Int unitCellAtGrid = new Vector3Int(unitsCells[i].x - offsetX, unitsCells[i].y - offsetY);
-            if(unitCellAtGrid.x<0 || unitCellAtGrid.x >= width
-                 || unitCellAtGrid.y<0 || unitCellAtGrid.y >= height)
-            {
-                continue; // we can't reach this cell anyway
-            }
-            gridArray[unitCellAtGrid.x, unitCellAtGrid.y].isWalkable = false;
         }
     }
     public List<PathNode> GetNeighbours(PathNode node)
