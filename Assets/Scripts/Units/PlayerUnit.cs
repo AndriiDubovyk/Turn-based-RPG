@@ -19,12 +19,14 @@ public class PlayerUnit : Unit
     private TextMeshProUGUI healthBar;
 
     private bool isPathConfirmed;
+    private bool isItemTakingActive;
 
 
     protected override void Start()
     {
         base.Start();
         isPathConfirmed = false;
+        isItemTakingActive = false;
     }
 
     public void SetAction()
@@ -43,6 +45,13 @@ public class PlayerUnit : Unit
                 ChoseAttackTarget(clickedUnit);
             }
         }
+    }
+
+    public void TakeItem(Item item)
+    {
+        Debug.Log($"Player takes {item.name}");
+        SetItemTaking(false);
+        // take items
     }
 
     private void SelectDestinationCell(Vector3Int clickedCell)
@@ -83,6 +92,17 @@ public class PlayerUnit : Unit
         base.Attack(another);
         attackTarget = null;
         UpdateOverlayMarks();
+    }
+
+    public void SetItemTaking(bool active)
+    {
+        isItemTakingActive = active;
+        Debug.Log($"Item taking is {isItemTakingActive.ToString()}");
+    }
+
+    public bool IsItemTakingActive()
+    {
+        return isItemTakingActive;
     }
 
     public void UpdateOverlayMarks()
