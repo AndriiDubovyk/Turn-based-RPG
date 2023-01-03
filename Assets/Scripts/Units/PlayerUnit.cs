@@ -15,13 +15,13 @@ public class PlayerUnit : Unit
     [SerializeField]
     private Tile pathMarkTile;
 
-    [SerializeField]
     private TextMeshProUGUI healthBar;
 
     private bool isPathConfirmed;
     private bool isItemTakingActive;
 
     private ItemData[] inventory = new ItemData[6];
+    private UI ui;
 
 
     protected override void Start()
@@ -29,12 +29,16 @@ public class PlayerUnit : Unit
         base.Start();
         isPathConfirmed = false;
         isItemTakingActive = false;
+        ui = GameObject.Find("UICanvas").GetComponent<UI>();
+        healthBar = GameObject.Find("PlayerHealthBar").GetComponent<TextMeshProUGUI>();
     }
 
     public void SetAction()
     {
-        bool isInventoryOpened = GameObject.Find("InvetoryPanel") != null && GameObject.Find("InvetoryPanel").activeSelf;
-        if (Input.GetMouseButtonDown(0) && !isInventoryOpened)
+        GameObject invPanel = GameObject.Find("InventoryPanel");
+        bool isInventoryOpened = invPanel != null && invPanel.activeSelf;
+
+        if (Input.GetMouseButtonDown(0) && !isInventoryOpened && !ui.IsMouseOverUI())
         {
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);

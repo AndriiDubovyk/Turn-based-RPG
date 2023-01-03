@@ -251,8 +251,9 @@ GameObject:
   - component: {fileID: 5730842783785289749}
   - component: {fileID: 5730842783785289748}
   - component: {fileID: 5730842783785289751}
+  - component: {fileID: 6389041323357312755}
   m_Layer: 5
-  m_Name: UI Canvas
+  m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,6 +344,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6389041323357312755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5730842783785289750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4087a29ef32a5c46a1e6a08f928ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryButton: {fileID: 6087895941850738563}
+  takeItemButton: {fileID: 5730842785385297011}
 --- !u!1 &5730842783889350445
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +640,7 @@ GameObject:
   - component: {fileID: 5730842785385297015}
   - component: {fileID: 5730842785385297014}
   - component: {fileID: 5730842785385297009}
+  - component: {fileID: 7193355859157309029}
   m_Layer: 5
   m_Name: TakeItemButton
   m_TagString: Untagged
@@ -747,6 +763,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7193355859157309029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5730842785385297011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6389041323357312755}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: EnterTakeItemButton
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6389041323357312755}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: EnterTakeItemButton
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6087895941850738563
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +820,7 @@ GameObject:
   - component: {fileID: 4467640410635824444}
   - component: {fileID: 8889715934112626453}
   - component: {fileID: 7614506145701323259}
+  - component: {fileID: 6070598336307445144}
   m_Layer: 5
   m_Name: InventoryButton
   m_TagString: Untagged
@@ -881,6 +943,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6070598336307445144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087895941850738563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6389041323357312755}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: EnterInventoryButton
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6389041323357312755}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
+          m_MethodName: EnterInventoryButton
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &3049366510704493073
 PrefabInstance:
   m_ObjectHideFlags: 0

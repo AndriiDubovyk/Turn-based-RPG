@@ -10556,7 +10556,7 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 5730842783785289750, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
       propertyPath: m_Name
-      value: UI Canvas
+      value: UICanvas
       objectReference: {fileID: 0}
     - target: {fileID: 5730842785385297009, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
