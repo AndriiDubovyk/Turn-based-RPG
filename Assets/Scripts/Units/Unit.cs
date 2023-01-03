@@ -127,6 +127,11 @@ public class Unit : MonoBehaviour
     public virtual void SetMovementPathTo(Vector3Int destinationCell)
     {
         Vector3Int currentCell = GetCell();
+        if(currentCell.Equals(destinationCell))
+        {
+            movementPath = null;
+            return;
+        }
         int offsetX = currentCell.x - pathfindingXMaxDistance;
         int offsetY = currentCell.y - pathfindingYMaxDistance;
         // We can't reach this cell anyway so we can just set movementPath to null
@@ -140,6 +145,7 @@ public class Unit : MonoBehaviour
         otherUnitsCells.Remove(this.GetCell());
         UnitsPathfinder pf = new UnitsPathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, otherUnitsCells);
         List<Coords> movementPathCoords = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
+        if (movementPathCoords == null) return;
         movementPath = movementPathCoords.ConvertAll<Vector3Int>(c => new Vector3Int(c.X, c.Y));
     }
 
