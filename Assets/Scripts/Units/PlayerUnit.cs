@@ -31,7 +31,8 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
-        if (Input.GetMouseButtonDown(0))
+        bool isInventoryOpened = GameObject.Find("InvetoryPanel") != null && GameObject.Find("InvetoryPanel").activeSelf;
+        if (Input.GetMouseButtonDown(0) && !isInventoryOpened)
         {
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
