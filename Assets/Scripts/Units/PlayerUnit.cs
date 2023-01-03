@@ -46,6 +46,7 @@ public class PlayerUnit : Unit
             if (clickedUnit == null)
             {
                 SelectDestinationCell(clickedCell);
+                SetItemTaking(false);
             }
             else if (clickedUnit != gameObject && CanAttack(clickedUnit))
             {

@@ -25,9 +25,6 @@ public class ItemPickup : MonoBehaviour
             if (player.GetCell().Equals(GetCell()))
             {
                 GameObject.Find("Player").GetComponent<PlayerUnit>().TakeItem(this);
-            } else
-            {
-                player.SetItemTaking(false);
             }
         }     
     }
