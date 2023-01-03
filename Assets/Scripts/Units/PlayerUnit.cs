@@ -21,6 +21,8 @@ public class PlayerUnit : Unit
     private bool isPathConfirmed;
     private bool isItemTakingActive;
 
+    private ItemData[] inventory = new ItemData[6];
+
 
     protected override void Start()
     {
@@ -50,10 +52,19 @@ public class PlayerUnit : Unit
 
     public void TakeItem(ItemPickup itemPickup)
     {
-        Debug.Log($"Player takes {itemPickup.itemData.name}");
-        Destroy(itemPickup.gameObject);
+        Debug.Log("Slots: "+ NumberOfOccupiedInvetorySlots());
+        if(HasFreeInventorySlots())
+        {
+            Debug.Log($"Player takes {itemPickup.itemData.name}");
+            Destroy(itemPickup.gameObject);
+            inventory[NumberOfOccupiedInvetorySlots()] = itemPickup.itemData;
+        }
         SetItemTaking(false);
-        // take items
+    }
+
+    public ItemData[] GetInvetory()
+    {
+        return inventory;
     }
 
     private void SelectDestinationCell(Vector3Int clickedCell)
@@ -104,6 +115,21 @@ public class PlayerUnit : Unit
     public bool IsItemTakingActive()
     {
         return isItemTakingActive;
+    }
+
+    public int NumberOfOccupiedInvetorySlots()
+    {
+        int slots = 0;
+        for(int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] != null) slots++;
+        }
+        return slots;
+    }
+
+    public bool HasFreeInventorySlots()
+    {
+        return NumberOfOccupiedInvetorySlots() < inventory.Length;
     }
 
     public void UpdateOverlayMarks()
