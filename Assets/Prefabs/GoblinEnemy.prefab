@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 569387430450957855}
   - component: {fileID: 2700230964628959031}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: GoblinEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,12 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7192ecdf6e9e58a49a67364f490975b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  attack: 5
-  maxAttackDistance: 1
-  moveSpeed: 10
-  pathfindingXMaxDistance: 4
-  pathfindingYMaxDistance: 4
+  unitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
 --- !u!1 &856846650111277935
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class ItemPickup : MonoBehaviour
 {
+    public ItemData itemData;
+
     private GridManager gridManager;
     private PlayerUnit player;
-
-    [SerializeField]
-    protected string itemName;
 
     // Start is called before the first frame update
     void Start()
     {
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
+        gameObject.GetComponent<SpriteRenderer>().sprite = itemData.sprite;
     }
 
     // Update is called once per frame
@@ -25,7 +25,6 @@ public class Item : MonoBehaviour
             if (player.GetCell().Equals(GetCell()))
             {
                 GameObject.Find("Player").GetComponent<PlayerUnit>().TakeItem(this);
-                Destroy(gameObject);
             } else
             {
                 player.SetItemTaking(false);

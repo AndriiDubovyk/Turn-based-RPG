@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569387430450957854, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_Name
-      value: Enemy (1)
+      value: GoblinEnemy (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2530019814674885090, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10041,7 +10041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569387430450957854, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_Name
-      value: Enemy (2)
+      value: GoblimEnemy (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2530019814674885090, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10248,7 +10248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569387430450957854, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: GoblinEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 2530019814674885090, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10275,6 +10275,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 447065657}
+    - target: {fileID: 3516794437458014940, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
+      propertyPath: maxAttackDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3516794437458014941, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -10376,10 +10380,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4187689704917650208, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187689704917650208, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6591428061944771710, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: CoinItemPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 7513286182769675311, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 07ed8659969eb104b9d2b2cbc6057c60, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
 --- !u!1001 &5730842784067252506

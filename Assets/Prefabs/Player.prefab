@@ -203,12 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0089294670d35c4c979970e5a04f3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  attack: 25
-  maxAttackDistance: 1
-  moveSpeed: 10
-  pathfindingXMaxDistance: 22
-  pathfindingYMaxDistance: 14
+  unitData: {fileID: 11400000, guid: e5a595b3f5e1d7246bce8db810260ccb, type: 2}
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
   attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}

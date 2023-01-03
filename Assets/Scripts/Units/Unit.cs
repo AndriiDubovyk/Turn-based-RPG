@@ -7,23 +7,17 @@ public class Unit : MonoBehaviour
 {
     protected GridManager gridManager;
 
-    // Stats
-    [SerializeField]
+
+    public UnitData unitData;
+
     protected int maxHP;
-    [SerializeField]
     protected int attack;
-    [SerializeField]
     protected int maxAttackDistance;
+    protected float moveSpeed;
+    protected int pathfindingXMaxDistance;
+    protected int pathfindingYMaxDistance;
 
     protected int currentHP;
-
-    [SerializeField]
-    protected float moveSpeed;
-
-    [SerializeField]
-    protected int pathfindingXMaxDistance;
-    [SerializeField]
-    protected int pathfindingYMaxDistance;
 
     // Data for turn
     protected List<Vector3Int> movementPath;
@@ -40,11 +34,20 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
+        maxHP = unitData.maxHP;
+        attack = unitData.attack;
+        maxAttackDistance = unitData.maxAttackDistance;
+        moveSpeed = unitData.moveSpeed;
+        pathfindingXMaxDistance = unitData.pathfindingXMaxDistance;
+        pathfindingYMaxDistance = unitData.pathfindingYMaxDistance;
+        gameObject.GetComponent<SpriteRenderer>().sprite = unitData.sprite;
+
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
         attackTarget = null;
         state = State.IsThinking;
         currentHP = maxHP;
+       
     }
 
     void Update()

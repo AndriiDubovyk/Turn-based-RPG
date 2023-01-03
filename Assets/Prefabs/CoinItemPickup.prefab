@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4187689704917650208}
   - component: {fileID: 7513286182769675311}
   m_Layer: 0
-  m_Name: Item
+  m_Name: CoinItemPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf36d514c2d7ab4aad07c43c38e3cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Item
+  itemData: {fileID: 11400000, guid: 07ed8659969eb104b9d2b2cbc6057c60, type: 2}

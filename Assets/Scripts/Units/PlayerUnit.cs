@@ -47,9 +47,10 @@ public class PlayerUnit : Unit
         }
     }
 
-    public void TakeItem(Item item)
+    public void TakeItem(ItemPickup itemPickup)
     {
-        Debug.Log($"Player takes {item.name}");
+        Debug.Log($"Player takes {itemPickup.itemData.name}");
+        Destroy(itemPickup.gameObject);
         SetItemTaking(false);
         // take items
     }
@@ -97,7 +98,6 @@ public class PlayerUnit : Unit
     public void SetItemTaking(bool active)
     {
         isItemTakingActive = active;
-        Debug.Log($"Item taking is {isItemTakingActive.ToString()}");
     }
 
     public bool IsItemTakingActive()
