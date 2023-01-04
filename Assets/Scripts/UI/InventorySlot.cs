@@ -29,10 +29,13 @@ public class InventorySlot : MonoBehaviour
         }
         else
         {
-            image.sprite = null;
-            Color tmpColor = image.color;
-            tmpColor.a = 0f;
-            image.color = tmpColor;
+            if(image!=null)
+            {
+                image.sprite = null;
+                Color tmpColor = image.color;
+                tmpColor.a = 0f;
+                image.color = tmpColor;
+            }
         }
     }
 
