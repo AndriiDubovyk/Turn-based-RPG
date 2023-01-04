@@ -10,6 +10,8 @@ public class InventoryPanel : MonoBehaviour
 
     [SerializeField]
     private GameObject[] invetorySlots = new GameObject[6];
+    [SerializeField]
+    private GameObject itemDisplayPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,7 @@ public class InventoryPanel : MonoBehaviour
         ItemData[] inventory = player.GetInvetory();
         if(gameObject.activeSelf)
         {
-            string invDesc = "Invetory: ";
+            string invDesc = "Inventory: ";
             for(int i=0; i< inventory.Length; i++)
             {
                 if(inventory[i]!=null)
@@ -33,34 +35,18 @@ public class InventoryPanel : MonoBehaviour
                 }
             }
             Debug.Log(invDesc);
-            SetInvetoryItems();
+            InitializeInventory();
         }
     }
 
-    private void SetInvetoryItems()
+    private void InitializeInventory()
     {
         ItemData[] inventory = player.GetInvetory();
         for (int i = 0; i < inventory.Length; i++)
         {
-            if(inventory[i]!=null)
-            {
-                Image image = invetorySlots[i].transform.GetChild(0).GetComponent<Image>();
-                image.sprite = inventory[i].sprite;
-
-                Color tmpColor = image.color;
-                tmpColor.a = 1f;
-                image.color = tmpColor;
-            }
-            else
-            {
-                Image image = invetorySlots[i].transform.GetChild(0).GetComponent<Image>();
-                image.sprite = null;
-
-                Color tmpColor = image.color;
-                tmpColor.a = 0f;
-                image.color = tmpColor;
-            }      
+            invetorySlots[i].GetComponent<InventorySlot>().SetItemData(inventory[i]);
         }
+        itemDisplayPanel.GetComponent<ItemDisplayPanel>().SetItemData(null);
     }
 
     // Update is called once per frame
