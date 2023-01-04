@@ -14,6 +14,8 @@ public class ItemDisplayPanel : MonoBehaviour
     private TextMeshProUGUI itemDescription;
     [SerializeField]
     private Button dropButton;
+    [SerializeField]
+    private Button equipButton;
 
     private ItemData itemData;
 
@@ -39,7 +41,14 @@ public class ItemDisplayPanel : MonoBehaviour
             image.color = tmpColor;
 
             dropButton.gameObject.SetActive(true);
-            dropButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Drop");
+            if(itemData.attack>0)
+            {
+                equipButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                equipButton.gameObject.SetActive(false);
+            }
 
         }
         else
@@ -53,14 +62,18 @@ public class ItemDisplayPanel : MonoBehaviour
             image.color = tmpColor;
 
             dropButton.gameObject.SetActive(false);
-            dropButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("");
-
+            equipButton.gameObject.SetActive(false);
         }
     }
 
     public void DropItem()
     {
         inventoryPanel.DropItem(itemData);
+    }
+
+    public void EquipItem()
+    {
+        inventoryPanel.EquipItem(itemData);
     }
 
 }

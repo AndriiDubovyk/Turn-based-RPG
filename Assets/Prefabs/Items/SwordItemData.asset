@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SwordItemData
   m_EditorClassIdentifier: 
   name: Sword
-  description: Rusty iron sword
+  description: 'Rusty iron sword. Attack: 30'
+  attack: 30
   sprite: {fileID: 21300000, guid: 5abad86129deb71439fec5d6cc46757f, type: 3}

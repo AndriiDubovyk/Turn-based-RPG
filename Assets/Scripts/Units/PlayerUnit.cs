@@ -21,6 +21,8 @@ public class PlayerUnit : Unit
     private bool isItemTakingActive;
 
     private ItemData[] inventory = new ItemData[6];
+    private ItemData equipedWeapon;
+
     private UI ui;
 
 
@@ -57,8 +59,8 @@ public class PlayerUnit : Unit
 
     public void TakeItem(ItemPickup itemPickup)
     {
-        Debug.Log("Slots: "+ NumberOfOccupiedInvetorySlots());
-        if(HasFreeInventorySlots())
+        Debug.Log("Slots: " + NumberOfOccupiedInvetorySlots());
+        if (HasFreeInventorySlots())
         {
             Debug.Log($"Player takes {itemPickup.itemData.name}");
             Destroy(itemPickup.gameObject);
@@ -67,15 +69,21 @@ public class PlayerUnit : Unit
         SetItemTaking(false);
     }
 
-    public void DropInventoryItem(ItemData itemData)
+    public void DropItem(ItemData itemData)
     {
-        for(int i=0; i<inventory.Length; i++)
+        if(itemData ==equipedWeapon)
         {
-            if(inventory[i]==itemData)
+            equipedWeapon = null;
+            this.attack -= itemData.attack;
+            return;
+        }
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == itemData)
             {
                 inventory[i] = null;
             }
-            if(inventory[i]==null && i<inventory.Length-1)
+            if (inventory[i] == null && i < inventory.Length - 1)
             {
                 // shift all items
                 inventory[i] = inventory[i + 1];
@@ -87,6 +95,22 @@ public class PlayerUnit : Unit
     public ItemData[] GetInvetory()
     {
         return inventory;
+    }
+
+    public void EquipWeapon(ItemData newWeapon)
+    {
+        // Player can equip only item with damage or no item
+        if (newWeapon == null || newWeapon.attack>0)
+        {
+            equipedWeapon = newWeapon;
+            this.attack += equipedWeapon.attack;
+        }
+        Debug.Log("Equip " + equipedWeapon.name);
+    }
+
+    public ItemData GetEquipedWeapon()
+    {
+        return equipedWeapon;
     }
 
     private void SelectDestinationCell(Vector3Int clickedCell)
