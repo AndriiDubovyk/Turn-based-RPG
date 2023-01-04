@@ -82,6 +82,7 @@ public class PlayerUnit : Unit
         currentHP += healing;
         if (currentHP > maxHP) currentHP = maxHP;
         UpdateHealthBar();
+        SkipTurn();
     }
 
     public void RemoveItem(ItemData itemData)
@@ -136,8 +137,14 @@ public class PlayerUnit : Unit
         {
             Debug.Log("Equip " + equipedWeapon.name + " with. Player attack + "+equipedWeapon.attack+ " = "+attack);
         }
+        SkipTurn();
     }
 
+    public void SkipTurn()
+    {
+        if (state == State.IsThinking)
+            state = State.IsWaiting;
+    }
     public ItemData GetEquipedWeapon()
     {
         return equipedWeapon;
