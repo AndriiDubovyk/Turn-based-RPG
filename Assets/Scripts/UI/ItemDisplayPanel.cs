@@ -44,6 +44,14 @@ public class ItemDisplayPanel : MonoBehaviour
             if(itemData.attack>0)
             {
                 equipButton.gameObject.SetActive(true);
+                if (itemData != inventoryPanel.GetEquipedWeapon())
+                {
+                    equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Equip");
+                }
+                else
+                {
+                    equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Unequip");
+                }
             }
             else
             {
@@ -71,9 +79,19 @@ public class ItemDisplayPanel : MonoBehaviour
         inventoryPanel.DropItem(itemData);
     }
 
-    public void EquipItem()
+    public void UseItem()
     {
-        inventoryPanel.EquipItem(itemData);
+        if(itemData.attack>0)
+        {
+            if(itemData!=inventoryPanel.GetEquipedWeapon())
+            {
+                inventoryPanel.EquipItem(itemData);
+            }
+            else
+            {
+                inventoryPanel.UnequipItem(itemData);
+            }
+        }
     }
 
 }

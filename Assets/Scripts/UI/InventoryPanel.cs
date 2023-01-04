@@ -50,17 +50,33 @@ public class InventoryPanel : MonoBehaviour
 
     public void DropItem(ItemData itemData)
     {
-        player.DropItem(itemData);
+        player.RemoveItem(itemData);
         InitializeInventory(); // reinitialize inventory
         GameObject.Find("Grid").GetComponent<ItemSpawner>().SpawnItem(itemData); // spawn item pickup
     }
 
     public void EquipItem(ItemData itemData)
     {
-        player.DropItem(itemData); // remove from main inventory
+        player.RemoveItem(itemData); // remove from main inventory
         player.EquipWeapon(itemData);
         InitializeInventory(); // reinitialize inventory
         
+    }
+
+    public void UnequipItem(ItemData itemData)
+    {
+        if(player.HasFreeInventorySlots())
+        {
+            player.RemoveItem(itemData); // remove from main inventory
+            player.AddItem(itemData);
+            InitializeInventory(); // reinitialize inventory
+        }
+
+    }
+
+    public ItemData GetEquipedWeapon()
+    {
+        return player.GetEquipedWeapon();
     }
 
     // Update is called once per frame

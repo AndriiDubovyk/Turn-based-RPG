@@ -64,12 +64,20 @@ public class PlayerUnit : Unit
         {
             Debug.Log($"Player takes {itemPickup.itemData.name}");
             Destroy(itemPickup.gameObject);
-            inventory[NumberOfOccupiedInvetorySlots()] = itemPickup.itemData;
+            AddItem(itemPickup.itemData);
         }
         SetItemTaking(false);
     }
 
-    public void DropItem(ItemData itemData)
+    public void AddItem(ItemData itemData)
+    {
+        if (HasFreeInventorySlots())
+        {
+            inventory[NumberOfOccupiedInvetorySlots()] = itemData;
+        }
+    }
+
+    public void RemoveItem(ItemData itemData)
     {
         if(itemData ==equipedWeapon)
         {
@@ -102,10 +110,25 @@ public class PlayerUnit : Unit
         // Player can equip only item with damage or no item
         if (newWeapon == null || newWeapon.attack>0)
         {
-            equipedWeapon = newWeapon;
-            this.attack += equipedWeapon.attack;
+            if(equipedWeapon == null)
+            {
+                equipedWeapon = newWeapon;
+                if(equipedWeapon!=null) this.attack += equipedWeapon.attack;
+            }
+            else
+            {
+                ItemData tmpItem = equipedWeapon;
+                RemoveItem(tmpItem); // alread has attack decreasing
+                equipedWeapon = newWeapon;
+                AddItem(tmpItem);
+               
+                if (equipedWeapon != null) this.attack += equipedWeapon.attack;
+            }
         }
-        Debug.Log("Equip " + equipedWeapon.name);
+        if(equipedWeapon!=null)
+        {
+            Debug.Log("Equip " + equipedWeapon.name + " with. Player attack + "+equipedWeapon.attack+ " = "+attack);
+        }
     }
 
     public ItemData GetEquipedWeapon()

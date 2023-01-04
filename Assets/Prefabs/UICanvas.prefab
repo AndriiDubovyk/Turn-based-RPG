@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7101372782289921833}
   - component: {fileID: 1483351491047073633}
   m_Layer: 5
-  m_Name: EquipButton
+  m_Name: UseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5173960295396216673}
         m_TargetAssemblyTypeName: ItemDisplayPanel, Assembly-CSharp
-        m_MethodName: EquipItem
+        m_MethodName: UseItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
