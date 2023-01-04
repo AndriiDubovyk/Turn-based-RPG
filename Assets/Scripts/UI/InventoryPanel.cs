@@ -55,6 +55,16 @@ public class InventoryPanel : MonoBehaviour
         GameObject.Find("Grid").GetComponent<ItemSpawner>().SpawnItem(itemData); // spawn item pickup
     }
 
+    public void UseHealingItem(ItemData itemData)
+    {
+        if(itemData.healing>0)
+        {
+            player.RemoveItem(itemData); // remove from main inventory
+            player.Heal(itemData.healing);
+            InitializeInventory(); // reinitialize inventory
+        }
+    }
+
     public void EquipItem(ItemData itemData)
     {
         player.RemoveItem(itemData); // remove from main inventory

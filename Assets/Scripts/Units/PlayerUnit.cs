@@ -77,6 +77,13 @@ public class PlayerUnit : Unit
         }
     }
 
+    public void Heal(int healing)
+    {
+        currentHP += healing;
+        if (currentHP > maxHP) currentHP = maxHP;
+        UpdateHealthBar();
+    }
+
     public void RemoveItem(ItemData itemData)
     {
         if(itemData ==equipedWeapon)

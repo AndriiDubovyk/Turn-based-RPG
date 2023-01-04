@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoblinUnitData
   m_EditorClassIdentifier: 
   maxHP: 100
-  attack: 5
+  attack: 15
   maxAttackDistance: 1
   pathfindingXMaxDistance: 4
   pathfindingYMaxDistance: 4

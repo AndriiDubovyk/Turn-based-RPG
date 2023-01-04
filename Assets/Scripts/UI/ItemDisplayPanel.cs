@@ -53,6 +53,11 @@ public class ItemDisplayPanel : MonoBehaviour
                     equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Unequip");
                 }
             }
+            else if(itemData.healing>0)
+            {
+                equipButton.gameObject.SetActive(true);
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Use");
+            }
             else
             {
                 equipButton.gameObject.SetActive(false);
@@ -91,6 +96,10 @@ public class ItemDisplayPanel : MonoBehaviour
             {
                 inventoryPanel.UnequipItem(itemData);
             }
+        }
+        else if(itemData.healing>0)
+        {
+            inventoryPanel.UseHealingItem(itemData);
         }
     }
 

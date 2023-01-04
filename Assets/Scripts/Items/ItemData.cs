@@ -8,6 +8,7 @@ public class ItemData : ScriptableObject
     public new string name;
     public string description;
     public int attack;
+    public int healing;
 
     public Sprite sprite;
 }
