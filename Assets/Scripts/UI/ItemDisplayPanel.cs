@@ -15,8 +15,18 @@ public class ItemDisplayPanel : MonoBehaviour
     [SerializeField]
     private Button dropButton;
 
+    private ItemData itemData;
+
+    private InventoryPanel inventoryPanel;
+
+    void Start()
+    {
+        inventoryPanel = GameObject.Find("InventoryPanel").GetComponent<InventoryPanel>();
+    }
+
     public void SetItemData(ItemData itemData)
     {
+        this.itemData = itemData;
         Color tmpColor;
         if (itemData != null)
         {
@@ -46,6 +56,11 @@ public class ItemDisplayPanel : MonoBehaviour
             dropButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("");
 
         }
+    }
+
+    public void DropItem()
+    {
+        inventoryPanel.DropItem(itemData);
     }
 
 }

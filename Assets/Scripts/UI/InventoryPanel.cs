@@ -39,7 +39,7 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
-    private void InitializeInventory()
+    public void InitializeInventory()
     {
         ItemData[] inventory = player.GetInvetory();
         for (int i = 0; i < inventory.Length; i++)
@@ -47,6 +47,13 @@ public class InventoryPanel : MonoBehaviour
             invetorySlots[i].GetComponent<InventorySlot>().SetItemData(inventory[i]);
         }
         itemDisplayPanel.GetComponent<ItemDisplayPanel>().SetItemData(null);
+    }
+
+    public void DropItem(ItemData itemData)
+    {
+        player.DropInventoryItem(itemData);
+        InitializeInventory(); // reinitialize inventory
+        GameObject.Find("Grid").GetComponent<ItemSpawner>().SpawnItem(itemData); // spawn item pickup
     }
 
     // Update is called once per frame

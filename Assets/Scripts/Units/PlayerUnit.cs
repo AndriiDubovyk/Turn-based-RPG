@@ -67,6 +67,23 @@ public class PlayerUnit : Unit
         SetItemTaking(false);
     }
 
+    public void DropInventoryItem(ItemData itemData)
+    {
+        for(int i=0; i<inventory.Length; i++)
+        {
+            if(inventory[i]==itemData)
+            {
+                inventory[i] = null;
+            }
+            if(inventory[i]==null && i<inventory.Length-1)
+            {
+                // shift all items
+                inventory[i] = inventory[i + 1];
+                inventory[i + 1] = null;
+            }
+        }
+    }
+
     public ItemData[] GetInvetory()
     {
         return inventory;

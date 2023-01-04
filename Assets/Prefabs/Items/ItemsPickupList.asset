@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 401e5fafb230c874690f03595d054363, type: 3}
+  m_Name: ItemsPickupList
+  m_EditorClassIdentifier: 
+  itemsPickup:
+  - {fileID: 7513286182769675311, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
+  - {fileID: 7513286182769675311, guid: 4fd6bd82df24f4d41b5cec185d675669, type: 3}

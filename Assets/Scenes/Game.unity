@@ -10126,6 +10126,7 @@ GameObject:
   - component: {fileID: 1522314642}
   - component: {fileID: 1522314641}
   - component: {fileID: 1522314643}
+  - component: {fileID: 1522314644}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -10182,6 +10183,19 @@ MonoBehaviour:
   tileSize: 1
   xTilePivot: 0.5
   yTilePivot: 0.5
+--- !u!114 &1522314644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522314640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8212a7b8715a5479df8b4036a7bc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsPickupList: {fileID: 11400000, guid: ca46b40d222786c42ab7f5cfb51e3625, type: 2}
 --- !u!1 &1557100792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3516794437458014943, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
