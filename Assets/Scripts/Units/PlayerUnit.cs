@@ -93,6 +93,7 @@ public class PlayerUnit : Unit
             else if (clickedUnit != gameObject && CanAttack(clickedUnit))
             {
                 ChoseAttackTarget(clickedUnit);
+                movementPath = null;
             }
         }
     }
