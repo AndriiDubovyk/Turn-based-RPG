@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
+
 
 public class Unit : MonoBehaviour
 {
@@ -194,5 +196,22 @@ public class Unit : MonoBehaviour
         state = State.IsMakingTurn;
         // Skip turn. Temporary solution. TODO
         if (attackTarget == null && movementPath == null) state = State.IsWaiting;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Enemy dies");
+        int chance = new Random().Next(100);
+        foreach(UnitData.Drop drop in unitData.drops)
+        {
+            if(chance<drop.dropChance)
+            {
+                Debug.Log("Enemy drops item");
+                // drop item
+                ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
+                itemSpawner.SpawnItem(drop.itemData, gameObject.transform.position);
+            }
+        }
+        Destroy(gameObject);
     }
 }

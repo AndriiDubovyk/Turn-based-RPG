@@ -12,4 +12,13 @@ public class UnitData : ScriptableObject
     public int pathfindingYMaxDistance;
     public float moveSpeed;
     public Sprite sprite;
+
+    [System.Serializable]
+    public class Drop
+    {
+        public ItemData itemData;
+        public int dropChance;
+    }
+
+    public List<Drop> drops;
 }

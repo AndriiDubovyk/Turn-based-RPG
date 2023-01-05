@@ -72,7 +72,7 @@ public class TurnManager : MonoBehaviour
         {
             enemiesGO.Remove(deadEnemyGO);
             enemiesUnits.Remove(deadEnemyGO.GetComponent<EnemyUnit>());
-            Destroy(deadEnemyGO);
+            deadEnemyGO.GetComponent<EnemyUnit>().Die();
         }
     }
 
