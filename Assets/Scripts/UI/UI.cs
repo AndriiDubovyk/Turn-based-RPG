@@ -9,6 +9,10 @@ public class UI : MonoBehaviour
     private GameObject inventoryButton;
     [SerializeField]
     private GameObject takeItemButton;
+    [SerializeField]
+    private GameObject inventoryPanel;
+    [SerializeField]
+    private GameObject resultPanel;
 
     private bool isMouseOverInvetoryButton;
     private bool isMouseOverTakeItemButton;
@@ -26,7 +30,23 @@ public class UI : MonoBehaviour
 
     }
 
-    public bool IsMouseOverUI()
+    public bool IsUIBlockingActions()
+    {
+        return IsMouseOverUI() || IsInventoryOpened() || IsResultPanelActive();
+    }
+
+
+    private bool IsInventoryOpened()
+    {
+        return inventoryPanel != null && inventoryPanel.activeSelf;
+    }
+
+    private bool IsResultPanelActive()
+    {
+        return resultPanel.activeSelf;
+    }
+
+    private bool IsMouseOverUI()
     {
         return isMouseOverInvetoryButton || isMouseOverTakeItemButton; 
     } 

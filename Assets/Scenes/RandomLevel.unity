@@ -948,10 +948,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1436082778888404868, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5730842783785289738, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1045,32 +1041,8 @@ PrefabInstance:
       value: UICanvas
       objectReference: {fileID: 0}
     - target: {fileID: 5730842785385297009, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5730842785385297009, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1557100795}
-    - target: {fileID: 5730842785385297009, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetItemTaking
-      objectReference: {fileID: 0}
-    - target: {fileID: 5730842785385297009, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217259033597077451, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217259033597077451, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 4.999939
-      objectReference: {fileID: 0}
-    - target: {fileID: 6420473970249236976, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f71e8fa28a71442894adf48e721284, type: 3}

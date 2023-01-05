@@ -43,11 +43,11 @@ public class TempleteGenerator
     public int[,] GetTemplete()
     {
         // Temlete is too small
-        if(numberOfInvisibleObstacles >= levelWidthCells - 1 || numberOfInvisibleObstacles >= levelHeightCells - 1)
+        if(numberOfInvisibleObstacles > (levelHeightCells * levelWidthCells / 10))
         {
             return null;
         }
-        if (numberOfEnemyRooms > (levelHeightCells * levelWidthCells / 10))
+        if (numberOfEnemyRooms > (levelHeightCells * levelWidthCells / 15))
         {
             return null;
         }

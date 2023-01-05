@@ -25,11 +25,13 @@ public class PlayerUnit : Unit
 
     private UI ui;
     private TurnManager tm;
+    private ResultPanel resultPanel;
 
     private void Awake()
     {
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddPlayer(gameObject);
+        resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
     }
 
 
@@ -51,12 +53,15 @@ public class PlayerUnit : Unit
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        if (IsDead()) Die();
+    }
+
     public void SetAction()
     {
-        GameObject invPanel = GameObject.Find("InventoryPanel");
-        bool isInventoryOpened = invPanel != null && invPanel.activeSelf;
-
-        if (Input.GetMouseButtonDown(0) && !isInventoryOpened && !ui.IsMouseOverUI())
+        if (Input.GetMouseButtonDown(0) && !ui.IsUIBlockingActions())
         {
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
@@ -265,6 +270,12 @@ public class PlayerUnit : Unit
             gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
         }
         gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
+    }
+
+    public override void Die()
+    {
+        resultPanel.SetResult(false);
+        resultPanel.Display();
     }
 
     protected override void MoveUpdate()

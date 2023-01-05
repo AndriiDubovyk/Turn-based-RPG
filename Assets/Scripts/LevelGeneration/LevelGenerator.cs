@@ -56,8 +56,8 @@ public class LevelGenerator : MonoBehaviour
         // generate level again with bigger size
         while (templete == null)
         {
-            levelWidthCells += 5;
-            levelHeightCells += 5;
+            levelWidthCells += 1;
+            levelHeightCells += 1;
             templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         }
         

@@ -52,7 +52,7 @@ public class Unit : MonoBehaviour
        
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (state == State.IsMakingTurn)
         {
@@ -198,7 +198,7 @@ public class Unit : MonoBehaviour
         if (attackTarget == null && movementPath == null) state = State.IsWaiting;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         int chance = new Random().Next(100);
         foreach(UnitData.Drop drop in unitData.drops)
