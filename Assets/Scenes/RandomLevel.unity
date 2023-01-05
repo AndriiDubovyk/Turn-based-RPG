@@ -751,6 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0f7dd0f99e3354aba8050aec2fc454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelExit: {fileID: 8516737359112469485, guid: c6fc63ce3fc28d841b7a295c5f03bab3, type: 3}
   defaultGroundTile: {fileID: 11400000, guid: f6841fd1ee3a10549b1d402b8992bec7, type: 2}
   defaultObstaclesTile: {fileID: 11400000, guid: 0bcb10668b78e4247b9943f9d01c939e, type: 2}
   templeteCellSize: 11

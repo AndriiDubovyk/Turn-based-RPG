@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = System.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class LevelGenerator : MonoBehaviour
     private int[,] templete;
     private int shiftX, shiftY;
 
+
+    [SerializeField]
+    private GameObject levelExit;
     [SerializeField]
     private Tile defaultGroundTile;
     [SerializeField]
@@ -48,8 +52,26 @@ public class LevelGenerator : MonoBehaviour
         shiftX = - templete.GetLength(0) / 2;
         shiftY = - templete.GetLength(1) / 2;
         ShowWorld(templete);
-
         CreateRooms();
+        CreateExit();
+    }
+
+    private void CreateExit()
+    {
+        Random rnd = new Random();
+        Vector3 roomPos = GetBossRoomPos();
+        int roomSize = GetCellSize();
+        List<Vector3> usedPositions = new List<Vector3>();
+        Vector3 pos;
+        do
+        {
+            int x = rnd.Next(1, roomSize - 1);
+            int y = rnd.Next(1, roomSize - 1);
+            pos = roomPos + new Vector3(x, y);
+        } while (usedPositions.Contains(pos));
+        usedPositions.Add(pos);
+        levelExit.transform.position = pos;
+        Instantiate(levelExit);
     }
 
     private void CreateRooms()
