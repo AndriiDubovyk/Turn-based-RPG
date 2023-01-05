@@ -33,6 +33,15 @@ public class PlayerUnit : Unit
         isItemTakingActive = false;
         ui = GameObject.Find("UICanvas").GetComponent<UI>();
         healthBar = GameObject.Find("PlayerHealthBar").GetComponent<TextMeshProUGUI>();
+
+        LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
+        if(lg!=null)
+        {
+            // player starts at the center of the room
+            int cellSize = lg.GetCellSize();
+            Vector3 startRoomPos = lg.GetStartRoomPos();
+            gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
+        }
     }
 
     public void SetAction()

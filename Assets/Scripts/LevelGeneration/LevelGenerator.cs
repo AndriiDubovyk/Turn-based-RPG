@@ -33,12 +33,15 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private int numberOfInvisibleObstacles = 8; // to make the corridors more undulating
     [SerializeField]
-    private int minCellDistBetweenInvisibleObstacles = 1;                                  
+    private int minCellDistBetweenInvisibleObstacles = 1;
+
+    private Vector3 startRoomPos;
+    private Vector3 bossRoomPos;
+    private List<Vector3> commonRoomsPos = new List<Vector3>();
 
 
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gridManager = gameObject.GetComponent<GridManager>();
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
@@ -70,16 +73,16 @@ public class LevelGenerator : MonoBehaviour
                 switch(templete[x,y])
                 {
                     case 1:
-                        CreateRoom(x, y);
+                        startRoomPos = CreateRoom(x, y) + new Vector3(0.5f, 0.5f);
                         break;
                     case 2:
-                        CreateRoom(x, y);
+                        commonRoomsPos.Add(CreateRoom(x, y) + new Vector3(0.5f, 0.5f));
                         break;
                     case 4:
                         CreateCorridor(x, y);
                         break;
                     case 5:
-                        CreateRoom(x, y);
+                        bossRoomPos = CreateRoom(x, y) + new Vector3(0.5f, 0.5f);
                         break;
                     default:
                         break;
@@ -187,7 +190,27 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private void CreateRoom(int x, int y)
+    public int GetCellSize()
+    {
+        return templeteCellSize;
+    }
+
+    public Vector3 GetStartRoomPos()
+    {
+        return startRoomPos;
+    }
+
+    public Vector3 GetBossRoomPos()
+    {
+        return bossRoomPos;
+    }
+
+    public List<Vector3> GetCommonRoomPos()
+    {
+        return commonRoomsPos;
+    }
+
+    private Vector3Int CreateRoom(int x, int y) // return room coords
     {
         FillCell(gridManager.collidersTilemap, defaultObstaclesTile, new Vector3Int(x, y), true);
         int width = templete.GetLength(0);
@@ -237,6 +260,7 @@ public class LevelGenerator : MonoBehaviour
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
         }
+        return topLeftCorner;
     }
 
     private void FillCell(Tilemap tilemmap, Tile tile, Vector3Int cellPoint, bool onlyOutline = false)
