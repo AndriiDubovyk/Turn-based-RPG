@@ -49,7 +49,7 @@ public class LevelGenerator : MonoBehaviour
         shiftY = - templete.GetLength(1) / 2;
         ShowWorld(templete);
 
-        CreateGround();
+        //CreateGround();
         CreateRooms();
     }
 
@@ -104,12 +104,30 @@ public class LevelGenerator : MonoBehaviour
         int shift = (templeteCellSize - corridorWidth) / 2;
 
         Vector3Int topLeftCorner = new Vector3Int((x + shiftX) * templeteCellSize, (y + shiftY) * templeteCellSize);
+
+        // floor at the center
+        for(int i=0; i<corridorWidth; i++)
+        {
+            for (int j = 0; j < corridorWidth; j++)
+            {
+                Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + i,
+                    topLeftCorner.y + +shift + j);
+                gridManager.groundTilemap.SetTile(pos, defaultGroundTile);
+            }
+        }
+
         if (topSpace != 0)
         {   
             for (int i = 0; i < shift; i++)
             {
                 Vector3Int posLeft = new Vector3Int(topLeftCorner.x + shift - 1,
                     topLeftCorner.y+i);
+                for(int j = 0; j<corridorWidth; j++)
+                {
+                    Vector3Int pos = new Vector3Int(topLeftCorner.x + shift +j,
+                    topLeftCorner.y + i);
+                    gridManager.groundTilemap.SetTile(pos, defaultGroundTile);
+                }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y+i);
                 gridManager.collidersTilemap.SetTile(posLeft, defaultObstaclesTile);
@@ -131,6 +149,12 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int posLeft = new Vector3Int(topLeftCorner.x + shift - 1,
                     topLeftCorner.y+templeteCellSize-1-i);
+                for (int j = 0; j < corridorWidth; j++)
+                {
+                    Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + j,
+                    topLeftCorner.y + templeteCellSize - 1 - i);
+                    gridManager.groundTilemap.SetTile(pos, defaultGroundTile);
+                }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y + templeteCellSize - 1 - i);
                 gridManager.collidersTilemap.SetTile(posLeft, defaultObstaclesTile);
@@ -152,6 +176,12 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int posTop = new Vector3Int(topLeftCorner.x+i,
                     topLeftCorner.y + shift - 1);
+                for (int j = 0; j < corridorWidth; j++)
+                {
+                    Vector3Int pos = new Vector3Int(topLeftCorner.x + i,
+                    topLeftCorner.y + shift + j);
+                    gridManager.groundTilemap.SetTile(pos, defaultGroundTile);
+                }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x+i,
                     topLeftCorner.y + shift + corridorWidth);
                 gridManager.collidersTilemap.SetTile(posTop, defaultObstaclesTile);
@@ -173,6 +203,12 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int posTop = new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - i,
                     topLeftCorner.y + shift - 1);
+                for (int j = 0; j < corridorWidth; j++)
+                {
+                    Vector3Int pos = new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - i,
+                    topLeftCorner.y + shift + j);
+                    gridManager.groundTilemap.SetTile(pos, defaultGroundTile);
+                }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - i,
                     topLeftCorner.y + shift + corridorWidth);
                 gridManager.collidersTilemap.SetTile(posTop, defaultObstaclesTile);
@@ -259,6 +295,13 @@ public class LevelGenerator : MonoBehaviour
                     topLeftCorner.y + shift + i);
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
+        }
+        for (int i = 0; i< templeteCellSize; i++)
+        {
+            for (int j = 0; j < templeteCellSize; j++)
+            {
+                gridManager.groundTilemap.SetTile(topLeftCorner + new Vector3Int(i, j), defaultGroundTile);
+            }      
         }
         return topLeftCorner;
     }
