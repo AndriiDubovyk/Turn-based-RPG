@@ -32,6 +32,7 @@ public class LevelExit : MonoBehaviour
             else
             {
                 GameProcessInfo.CurrentLevel++;
+                player.GetComponent<PlayerUnit>().SaveData();
                 SceneManager.LoadScene("RandomLevel");
             }
         }

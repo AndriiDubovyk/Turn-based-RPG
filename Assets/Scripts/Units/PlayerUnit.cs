@@ -34,6 +34,22 @@ public class PlayerUnit : Unit
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
     }
 
+    public void SaveData()
+    {
+        GameProcessInfo.CurrentHP = currentHP;
+        GameProcessInfo.Attack = attack;
+        GameProcessInfo.Inventory = inventory;
+        GameProcessInfo.EquipedWeapon = equipedWeapon;
+    }
+
+    public void LoadData()
+    {
+        currentHP = GameProcessInfo.CurrentHP;
+        attack = GameProcessInfo.Attack;
+        inventory = GameProcessInfo.Inventory;
+        equipedWeapon = GameProcessInfo.EquipedWeapon;
+    }
+
 
     protected override void Start()
     {
@@ -51,6 +67,9 @@ public class PlayerUnit : Unit
             Vector3 startRoomPos = lg.GetStartRoomPos();
             gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
         }
+
+        if (GameProcessInfo.CurrentLevel > 1) LoadData();
+        UpdateHealthBar();
     }
 
     protected override void Update()
