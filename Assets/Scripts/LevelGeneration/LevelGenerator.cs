@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private int levelHeightCells = 9;
     [SerializeField]
-    private int numberOfEnemyRooms = 3;
+    private int numberOfEnemyRooms = 2;
     [SerializeField]
     private int enemyRoomMaxCellDistFromEdge = 3;
     [SerializeField]
@@ -47,8 +48,22 @@ public class LevelGenerator : MonoBehaviour
 
     void Awake()
     {
+        numberOfEnemyRooms += GameProcessInfo.CurrentLevel / 2;
+
         gridManager = gameObject.GetComponent<GridManager>();
+
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
+        // generate level again with bigger size
+        while (templete == null)
+        {
+            levelWidthCells += 5;
+            levelHeightCells += 5;
+            templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
+        }
+        
+
+
+
         shiftX = - templete.GetLength(0) / 2;
         shiftY = - templete.GetLength(1) / 2;
         ShowWorld(templete);

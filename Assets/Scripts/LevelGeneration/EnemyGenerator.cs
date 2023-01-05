@@ -14,6 +14,11 @@ public class EnemyGenerator : MonoBehaviour
 
     private LevelGenerator lg;
 
+    void Awake()
+    {
+        numberOfEnemiesInBossRoom += GameProcessInfo.CurrentLevel / 3;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

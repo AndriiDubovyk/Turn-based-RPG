@@ -18,6 +18,7 @@ public class LevelExit : MonoBehaviour
     {
         if(player.transform.position.Equals(gameObject.transform.position))
         {
+            GameProcessInfo.CurrentLevel++;
             SceneManager.LoadScene("RandomLevel");
         }
     }

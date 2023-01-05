@@ -24,6 +24,20 @@ public class ItemGenerator : MonoBehaviour
     private LevelGenerator lg;
     private ItemSpawner itemSpawner;
 
+    private void Awake()
+    {
+        foreach(ItemSpawn itemSpawn in commonRoomItems)
+        {
+            if (itemSpawn.itemData.name == "Healing Potion")
+                itemSpawn.quantity += GameProcessInfo.CurrentLevel / 2;
+        }
+        foreach (ItemSpawn itemSpawn in bossRoomItems)
+        {
+            if (itemSpawn.itemData.name == "Healing Potion")
+                itemSpawn.quantity += GameProcessInfo.CurrentLevel / 3;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -758,7 +758,7 @@ MonoBehaviour:
   corridorWidth: 3
   levelWidthCells: 9
   levelHeightCells: 9
-  numberOfEnemyRooms: 3
+  numberOfEnemyRooms: 2
   enemyRoomMaxCellDistFromEdge: 3
   minCellDistBetweenEnemyRooms: 1
   numberOfInvisibleObstacles: 8

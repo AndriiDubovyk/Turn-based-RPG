@@ -42,12 +42,27 @@ public class TempleteGenerator
 
     public int[,] GetTemplete()
     {
-        GenerateStartRoom(world);
-        GenerateEnemyRooms(world, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms);
-        GenerateObstacles(world, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles);
-        GenerateCorridors(world);
-        GenerateBossRoom(world);
-        RemoveObstacles(world);
+        // Temlete is too small
+        if(numberOfInvisibleObstacles >= levelWidthCells - 1 || numberOfInvisibleObstacles >= levelHeightCells - 1)
+        {
+            return null;
+        }
+        if (numberOfEnemyRooms > (levelHeightCells * levelWidthCells / 10))
+        {
+            return null;
+        }
+        try
+        {
+            GenerateStartRoom(world);
+            GenerateEnemyRooms(world, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms);
+            GenerateObstacles(world, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles);
+            GenerateCorridors(world);
+            GenerateBossRoom(world);
+            RemoveObstacles(world);
+        } catch
+        {
+            return null;
+        }
         return world;
     }
 
