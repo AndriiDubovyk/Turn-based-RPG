@@ -36,14 +36,14 @@ public class GridManager : MonoBehaviour
 
     private Vector3Int[] GetEnemiesCells()
     {
-        List<GameObject> enemies = turnManager.enemiesGO;
+        List<GameObject> enemies = turnManager.GetEnemiesGO();
         Vector3Int[] enemiesCells = Array.ConvertAll(enemies.ToArray(), it => it.GetComponent<Unit>().GetCell());
         return enemiesCells;
     }
 
     public List<Vector3Int> GetOccupiedCells()
     {
-        List<Vector3Int> occupiedCells = turnManager.enemiesGO.ConvertAll(x => x.GetComponent<Unit>().GetCell());
+        List<Vector3Int> occupiedCells = turnManager.GetEnemiesGO().ConvertAll(x => x.GetComponent<Unit>().GetCell());
         occupiedCells.Add(player.GetComponent<Unit>().GetCell());
         return occupiedCells;
     }

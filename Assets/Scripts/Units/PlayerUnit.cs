@@ -24,6 +24,13 @@ public class PlayerUnit : Unit
     private ItemData equipedWeapon;
 
     private UI ui;
+    private TurnManager tm;
+
+    private void Awake()
+    {
+        tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
+        tm.AddPlayer(gameObject);
+    }
 
 
     protected override void Start()

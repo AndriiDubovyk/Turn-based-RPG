@@ -17,5 +17,5 @@ MonoBehaviour:
   maxAttackDistance: 1
   pathfindingXMaxDistance: 22
   pathfindingYMaxDistance: 14
-  moveSpeed: 10
+  moveSpeed: 20
   sprite: {fileID: 21300000, guid: 6e46f2b17f6753e48bbd3c5e2722fd55, type: 3}

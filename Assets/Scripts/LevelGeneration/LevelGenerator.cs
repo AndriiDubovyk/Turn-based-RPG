@@ -49,19 +49,7 @@ public class LevelGenerator : MonoBehaviour
         shiftY = - templete.GetLength(1) / 2;
         ShowWorld(templete);
 
-        //CreateGround();
         CreateRooms();
-    }
-
-    private void CreateGround()
-    {
-        for(int i=0; i<templete.GetLength(0); i++)
-        {
-            for (int j = 0; j < templete.GetLength(1); j++)
-            {
-                FillCell(gridManager.groundTilemap, defaultGroundTile, new Vector3Int(i , j));
-            }
-        }
     }
 
     private void CreateRooms()

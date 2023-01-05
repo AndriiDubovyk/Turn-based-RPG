@@ -8,12 +8,12 @@ public class TurnManager : MonoBehaviour
 {
     public GameObject grid;
 
-    public GameObject playerGO;
-    public List<GameObject> enemiesGO;
+    private GameObject playerGO;
+    private List<GameObject> enemiesGO = new List<GameObject>();
 
     private PlayerUnit playerUnit;
 
-    private List<EnemyUnit> enemiesUnits;
+    private List<EnemyUnit> enemiesUnits = new List<EnemyUnit>();
     private int activeEnemyIndex;
 
     private Unit activeUnit;
@@ -23,15 +23,32 @@ public class TurnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerUnit = playerGO.GetComponent<PlayerUnit>();
-        enemiesUnits = new List<EnemyUnit>();
-        foreach(GameObject enemyGO in enemiesGO)
-        {
-            enemiesUnits.Add(enemyGO.GetComponent<EnemyUnit>());
-        }
         activeUnit = playerUnit;
         activeEnemyIndex = 0;
     }
+
+    public void AddEnemy(GameObject enemy)
+    {
+        enemiesGO.Add(enemy);
+        enemiesUnits.Add(enemy.GetComponent<EnemyUnit>());
+    }
+
+    public void AddPlayer(GameObject player)
+    {
+        playerGO = player;
+        playerUnit = playerGO.GetComponent<PlayerUnit>();
+    }
+
+    public List<GameObject> GetEnemiesGO()
+    {
+        return enemiesGO;
+    }
+
+    public List<GameObject> GetPlayerGO()
+    {
+        return enemiesGO;
+    }
+
 
     // Update is called once per frame
     void Update()

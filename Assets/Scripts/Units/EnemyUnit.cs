@@ -7,6 +7,13 @@ using UnityEngine;
 public class EnemyUnit : Unit
 {
     private HealthBar healthBar;
+    private TurnManager tm;
+
+    private void Awake()
+    {
+        tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
+        tm.AddEnemy(gameObject);
+    }
 
     // Start is called before the first frame update
     protected override void Start()
