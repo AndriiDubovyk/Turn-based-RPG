@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
         IsWaiting // waiting opponent's turn end
     }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         maxHP = unitData.maxHP;
         attack = unitData.attack;
@@ -43,6 +43,10 @@ public class Unit : MonoBehaviour
         pathfindingXMaxDistance = unitData.pathfindingXMaxDistance;
         pathfindingYMaxDistance = unitData.pathfindingYMaxDistance;
         gameObject.GetComponent<SpriteRenderer>().sprite = unitData.sprite;
+    }
+
+    protected virtual void Start()
+    {
 
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
@@ -50,6 +54,12 @@ public class Unit : MonoBehaviour
         state = State.IsThinking;
         currentHP = maxHP;
        
+    }
+
+    public void SetHealth(int health)
+    {
+        currentHP = health;
+        UpdateHealthBar();
     }
 
     protected virtual void Update()
@@ -97,7 +107,6 @@ public class Unit : MonoBehaviour
 
     public virtual void Attack(Unit another)
     {
-        Debug.Log(tag + " attack " + another.tag + " with " + attack + " dmg");
         another.TakeDamage(this.attack);
     }
 
@@ -111,11 +120,20 @@ public class Unit : MonoBehaviour
         return maxHP;
     }
 
+    public int GetAttack()
+    {
+        return attack;
+    }
+
+    public void SetAttack(int attack)
+    {
+        this.attack = attack;
+    }
+
     public void TakeDamage(int damageAmount)
     {
         currentHP -= damageAmount;
         if (currentHP < 0) currentHP = 0;
-        Debug.Log(tag + " was attacked with " + damageAmount + " dmg. Current HP: " + currentHP);
         UpdateHealthBar();
     }
 
@@ -197,7 +215,6 @@ public class Unit : MonoBehaviour
         // Skip turn. Unit has no action to do
         if (attackTarget == null && movementPath == null)
         {
-            Debug.Log("Enemy skips turn");
             state = State.IsWaiting;
         }
     }

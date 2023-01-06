@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "NewUnitData", menuName = "SO/UnitData")]
 public class UnitData : ScriptableObject
 {
+    public new string name;
     public int maxHP;
     public int attack;
     public int maxAttackDistance;

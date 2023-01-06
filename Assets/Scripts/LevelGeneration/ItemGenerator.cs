@@ -26,7 +26,8 @@ public class ItemGenerator : MonoBehaviour
 
     private void Awake()
     {
-        foreach(ItemSpawn itemSpawn in commonRoomItems)
+        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
+        foreach (ItemSpawn itemSpawn in commonRoomItems)
         {
             if (itemSpawn.itemData.name == "Healing Potion")
                 itemSpawn.quantity += GameProcessInfo.CurrentLevel / 2;
@@ -41,6 +42,7 @@ public class ItemGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
         lg = gameObject.GetComponent<LevelGenerator>();
         itemSpawner = gameObject.GetComponent<ItemSpawner>();
         SpawnItemsInStartRoom();

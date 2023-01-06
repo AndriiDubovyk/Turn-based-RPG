@@ -17,10 +17,28 @@ public class GridManager : MonoBehaviour
 
     private TurnManager turnManager;
 
+    private List<ItemPickup> itemPickupList = new List<ItemPickup>();
+
+
     // Start is called before the first frame update
     void Start()
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
+    }
+
+    public void AddItemPickup(ItemPickup itemPickup)
+    {
+        itemPickupList.Add(itemPickup);
+    }
+
+    public void RemoveItemPickup(ItemPickup itemPickup)
+    {
+        itemPickupList.Remove(itemPickup);
+    }
+
+    public List<ItemPickup> GetItemPickupList()
+    {
+        return itemPickupList;
     }
 
     // Update is called once per frame

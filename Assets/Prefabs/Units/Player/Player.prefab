@@ -207,4 +207,4 @@ MonoBehaviour:
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
   attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
-  healthBar: {fileID: 0}
+  ips: {fileID: 11400000, guid: ca46b40d222786c42ab7f5cfb51e3625, type: 2}

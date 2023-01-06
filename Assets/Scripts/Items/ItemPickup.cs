@@ -15,6 +15,12 @@ public class ItemPickup : MonoBehaviour
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         gameObject.GetComponent<SpriteRenderer>().sprite = itemData.sprite;
+        gridManager.AddItemPickup(this);
+    }
+
+    private void OnDestroy()
+    {
+        gridManager.RemoveItemPickup(this);
     }
 
     // Update is called once per frame

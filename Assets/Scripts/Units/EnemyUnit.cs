@@ -9,18 +9,19 @@ public class EnemyUnit : Unit
     private HealthBar healthBar;
     private TurnManager tm;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddEnemy(gameObject);
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.UpdateHealth(GetCurrentHP(), GetMaxHP());
     }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        healthBar = GetComponentInChildren<HealthBar>();
-        healthBar.UpdateHealth(GetCurrentHP(), GetMaxHP());
     }
 
     public override void SetMovementPathTo(Vector3Int destinationCell)

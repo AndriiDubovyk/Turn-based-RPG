@@ -48,9 +48,8 @@ public class LevelGenerator : MonoBehaviour
 
     void Awake()
     {
+        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
         numberOfEnemyRooms += GameProcessInfo.CurrentLevel / 2;
-
-        gridManager = gameObject.GetComponent<GridManager>();
 
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         // generate level again with bigger size
@@ -60,15 +59,25 @@ public class LevelGenerator : MonoBehaviour
             levelHeightCells += 1;
             templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         }
-        
 
+        GenerateLevelWithTemplete(templete);
+    }
 
+    public void GenerateLevelWithTemplete(int[,] templete)
+    {
+        this.templete = templete;
+        gridManager = gameObject.GetComponent<GridManager>();
 
-        shiftX = - templete.GetLength(0) / 2;
-        shiftY = - templete.GetLength(1) / 2;
+        shiftX = -templete.GetLength(0) / 2;
+        shiftY = -templete.GetLength(1) / 2;
         ShowWorld(templete);
         CreateRooms();
         CreateExit();
+    }
+
+    public int[,] GetLevelTemplete()
+    {
+        return templete;
     }
 
     private void CreateExit()

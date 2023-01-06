@@ -16,12 +16,14 @@ public class EnemyGenerator : MonoBehaviour
 
     void Awake()
     {
+        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
         numberOfEnemiesInBossRoom += GameProcessInfo.CurrentLevel / 3;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
         lg = gameObject.GetComponent<LevelGenerator>();
         SpawnEnemiesInCommonRooms();
         SpawnEnemiesInBossRoom();

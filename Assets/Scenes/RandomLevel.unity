@@ -670,6 +670,7 @@ GameObject:
   - component: {fileID: 1522314645}
   - component: {fileID: 1522314646}
   - component: {fileID: 1522314647}
+  - component: {fileID: 1522314648}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -803,6 +804,19 @@ MonoBehaviour:
     quantity: 1
   - itemData: {fileID: 11400000, guid: 7bf2e9045180d374f83193aa06fe2d63, type: 2}
     quantity: 1
+--- !u!114 &1522314648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522314640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254c52e5be2d41048804678bd8177d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitList: {fileID: 11400000, guid: 316f7ceded16adf47b19308bc4040df4, type: 2}
 --- !u!1 &1557100792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3516794437458014943, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
@@ -829,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1775356286}
   - component: {fileID: 1775356287}
+  - component: {fileID: 1775356288}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -864,6 +879,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1522314640}
+--- !u!114 &1775356288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775356285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805a9a1ac0eb58f43b9c117822b628da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3516794436037003815
 PrefabInstance:
   m_ObjectHideFlags: 0

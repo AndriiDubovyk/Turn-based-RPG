@@ -26,12 +26,16 @@ public class PlayerUnit : Unit
     private UI ui;
     private TurnManager tm;
     private ResultPanel resultPanel;
+    [SerializeField]
+    private ItemsPickupList ips;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddPlayer(gameObject);
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
+        healthBar = GameObject.Find("PlayerHealthBar").GetComponent<TextMeshProUGUI>();
     }
 
     public void SaveData()
@@ -42,6 +46,46 @@ public class PlayerUnit : Unit
         GameProcessInfo.EquipedWeapon = equipedWeapon;
     }
 
+    public void SetInventory(ItemData[] inventory)
+    {
+        this.inventory = inventory;
+    }
+
+    public void SetInventory(string[] inventory)
+    {
+        ItemData[] inv = new ItemData[6];
+        for(int i=0; i<inventory.Length; i++)
+        {
+            foreach (ItemPickup ip in ips.itemsPickup)
+            {
+                if (ip.itemData.name == inventory[i])
+                {
+                    inv [i]= ip.itemData;
+                }
+            }
+        }
+
+        this.inventory = inv;
+    }
+
+    public void SetEquipedWeapon(ItemData equipedWeapon)
+    {
+        this.equipedWeapon = equipedWeapon;
+    }
+
+    public void SetEquipedWeapon(string equipedWeaponName)
+    {
+        ItemData ew = null;
+        foreach(ItemPickup ip in ips.itemsPickup)
+        {
+            if(ip.itemData.name == equipedWeaponName)
+            {
+                ew = ip.itemData;
+            }
+        }
+        this.equipedWeapon = ew;
+    }
+
     public void LoadData()
     {
         currentHP = GameProcessInfo.CurrentHP;
@@ -50,17 +94,15 @@ public class PlayerUnit : Unit
         equipedWeapon = GameProcessInfo.EquipedWeapon;
     }
 
-
     protected override void Start()
     {
         base.Start();
         isPathConfirmed = false;
         isItemTakingActive = false;
         ui = GameObject.Find("UICanvas").GetComponent<UI>();
-        healthBar = GameObject.Find("PlayerHealthBar").GetComponent<TextMeshProUGUI>();
 
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
-        if(lg!=null)
+        if(lg!=null && !GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist())
         {
             // player starts at the center of the room
             int cellSize = lg.GetCellSize();
@@ -154,7 +196,7 @@ public class PlayerUnit : Unit
         }
     }
 
-    public ItemData[] GetInvetory()
+    public ItemData[] GetInventory()
     {
         return inventory;
     }

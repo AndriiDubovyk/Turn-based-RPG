@@ -26,13 +26,13 @@ public class InventoryPanel : MonoBehaviour
     public void Toggle()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        ItemData[] inventory = player.GetInvetory();
+        ItemData[] inventory = player.GetInventory();
         InitializeInventory();
     }
 
     public void InitializeInventory()
     {
-        ItemData[] inventory = player.GetInvetory();
+        ItemData[] inventory = player.GetInventory();
         for (int i = 0; i < inventory.Length; i++)
         {
             invetorySlots[i].GetComponent<InventorySlot>().SetItemData(inventory[i]);
