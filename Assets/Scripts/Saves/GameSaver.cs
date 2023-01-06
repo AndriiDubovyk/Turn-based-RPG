@@ -13,7 +13,7 @@ public class GameSaver : MonoBehaviour
     private GameObject player;
     private const string SAVE_FILE_NAME = "SavedData.dat";
 
-    private void Start()
+    private void Awake()
     {
         Debug.Log($"Save exist {IsSaveExist()}");
         player = GameObject.Find("Player");
@@ -36,8 +36,11 @@ public class GameSaver : MonoBehaviour
 
         savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentLevel;
         savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
+        savedData.levelSavedData.exitPosX = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().x;
+        savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
 
         List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().GetEnemiesGO();
+        Debug.Log($"saved enemies {enemies.Count}");
         foreach(GameObject enemy in enemies)
         {
             SavedData.EnemySavedData enemySavedData = new SavedData.EnemySavedData();
@@ -45,6 +48,7 @@ public class GameSaver : MonoBehaviour
             enemySavedData.posX = enemy.transform.position.x;
             enemySavedData.posY = enemy.transform.position.y;
             enemySavedData.health = enemy.GetComponent<Unit>().GetCurrentHP();
+            Debug.Log("Save enemy hp " + enemySavedData.health);
             savedData.enemiesSavedData.Add(enemySavedData);
         }
 
@@ -75,6 +79,14 @@ public class GameSaver : MonoBehaviour
         return File.Exists($"{Application.persistentDataPath}/{SAVE_FILE_NAME}");
     }
 
+    public void DeleteSave()
+    {
+        if(IsSaveExist())
+        {
+            File.Delete($"{Application.persistentDataPath}/{SAVE_FILE_NAME}");
+        }
+    }
+
     public void LoadGame()
     {
         if (IsSaveExist())
@@ -92,8 +104,9 @@ public class GameSaver : MonoBehaviour
     private void GenerateWorld()
     {
         GameProcessInfo.CurrentLevel = savedData.levelSavedData.levelIndex;
+        Debug.Log("Current level " + GameProcessInfo.CurrentLevel);
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
-        lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete);
+        lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete, new Vector3(savedData.levelSavedData.exitPosX, savedData.levelSavedData.exitPosY));
 
         ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
         foreach (SavedData.ItemSavedData isd in savedData.itemsSavedData)
@@ -104,6 +117,7 @@ public class GameSaver : MonoBehaviour
         UnitSpawner unitSpanwer = GameObject.Find("Grid").GetComponent<UnitSpawner>();
         foreach (SavedData.EnemySavedData esd in savedData.enemiesSavedData)
         {
+            Debug.Log("Load enemy hp " + esd.health);
             unitSpanwer.SpawnUnit(esd.unitName, new Vector3(esd.posX, esd.posY), esd.health);
         }
 

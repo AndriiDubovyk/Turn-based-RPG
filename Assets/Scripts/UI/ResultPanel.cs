@@ -40,6 +40,7 @@ public class ResultPanel : MonoBehaviour
 
     public void Restart()
     {
+        GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
         GameProcessInfo.CurrentLevel = 1;
         SceneManager.LoadScene("RandomLevel");
     }

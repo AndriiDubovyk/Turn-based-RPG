@@ -21,17 +21,19 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnItem(string itemName, Vector3 position)
+    public GameObject SpawnItem(string itemName, Vector3 position)
     {
+        GameObject spawnedItem = null;
         foreach (ItemPickup ip in itemsPickupList.itemsPickup)
         {
             if (ip.itemData.name.Equals(itemName))
             {
                 Vector3 newPos = new Vector3(position.x, position.y, ip.gameObject.transform.position.z);
                 ip.gameObject.transform.position = newPos;
-                Instantiate(ip.gameObject);
+                spawnedItem = Instantiate(ip.gameObject);
                 break;
             }
         }
+        return spawnedItem;
     }
 }

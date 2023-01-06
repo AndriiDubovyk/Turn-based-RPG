@@ -40,6 +40,7 @@ public class Unit : MonoBehaviour
         attack = unitData.attack;
         maxAttackDistance = unitData.maxAttackDistance;
         moveSpeed = unitData.moveSpeed;
+        currentHP = maxHP;
         pathfindingXMaxDistance = unitData.pathfindingXMaxDistance;
         pathfindingYMaxDistance = unitData.pathfindingYMaxDistance;
         gameObject.GetComponent<SpriteRenderer>().sprite = unitData.sprite;
@@ -51,13 +52,12 @@ public class Unit : MonoBehaviour
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
         attackTarget = null;
-        state = State.IsThinking;
-        currentHP = maxHP;
-       
+        state = State.IsThinking;      
     }
 
     public void SetHealth(int health)
     {
+        Debug.Log($"{name} - {health}");
         currentHP = health;
         UpdateHealthBar();
     }

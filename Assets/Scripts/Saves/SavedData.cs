@@ -12,6 +12,8 @@ public class SavedData
     {
         public int[,] levelTemplete;
         public int levelIndex;
+        public float exitPosX;
+        public float exitPosY;
     }
     public LevelSavedData levelSavedData = new LevelSavedData();
 

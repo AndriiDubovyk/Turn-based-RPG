@@ -43,6 +43,7 @@ public class LevelGenerator : MonoBehaviour
     private Vector3 startRoomPos;
     private Vector3 bossRoomPos;
     private List<Vector3> commonRoomsPos = new List<Vector3>();
+    private Vector3 exitPos;
 
 
 
@@ -63,6 +64,18 @@ public class LevelGenerator : MonoBehaviour
         GenerateLevelWithTemplete(templete);
     }
 
+    public void GenerateLevelWithTemplete(int[,] templete, Vector3 exitPosition)
+    {
+        this.templete = templete;
+        gridManager = gameObject.GetComponent<GridManager>();
+
+        shiftX = -templete.GetLength(0) / 2;
+        shiftY = -templete.GetLength(1) / 2;
+        ShowWorld(templete);
+        CreateRooms();
+        CreateExit(exitPosition);
+    }
+
     public void GenerateLevelWithTemplete(int[,] templete)
     {
         this.templete = templete;
@@ -80,21 +93,28 @@ public class LevelGenerator : MonoBehaviour
         return templete;
     }
 
+    public Vector3 GetExitPosition()
+    {
+        return exitPos;
+    }
+
     private void CreateExit()
     {
         Random rnd = new Random();
         Vector3 roomPos = GetBossRoomPos();
         int roomSize = GetCellSize();
-        List<Vector3> usedPositions = new List<Vector3>();
-        Vector3 pos;
-        do
-        {
-            int x = rnd.Next(1, roomSize - 1);
-            int y = rnd.Next(1, roomSize - 1);
-            pos = roomPos + new Vector3(x, y);
-        } while (usedPositions.Contains(pos));
-        usedPositions.Add(pos);
+        int x = rnd.Next(1, roomSize - 1);
+        int y = rnd.Next(1, roomSize - 1);
+        Vector3 pos = roomPos + new Vector3(x, y);
         levelExit.transform.position = pos;
+        exitPos = pos;
+        Instantiate(levelExit);
+    }
+
+    private void CreateExit(Vector3 pos)
+    {
+        levelExit.transform.position = pos;
+        exitPos = pos;
         Instantiate(levelExit);
     }
 

@@ -9,7 +9,12 @@ public class LevelInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<TextMeshProUGUI>().SetText($"Level: {GameProcessInfo.CurrentLevel}");
+        SetLevelInfo(GameProcessInfo.CurrentLevel);
+    }
+
+    public void SetLevelInfo(int level)
+    {
+        gameObject.GetComponent<TextMeshProUGUI>().SetText($"Level: {level}");
     }
 
     // Update is called once per frame

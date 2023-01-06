@@ -27,6 +27,7 @@ public class LevelExit : MonoBehaviour
         if(player.transform.position.Equals(gameObject.transform.position) && !isExitProcessed)
         {
             isExitProcessed = true;
+            GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
             if(GameProcessInfo.CurrentLevel == GameProcessInfo.MaxLevel)
             {
                 resultPanel.SetResult(true);
