@@ -113,8 +113,14 @@ public class PlayerUnit : Unit
     public void AddItem(ItemData itemData)
     {
         if (HasFreeInventorySlots())
-        {
+        {   
             inventory[NumberOfOccupiedInvetorySlots()] = itemData;
+
+            GameObject invPanel = GameObject.Find("InventoryPanel");
+            if(invPanel!=null && invPanel.GetComponent<InventoryPanel>()!=null)
+            {
+                invPanel.GetComponent<InventoryPanel>().InitializeInventory();
+            }
         }
     }
 

@@ -8,6 +8,8 @@ public class LevelExit : MonoBehaviour
     private GameObject player;
     private ResultPanel resultPanel;
 
+    private bool isExitProcessed = false;
+
     private void Awake()
     {
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
@@ -22,8 +24,9 @@ public class LevelExit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.transform.position.Equals(gameObject.transform.position))
+        if(player.transform.position.Equals(gameObject.transform.position) && !isExitProcessed)
         {
+            isExitProcessed = true;
             if(GameProcessInfo.CurrentLevel == GameProcessInfo.MaxLevel)
             {
                 resultPanel.SetResult(true);

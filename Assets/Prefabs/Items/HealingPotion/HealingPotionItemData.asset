@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Healing Potion
   description: 'Magical healing potion. Healing: 30'
   attack: 0
-  healing: 45
+  healing: 35
   sprite: {fileID: 21300000, guid: 28f45e02cb0a49d438984334fb6b4832, type: 3}

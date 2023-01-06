@@ -19,17 +19,16 @@ public class InventoryPanel : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
+        InitializeInventory();
         gameObject.SetActive(false);
     }
 
     public void Toggle()
     {
+        Debug.Log("inv toggle");
         gameObject.SetActive(!gameObject.activeSelf);
         ItemData[] inventory = player.GetInvetory();
-        if(gameObject.activeSelf)
-        {
-            InitializeInventory();
-        }
+        InitializeInventory();
     }
 
     public void InitializeInventory()
@@ -42,10 +41,7 @@ public class InventoryPanel : MonoBehaviour
 
         ItemData equipedWeapon = player.GetEquipedWeapon();
         weaponSlotDisplay.GetComponent<WeaponSlot>().SetWeapon(equipedWeapon);
-
         itemDisplayPanel.GetComponent<ItemDisplayPanel>().SetItemData(null);
-
-
     }
 
     public void DropItem(ItemData itemData)
@@ -88,11 +84,5 @@ public class InventoryPanel : MonoBehaviour
     public ItemData GetEquipedWeapon()
     {
         return player.GetEquipedWeapon();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

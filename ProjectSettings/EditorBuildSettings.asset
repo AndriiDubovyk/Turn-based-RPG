@@ -15,4 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/RandomLevel.unity
     guid: bd7d11585403b984582e82ded80f2574
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0fd9d1c93e2ecdb49a8556bea80cf565, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 9603651232bb0fc43aae8bad811d8700, type: 2}

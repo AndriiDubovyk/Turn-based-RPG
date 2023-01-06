@@ -21,7 +21,7 @@ public class ItemDisplayPanel : MonoBehaviour
 
     private InventoryPanel inventoryPanel;
 
-    void Start()
+    void Awake()
     {
         inventoryPanel = GameObject.Find("InventoryPanel").GetComponent<InventoryPanel>();
     }

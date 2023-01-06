@@ -11,7 +11,7 @@ public class InventorySlot : MonoBehaviour
     private Image image;
     
 
-    private void Start()
+    private void Awake()
     {
         image = gameObject.transform.GetChild(0).GetComponent<Image>();
         itemDisplayPanel = GameObject.Find("ItemDisplayPanel").GetComponent<ItemDisplayPanel>();

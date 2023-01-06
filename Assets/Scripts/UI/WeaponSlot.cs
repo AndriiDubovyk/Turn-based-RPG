@@ -11,7 +11,7 @@ public class WeaponSlot : MonoBehaviour
 
     private ItemData weaponData;
 
-    void Start()
+    void Awake()
     {
         image = gameObject.transform.GetChild(0).GetComponent<Image>();
         itemDisplayPanel = GameObject.Find("ItemDisplayPanel").GetComponent<ItemDisplayPanel>();
