@@ -7,7 +7,7 @@ using UnityEngine;
 public static class GameProcessInfo
 {
     public static int CurrentLevel { get; set; } = 1;
-    public static int MaxLevel { get; set; } =1; //5
+    public static int MaxLevel { get; set; } = 5; //5
 
     // Player cross scene data
     public static int Attack { get; set; } = 0;

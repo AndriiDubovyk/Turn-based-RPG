@@ -87,10 +87,11 @@ public class PlayerUnit : Unit
             Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
             if (clickedUnit == null)
             {
+                attackTarget = null;
                 SelectDestinationCell(clickedCell);
                 SetItemTaking(false);
             }
-            else if (clickedUnit != gameObject && CanAttack(clickedUnit))
+            else if (clickedUnit != this && CanAttack(clickedUnit))
             {
                 ChoseAttackTarget(clickedUnit);
                 movementPath = null;
