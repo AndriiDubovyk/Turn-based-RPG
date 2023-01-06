@@ -127,18 +127,27 @@ public class TurnManager : MonoBehaviour
                 }
                 else if(unit is EnemyUnit)
                 {
-                    PrepareEnemyAction((EnemyUnit)unit);
+                    bool unitHasActionsToDo = PrepareEnemyAction((EnemyUnit)unit);
+                    // If unit has nothing to do we must not wait till next update. We should do all that we can in this iteration
+                    if(!unitHasActionsToDo)
+                    {
+                        PassTurnToNextUnit();
+                        MakeTurn(activeUnit);
+                    }
+
                 }
                 break;
             case Unit.State.IsMakingTurn:
                 break;
             case Unit.State.IsWaiting:
                 PassTurnToNextUnit();
+                Debug.Log("Passing turn");
                 break;
         }
     }
 
-    private void PrepareEnemyAction(EnemyUnit enemyUnit)
+    // true - if enemy has actions to do, flase - if enemy must skip turn
+    private bool PrepareEnemyAction(EnemyUnit enemyUnit)
     {
         Vector3Int playerCell = playerUnit.GetCell();
         if (enemyUnit.CanAttack(playerUnit))
@@ -150,6 +159,8 @@ public class TurnManager : MonoBehaviour
             enemyUnit.SetMovementPathTo(playerCell);
         }
         enemyUnit.ConfirmTurn();
+        return enemyUnit.GetState() == Unit.State.IsMakingTurn;
+
     }
 
     private void PassTurnToNextUnit()

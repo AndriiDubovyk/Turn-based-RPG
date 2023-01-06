@@ -186,6 +186,7 @@ public class PlayerUnit : Unit
         if (state == State.IsThinking)
             state = State.IsWaiting;
     }
+
     public ItemData GetEquipedWeapon()
     {
         return equipedWeapon;

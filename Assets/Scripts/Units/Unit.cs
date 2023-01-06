@@ -194,8 +194,12 @@ public class Unit : MonoBehaviour
     public void ConfirmTurn()
     {
         state = State.IsMakingTurn;
-        // Skip turn. Temporary solution. TODO
-        if (attackTarget == null && movementPath == null) state = State.IsWaiting;
+        // Skip turn. Unit has no action to do
+        if (attackTarget == null && movementPath == null)
+        {
+            Debug.Log("Enemy skips turn");
+            state = State.IsWaiting;
+        }
     }
 
     public virtual void Die()
