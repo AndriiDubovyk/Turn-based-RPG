@@ -11,6 +11,8 @@ public class ItemDisplayPanel : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemName;
     [SerializeField]
+    private TextMeshProUGUI itemStats;
+    [SerializeField]
     private TextMeshProUGUI itemDescription;
     [SerializeField]
     private Button dropButton;
@@ -43,6 +45,7 @@ public class ItemDisplayPanel : MonoBehaviour
             dropButton.gameObject.SetActive(true);
             if(itemData.attack>0)
             {
+                itemStats.SetText($"Attack: {itemData.attack}");
                 equipButton.gameObject.SetActive(true);
                 if (itemData != inventoryPanel.GetEquipedWeapon())
                 {
@@ -55,11 +58,13 @@ public class ItemDisplayPanel : MonoBehaviour
             }
             else if(itemData.healing>0)
             {
+                itemStats.SetText($"Healing: {itemData.healing}");
                 equipButton.gameObject.SetActive(true);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Use");
             }
             else
             {
+                itemStats.SetText("");
                 equipButton.gameObject.SetActive(false);
             }
 
@@ -68,6 +73,7 @@ public class ItemDisplayPanel : MonoBehaviour
         {
             image.sprite = null;
             itemName.SetText("");
+            itemStats.SetText("");
             itemDescription.SetText("");
 
             tmpColor = image.color;

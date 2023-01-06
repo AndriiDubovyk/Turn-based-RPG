@@ -101,10 +101,8 @@ public class PlayerUnit : Unit
 
     public void TakeItem(ItemPickup itemPickup)
     {
-        Debug.Log("Slots: " + NumberOfOccupiedInvetorySlots());
         if (HasFreeInventorySlots())
         {
-            Debug.Log($"Player takes {itemPickup.itemData.name}");
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
         }
@@ -180,10 +178,6 @@ public class PlayerUnit : Unit
                
                 if (equipedWeapon != null) this.attack += equipedWeapon.attack;
             }
-        }
-        if(equipedWeapon!=null)
-        {
-            Debug.Log("Equip " + equipedWeapon.name + " with. Player attack + "+equipedWeapon.attack+ " = "+attack);
         }
         SkipTurn();
     }

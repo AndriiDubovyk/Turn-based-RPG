@@ -45,6 +45,7 @@ public class EnemyGenerator : MonoBehaviour
             usedPositions.Add(pos);
             enemy.transform.position = pos;
             Instantiate(enemy);
+            Debug.Log("Spawn enemy");
         }
     }
 
@@ -69,6 +70,7 @@ public class EnemyGenerator : MonoBehaviour
                 usedPositions.Add(pos);
                 enemy.transform.position = pos;
                 Instantiate(enemy);
+                Debug.Log("Spawn enemy");
             }
         }
     }

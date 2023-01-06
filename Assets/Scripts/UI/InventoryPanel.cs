@@ -25,7 +25,6 @@ public class InventoryPanel : MonoBehaviour
 
     public void Toggle()
     {
-        Debug.Log("inv toggle");
         gameObject.SetActive(!gameObject.activeSelf);
         ItemData[] inventory = player.GetInvetory();
         InitializeInventory();
