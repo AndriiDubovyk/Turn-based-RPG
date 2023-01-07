@@ -56,6 +56,19 @@ public class ItemDisplayPanel : MonoBehaviour
                     equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Unequip");
                 }
             }
+            else if(itemData.defense>0)
+            {
+                itemStats.SetText($"Defense: {itemData.defense}");
+                equipButton.gameObject.SetActive(true);
+                if (itemData != inventoryPanel.GetEquipedArmor())
+                {
+                    equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Equip");
+                }
+                else
+                {
+                    equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Unequip");
+                }
+            }
             else if(itemData.healing>0)
             {
                 itemStats.SetText($"Healing: {itemData.healing}");
@@ -96,11 +109,22 @@ public class ItemDisplayPanel : MonoBehaviour
         {
             if(itemData!=inventoryPanel.GetEquipedWeapon())
             {
-                inventoryPanel.EquipItem(itemData);
+                inventoryPanel.EquipWeapon(itemData);
             }
             else
             {
-                inventoryPanel.UnequipItem(itemData);
+                inventoryPanel.UnequipWeapon(itemData);
+            }
+        }
+        else if(itemData.defense>0)
+        {
+            if (itemData != inventoryPanel.GetEquipedArmor())
+            {
+                inventoryPanel.EquipArmor(itemData);
+            }
+            else
+            {
+                inventoryPanel.UnequipArmor(itemData);
             }
         }
         else if(itemData.healing>0)

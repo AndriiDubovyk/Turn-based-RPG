@@ -14,6 +14,8 @@ public class InventoryPanel : MonoBehaviour
     private GameObject itemDisplayPanel;
     [SerializeField]
     private GameObject weaponSlotDisplay;
+    [SerializeField]
+    private GameObject armorSlotDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,8 @@ public class InventoryPanel : MonoBehaviour
 
         ItemData equipedWeapon = player.GetEquipedWeapon();
         weaponSlotDisplay.GetComponent<WeaponSlot>().SetWeapon(equipedWeapon);
+        ItemData equipedArmor = player.GetEquipedArmor();
+        armorSlotDisplay.GetComponent<ArmorSlot>().SetArmor(equipedArmor);
         itemDisplayPanel.GetComponent<ItemDisplayPanel>().SetItemData(null);
     }
 
@@ -61,15 +65,21 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
-    public void EquipItem(ItemData itemData)
+    public void EquipWeapon(ItemData itemData)
     {
         player.RemoveItem(itemData); // remove from main inventory
         player.EquipWeapon(itemData);
-        InitializeInventory(); // reinitialize inventory
-        
+        InitializeInventory(); // reinitialize inventory       
     }
 
-    public void UnequipItem(ItemData itemData)
+    public void EquipArmor(ItemData itemData)
+    {
+        player.RemoveItem(itemData); // remove from main inventory
+        player.EquipArmor(itemData);
+        InitializeInventory(); // reinitialize inventory       
+    }
+
+    public void UnequipWeapon(ItemData itemData)
     {
         if(player.HasFreeInventorySlots())
         {
@@ -77,11 +87,25 @@ public class InventoryPanel : MonoBehaviour
             player.AddItem(itemData);
             InitializeInventory(); // reinitialize inventory
         }
+    }
 
+    public void UnequipArmor(ItemData itemData)
+    {
+        if (player.HasFreeInventorySlots())
+        {
+            player.RemoveItem(itemData); // remove from main inventory
+            player.AddItem(itemData);
+            InitializeInventory(); // reinitialize inventory
+        }
     }
 
     public ItemData GetEquipedWeapon()
     {
         return player.GetEquipedWeapon();
+    }
+
+    public ItemData GetEquipedArmor()
+    {
+        return player.GetEquipedArmor();
     }
 }

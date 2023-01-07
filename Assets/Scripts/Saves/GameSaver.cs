@@ -28,10 +28,13 @@ public class GameSaver : MonoBehaviour
         savedData.playerSavedData.posY = player.transform.position.y;
         savedData.playerSavedData.health = player.GetComponent<PlayerUnit>().GetCurrentHP();
         savedData.playerSavedData.attack = player.GetComponent<PlayerUnit>().GetAttack();
+        savedData.playerSavedData.defense = player.GetComponent<PlayerUnit>().GetDefense();
         ItemData[] inv = player.GetComponent<PlayerUnit>().GetInventory();
         savedData.playerSavedData.inventoryNames = Array.ConvertAll(inv.ToArray(), it => it != null ? it.name : "");
         ItemData equipedWeapon = player.GetComponent<PlayerUnit>().GetEquipedWeapon();
         savedData.playerSavedData.equipedWeaponName = equipedWeapon!=null ? equipedWeapon.name : "";
+        ItemData equipedArmor = player.GetComponent<PlayerUnit>().GetEquipedArmor();
+        savedData.playerSavedData.equipedArmorName = equipedArmor != null ? equipedArmor.name : "";
 
         savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentLevel;
         savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
@@ -117,7 +120,9 @@ public class GameSaver : MonoBehaviour
         player.transform.position = new Vector3(savedData.playerSavedData.posX, savedData.playerSavedData.posY);
         player.GetComponent<PlayerUnit>().SetHealth(savedData.playerSavedData.health);
         player.GetComponent<PlayerUnit>().SetAttack(savedData.playerSavedData.attack);
+        player.GetComponent<PlayerUnit>().SetDefense(savedData.playerSavedData.defense);
         player.GetComponent<PlayerUnit>().SetEquipedWeapon(savedData.playerSavedData.equipedWeaponName);
+        player.GetComponent<PlayerUnit>().SetEquipedArmor(savedData.playerSavedData.equipedArmorName);
         player.GetComponent<PlayerUnit>().SetInventory(savedData.playerSavedData.inventoryNames);
 
     }

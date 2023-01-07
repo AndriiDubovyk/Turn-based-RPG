@@ -22,6 +22,7 @@ public class PlayerUnit : Unit
 
     private ItemData[] inventory = new ItemData[6];
     private ItemData equipedWeapon;
+    private ItemData equipedArmor;
 
     private UI ui;
     private TurnManager tm;
@@ -73,6 +74,11 @@ public class PlayerUnit : Unit
         this.equipedWeapon = equipedWeapon;
     }
 
+    public void SetEquipedArmor(ItemData equipedArmor)
+    {
+        this.equipedArmor = equipedArmor;
+    }
+
     public void SetEquipedWeapon(string equipedWeaponName)
     {
         ItemData ew = null;
@@ -86,12 +92,26 @@ public class PlayerUnit : Unit
         this.equipedWeapon = ew;
     }
 
+    public void SetEquipedArmor(string equipedArmorName)
+    {
+        ItemData ea = null;
+        foreach (ItemPickup ip in ips.itemsPickup)
+        {
+            if (ip.itemData.name == equipedArmorName)
+            {
+                ea = ip.itemData;
+            }
+        }
+        this.equipedArmor = ea;
+    }
+
     public void LoadData()
     {
         currentHP = GameProcessInfo.CurrentHP;
         attack = GameProcessInfo.Attack;
         inventory = GameProcessInfo.Inventory;
         equipedWeapon = GameProcessInfo.EquipedWeapon;
+        equipedArmor = GameProcessInfo.EquipedArmor;
     }
 
     protected override void Start()
@@ -182,6 +202,12 @@ public class PlayerUnit : Unit
             this.attack -= itemData.attack;
             return;
         }
+        if (itemData == equipedArmor)
+        {
+            equipedArmor = null;
+            this.defense -= itemData.defense;
+            return;
+        }
         for (int i = 0; i < inventory.Length; i++)
         {
             if (inventory[i] == itemData)
@@ -215,11 +241,34 @@ public class PlayerUnit : Unit
             else
             {
                 ItemData tmpItem = equipedWeapon;
-                RemoveItem(tmpItem); // alread has attack decreasing
+                RemoveItem(tmpItem); // alread has defense decreasing
                 equipedWeapon = newWeapon;
                 AddItem(tmpItem);
                
                 if (equipedWeapon != null) this.attack += equipedWeapon.attack;
+            }
+        }
+        SkipTurn();
+    }
+
+    public void EquipArmor(ItemData newArmor)
+    {
+        // Player can equip only item with defense or no item
+        if (newArmor == null || newArmor.defense > 0)
+        {
+            if (equipedArmor == null)
+            {
+                equipedArmor = newArmor;
+                if (equipedArmor != null) this.defense += equipedArmor.defense;
+            }
+            else
+            {
+                ItemData tmpItem = equipedArmor;
+                RemoveItem(tmpItem); // already has defense decreasing
+                equipedArmor = newArmor;
+                AddItem(tmpItem);
+
+                if (equipedArmor != null) this.defense += equipedArmor.defense;
             }
         }
         SkipTurn();
@@ -234,6 +283,11 @@ public class PlayerUnit : Unit
     public ItemData GetEquipedWeapon()
     {
         return equipedWeapon;
+    }
+
+    public ItemData GetEquipedArmor()
+    {
+        return equipedArmor;
     }
 
     private void SelectDestinationCell(Vector3Int clickedCell)

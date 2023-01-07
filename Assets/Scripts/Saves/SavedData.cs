@@ -43,8 +43,10 @@ public class SavedData
         public float posY;
         public int health;
         public int attack;
+        public int defense;
         public string[] inventoryNames;
         public string equipedWeaponName;
+        public string equipedArmorName;
     }
     public PlayerSavedData playerSavedData = new PlayerSavedData();
 

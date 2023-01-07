@@ -18,6 +18,7 @@ public class ItemSpawner : MonoBehaviour
                 ip.gameObject.transform.position = newPos;
                 spawnedItem = Instantiate(ip.gameObject);
                 spawnedItem.GetComponent<ItemPickup>().itemData = itemData.Clone(); // new link
+                Debug.Log($"Spawn {itemData.name}");
                 break;
             }
         }

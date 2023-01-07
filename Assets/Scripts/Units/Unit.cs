@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
 
     protected int maxHP;
     protected int attack;
+    protected int defense;
     protected int maxAttackDistance;
     protected float moveSpeed;
     protected int pathfindingXMaxDistance;
@@ -38,6 +39,7 @@ public class Unit : MonoBehaviour
     {
         maxHP = unitData.maxHP;
         attack = unitData.attack;
+        defense = unitData.defense;
         maxAttackDistance = unitData.maxAttackDistance;
         moveSpeed = unitData.moveSpeed;
         currentHP = maxHP;
@@ -124,14 +126,27 @@ public class Unit : MonoBehaviour
         return attack;
     }
 
+    public int GetDefense()
+    {
+        return defense;
+    }
+
     public void SetAttack(int attack)
     {
         this.attack = attack;
     }
 
+    public void SetDefense(int defense)
+    {
+        this.defense = defense;
+    }
+
     public void TakeDamage(int damageAmount)
     {
-        currentHP -= damageAmount;
+        Debug.Log($"{unitData.defense} has {defense}");
+        int realDamageAmount = damageAmount - defense;
+        if (realDamageAmount < 1) realDamageAmount = 1; // min damage = 1
+        currentHP -= realDamageAmount;
         if (currentHP < 0) currentHP = 0;
         UpdateHealthBar();
     }

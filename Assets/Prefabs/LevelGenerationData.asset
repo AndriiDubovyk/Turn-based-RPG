@@ -50,8 +50,8 @@ MonoBehaviour:
     spawnChance: 15
   startRoomItemGenerationData:
   - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
-    minQuantity: 3
-    maxQuantity: 3
+    minQuantity: 1
+    maxQuantity: 1
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1
@@ -71,6 +71,22 @@ MonoBehaviour:
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 2
+    maxLevel: 999
+    spawnChance: 25
+  - itemData: {fileID: 11400000, guid: 50f336c382a016c4788508c96d345c87, type: 2}
+    minQuantity: 2
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 25
+  - itemData: {fileID: 11400000, guid: b567a968256914a4f91bdcb402303ba2, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
     maxLevel: 999
     spawnChance: 25
   commonRoomItemGenerationData:
