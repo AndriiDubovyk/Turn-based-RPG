@@ -40,7 +40,6 @@ public class GameSaver : MonoBehaviour
         savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
 
         List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().GetEnemiesGO();
-        Debug.Log($"saved enemies {enemies.Count}");
         foreach(GameObject enemy in enemies)
         {
             SavedData.EnemySavedData enemySavedData = new SavedData.EnemySavedData();
@@ -48,7 +47,6 @@ public class GameSaver : MonoBehaviour
             enemySavedData.posX = enemy.transform.position.x;
             enemySavedData.posY = enemy.transform.position.y;
             enemySavedData.health = enemy.GetComponent<Unit>().GetCurrentHP();
-            Debug.Log("Save enemy hp " + enemySavedData.health);
             savedData.enemiesSavedData.Add(enemySavedData);
         }
 
@@ -117,7 +115,6 @@ public class GameSaver : MonoBehaviour
         UnitSpawner unitSpanwer = GameObject.Find("Grid").GetComponent<UnitSpawner>();
         foreach (SavedData.EnemySavedData esd in savedData.enemiesSavedData)
         {
-            Debug.Log("Load enemy hp " + esd.health);
             unitSpanwer.SpawnUnit(esd.unitName, new Vector3(esd.posX, esd.posY), esd.health);
         }
 

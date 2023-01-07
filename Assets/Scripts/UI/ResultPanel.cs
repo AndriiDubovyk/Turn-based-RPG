@@ -29,7 +29,7 @@ public class ResultPanel : MonoBehaviour
         }
         else
         {
-            text.SetText($"You die");
+            text.SetText($"You die "+GameObject.Find("Player").GetComponent<PlayerUnit>().GetCurrentHP());
         }
     }
 

@@ -103,8 +103,7 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                // Clear path
-                Debug.Log("Path has been blocked by enemy");
+                // Path has been blocked by enemy - Clear path
                 playerUnit.SetMovementPathTo(playerUnit.GetCell());
                 playerUnit.UpdateOverlayMarks();
                 playerUnit.SetState(Unit.State.IsThinking);
@@ -141,7 +140,6 @@ public class TurnManager : MonoBehaviour
                 break;
             case Unit.State.IsWaiting:
                 PassTurnToNextUnit();
-                Debug.Log("Passing turn");
                 break;
         }
     }

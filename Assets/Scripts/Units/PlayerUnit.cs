@@ -89,6 +89,7 @@ public class PlayerUnit : Unit
     public void LoadData()
     {
         currentHP = GameProcessInfo.CurrentHP;
+        if (unitData.name == "Player") Debug.Log($"PlayerUnit.LoadData hp {GameProcessInfo.CurrentHP}");
         attack = GameProcessInfo.Attack;
         inventory = GameProcessInfo.Inventory;
         equipedWeapon = GameProcessInfo.EquipedWeapon;
@@ -102,7 +103,8 @@ public class PlayerUnit : Unit
         ui = GameObject.Find("UICanvas").GetComponent<UI>();
 
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
-        if(lg!=null && !GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist())
+        bool isSaveExist = GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist();
+        if (lg!=null && !isSaveExist)
         {
             // player starts at the center of the room
             int cellSize = lg.GetCellSize();
@@ -110,7 +112,7 @@ public class PlayerUnit : Unit
             gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
         }
 
-        if (GameProcessInfo.CurrentLevel > 1) LoadData();
+        if (GameProcessInfo.CurrentLevel > 1 && !isSaveExist) LoadData();
         UpdateHealthBar();
     }
 
