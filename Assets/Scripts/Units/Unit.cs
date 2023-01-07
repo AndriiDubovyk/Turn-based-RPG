@@ -222,7 +222,7 @@ public class Unit : MonoBehaviour
 
     public virtual void Die()
     {
-        int chance = new Random().Next(100);
+        double chance = new Random().NextDouble() * 100;
         foreach(UnitData.Drop drop in unitData.drops)
         {
             if(chance<drop.dropChance)

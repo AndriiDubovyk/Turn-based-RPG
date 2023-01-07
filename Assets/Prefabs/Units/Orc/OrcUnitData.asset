@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72c637544994ab04091c80fc1d9759e3, type: 3}
-  m_Name: GoblinUnitData
+  m_Name: OrcUnitData
   m_EditorClassIdentifier: 
-  name: Goblin
-  maxHP: 100
-  attack: 12
+  name: Orc
+  maxHP: 150
+  attack: 15
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6
   moveSpeed: 20
-  sprite: {fileID: 21300000, guid: 178a958e6930510479813e420dfc4eeb, type: 3}
+  sprite: {fileID: 21300000, guid: 6e3b6944a286e374596f0aba3f960f56, type: 3}
   drops:
   - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
-    dropChance: 25
-  - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
-    dropChance: 15
+    dropChance: 100
+  - itemData: {fileID: 11400000, guid: 7bf2e9045180d374f83193aa06fe2d63, type: 2}
+    dropChance: 50

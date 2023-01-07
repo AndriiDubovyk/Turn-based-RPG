@@ -50,7 +50,6 @@ public class LevelGenerator : MonoBehaviour
     void Awake()
     {
         if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
-        numberOfEnemyRooms += GameProcessInfo.CurrentLevel / 2;
 
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         // generate level again with bigger size

@@ -21,29 +21,22 @@ public class ItemGenerator : MonoBehaviour
     [SerializeField]
     private List<ItemSpawn> bossRoomItems;
 
-    private LevelGenerator lg;
+    [SerializeField]
+    private LevelGenerator levelGenerator;
+    [SerializeField]
     private ItemSpawner itemSpawner;
 
     private void Awake()
     {
         if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
-        foreach (ItemSpawn itemSpawn in commonRoomItems)
-        {
-            if (itemSpawn.itemData.name == "Healing Potion")
-                itemSpawn.quantity += GameProcessInfo.CurrentLevel / 2;
-        }
-        foreach (ItemSpawn itemSpawn in bossRoomItems)
-        {
-            if (itemSpawn.itemData.name == "Healing Potion")
-                itemSpawn.quantity += GameProcessInfo.CurrentLevel / 3;
-        }
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
-        lg = gameObject.GetComponent<LevelGenerator>();
+        levelGenerator = gameObject.GetComponent<LevelGenerator>();
         itemSpawner = gameObject.GetComponent<ItemSpawner>();
         SpawnItemsInStartRoom();
         SpawnItemsInCommonRooms();
@@ -53,8 +46,8 @@ public class ItemGenerator : MonoBehaviour
     private void SpawnItemsInStartRoom()
     {
         Random rnd = new Random();
-        Vector3 roomPos = lg.GetStartRoomPos();
-        int roomSize = lg.GetCellSize();
+        Vector3 roomPos = levelGenerator.GetStartRoomPos();
+        int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
         foreach (ItemSpawn itemSpawn in startRoomItems)
         {
@@ -76,8 +69,8 @@ public class ItemGenerator : MonoBehaviour
     private void SpawnItemsInCommonRooms()
     {
         Random rnd = new Random();
-        List<Vector3> roomsPos = lg.GetCommonRoomPos();
-        int roomSize = lg.GetCellSize();
+        List<Vector3> roomsPos = levelGenerator.GetCommonRoomPos();
+        int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
         foreach (ItemSpawn itemSpawn in commonRoomItems)
         {
@@ -100,8 +93,8 @@ public class ItemGenerator : MonoBehaviour
     private void SpawnItemsInBossRoom()
     {
         Random rnd = new Random();
-        Vector3 roomPos = lg.GetBossRoomPos();
-        int roomSize = lg.GetCellSize();
+        Vector3 roomPos = levelGenerator.GetBossRoomPos();
+        int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
         foreach (ItemSpawn itemSpawn in bossRoomItems)
         {

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: UnitList
   m_EditorClassIdentifier: 
   units:
-  - {fileID: 2700230964628959031, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
   - {fileID: 3516794437458014940, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
+  - {fileID: 2700230964628959031, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
+  - {fileID: 2700230964628959031, guid: ca90fc4ee17a72b489acd07723381ef4, type: 3}

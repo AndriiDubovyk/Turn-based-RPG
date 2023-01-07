@@ -19,7 +19,7 @@ public class UnitData : ScriptableObject
     public class Drop
     {
         public ItemData itemData;
-        public int dropChance;
+        public float dropChance;
     }
 
     public List<Drop> drops;

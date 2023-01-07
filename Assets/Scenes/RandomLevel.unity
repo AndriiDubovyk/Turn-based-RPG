@@ -776,9 +776,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462ffb5ea750236429a96c0ef94f89e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 569387430450957854, guid: 6208d3c82aa3e06449ffa053cfcb612a, type: 3}
-  numberOfEnemiesInCommonRoom: 2
-  numberOfEnemiesInBossRoom: 3
+  commonRoomEnemies:
+  - unitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+    quantity: 2
+  bossRoomEnemies:
+  - unitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+    quantity: 2
+  - unitData: {fileID: 11400000, guid: eb61d79feb264a54294fbeb81535c5a7, type: 2}
+    quantity: 1
+  levelGenerator: {fileID: 1522314645}
+  unitSpawner: {fileID: 1522314648}
+  gameSaver: {fileID: 1775356288}
 --- !u!114 &1522314647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,6 +812,8 @@ MonoBehaviour:
     quantity: 1
   - itemData: {fileID: 11400000, guid: 7bf2e9045180d374f83193aa06fe2d63, type: 2}
     quantity: 1
+  levelGenerator: {fileID: 1522314645}
+  itemSpawner: {fileID: 1522314644}
 --- !u!114 &1522314648
 MonoBehaviour:
   m_ObjectHideFlags: 0
