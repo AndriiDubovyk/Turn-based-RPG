@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d8dad8fd645e84b9e2ec781a1aa84a, type: 3}
+  m_Name: LevelGenerationData
+  m_EditorClassIdentifier: 
+  startCommonRoomsNumber: 2
+  commonRoomsNumberIncreasePerLevel: 0.35
+  commonRoomEnemiesGenerationData:
+  - enemyUnitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+    minQuantity: 1
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0.5
+    maxQuantityIncreasePerLevel: 0.5
+    minLevel: 1
+    maxLevel: 3
+    spawnChance: 50
+  - enemyUnitData: {fileID: 11400000, guid: eb61d79feb264a54294fbeb81535c5a7, type: 2}
+    minQuantity: 0
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0.2
+    maxQuantityIncreasePerLevel: 0.2
+    minLevel: 4
+    maxLevel: 999
+    spawnChance: 50
+  bossRoomEnemiesGenerationData:
+  - enemyUnitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+    minQuantity: 1
+    maxQuantity: 3
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 3
+    spawnChance: 25
+  - enemyUnitData: {fileID: 11400000, guid: eb61d79feb264a54294fbeb81535c5a7, type: 2}
+    minQuantity: 1
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0.25
+    maxQuantityIncreasePerLevel: 0.25
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 15
+  startRoomItemGenerationData:
+  - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 1
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 1
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 2
+    maxLevel: 999
+    spawnChance: 25
+  commonRoomItemGenerationData:
+  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
+    minQuantity: 1
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 25
+  bossRoomItemGenerationData:
+  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
+    minQuantity: 1
+    maxQuantity: 2
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 50
+  - itemData: {fileID: 11400000, guid: 7bf2e9045180d374f83193aa06fe2d63, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 3
+    spawnChance: 25

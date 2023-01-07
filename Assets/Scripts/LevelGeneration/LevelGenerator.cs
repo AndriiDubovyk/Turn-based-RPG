@@ -25,11 +25,11 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private int corridorWidth = 3;
 
-    [SerializeField]
+    //[SerializeField]
     private int levelWidthCells = 9;
-    [SerializeField]
+    //[SerializeField]
     private int levelHeightCells = 9;
-    [SerializeField]
+    //[SerializeField]
     private int numberOfEnemyRooms = 2;
     [SerializeField]
     private int enemyRoomMaxCellDistFromEdge = 3;
@@ -45,11 +45,17 @@ public class LevelGenerator : MonoBehaviour
     private List<Vector3> commonRoomsPos = new List<Vector3>();
     private Vector3 exitPos;
 
+    [SerializeField]
+    private LevelGenerationData levelGenerationData;
+
 
 
     void Awake()
     {
         if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
+
+        numberOfEnemyRooms = (int)(levelGenerationData.startCommonRoomsNumber + levelGenerationData.commonRoomsNumberIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+        levelWidthCells = levelHeightCells = 6 + (int)(levelGenerationData.startCommonRoomsNumber);
 
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         // generate level again with bigger size

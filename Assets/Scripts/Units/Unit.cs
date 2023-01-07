@@ -222,16 +222,21 @@ public class Unit : MonoBehaviour
 
     public virtual void Die()
     {
+        DropItem();
+        Destroy(gameObject);
+    }
+
+    private void DropItem()
+    {
         double chance = new Random().NextDouble() * 100;
-        foreach(UnitData.Drop drop in unitData.drops)
+        foreach (UnitData.Drop drop in unitData.drops)
         {
-            if(chance<drop.dropChance)
+            if (chance < drop.dropChance)
             {
                 // drop item
                 ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
                 itemSpawner.SpawnItem(drop.itemData, gameObject.transform.position);
             }
         }
-        Destroy(gameObject);
     }
 }

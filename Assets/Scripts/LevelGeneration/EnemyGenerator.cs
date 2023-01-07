@@ -6,17 +6,8 @@ using Random = System.Random;
 public class EnemyGenerator : MonoBehaviour
 {
 
-    [System.Serializable]
-    public class EnemySpawn
-    {
-        public UnitData unitData;
-        public int quantity;
-    }
-
     [SerializeField]
-    private List<EnemySpawn> commonRoomEnemies;
-    [SerializeField]
-    private List<EnemySpawn> bossRoomEnemies;
+    private LevelGenerationData levelGenerationData;
 
     [SerializeField]
     private LevelGenerator levelGenerator;
@@ -44,21 +35,34 @@ public class EnemyGenerator : MonoBehaviour
         Vector3 roomPos = levelGenerator.GetBossRoomPos();
         int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
-        foreach (EnemySpawn es in bossRoomEnemies)
+        
+        foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.bossRoomEnemiesGenerationData)
         {
-            for (int i = 0; i < es.quantity; i++)
+            if (GameProcessInfo.CurrentLevel >= egd.minLevel && GameProcessInfo.CurrentLevel <= egd.maxLevel)
             {
-                Vector3 pos;
-                do
+                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+
+                for(int i = 0; i < max; i++)
                 {
-                    int x = rnd.Next(1, roomSize - 1);
-                    int y = rnd.Next(1, roomSize - 1);
-                    pos = roomPos + new Vector3(x, y);
-                } while (usedPositions.Contains(pos));
-                usedPositions.Add(pos);
-                unitSpawner.SpawnUnit(es.unitData, pos);
+                    double chance = new Random().NextDouble() * 100;
+                    
+                    if(i < min || chance < egd.spawnChance)
+                    {
+                        Vector3 pos;
+                        do
+                        {
+                            int x = rnd.Next(1, roomSize - 1);
+                            int y = rnd.Next(1, roomSize - 1);
+                            pos = roomPos + new Vector3(x, y);
+                        } while (usedPositions.Contains(pos));
+                        usedPositions.Add(pos);
+                        unitSpawner.SpawnUnit(egd.enemyUnitData, pos);
+                    }
+                }
             }
         }
+
     }
 
     void SpawnEnemiesInCommonRooms()
@@ -70,21 +74,36 @@ public class EnemyGenerator : MonoBehaviour
             Vector3 roomPos = roomsPos[j];
             int roomSize = levelGenerator.GetCellSize();
             List<Vector3> usedPositions = new List<Vector3>();
-            foreach (EnemySpawn es in commonRoomEnemies)
+
+
+            foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.commonRoomEnemiesGenerationData)
             {
-                for (int i = 0; i < es.quantity; i++)
+                if (GameProcessInfo.CurrentLevel >= egd.minLevel && GameProcessInfo.CurrentLevel <= egd.maxLevel)
                 {
-                    Vector3 pos;
-                    do
+                    int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                    int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+
+                    for (int i = 0; i < max; i++)
                     {
-                        int x = rnd.Next(1, roomSize - 1);
-                        int y = rnd.Next(1, roomSize - 1);
-                        pos = roomPos + new Vector3(x, y);
-                    } while (usedPositions.Contains(pos));
-                    usedPositions.Add(pos);
-                    unitSpawner.SpawnUnit(es.unitData, pos);
+                        double chance = new Random().NextDouble() * 100;
+
+                        if (i < min || chance < egd.spawnChance)
+                        {
+                            Vector3 pos;
+                            do
+                            {
+                                int x = rnd.Next(1, roomSize - 1);
+                                int y = rnd.Next(1, roomSize - 1);
+                                pos = roomPos + new Vector3(x, y);
+                            } while (usedPositions.Contains(pos));
+                            usedPositions.Add(pos);
+                            unitSpawner.SpawnUnit(egd.enemyUnitData, pos);
+                        }
+                    }
                 }
             }
+
         }
+
     }
 }

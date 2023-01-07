@@ -6,31 +6,14 @@ using Random = System.Random;
 public class ItemGenerator : MonoBehaviour
 {
 
-    [System.Serializable]
-    public class ItemSpawn
-    {
-        public ItemData itemData;
-        public int quantity;
-    }
-
-
     [SerializeField]
-    private List<ItemSpawn> startRoomItems;
-    [SerializeField]
-    private List<ItemSpawn> commonRoomItems; // items for ALL rooms - NOT FOR EACH
-    [SerializeField]
-    private List<ItemSpawn> bossRoomItems;
+    private LevelGenerationData levelGenerationData;
 
     [SerializeField]
     private LevelGenerator levelGenerator;
     [SerializeField]
     private ItemSpawner itemSpawner;
 
-    private void Awake()
-    {
-        if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,19 +32,33 @@ public class ItemGenerator : MonoBehaviour
         Vector3 roomPos = levelGenerator.GetStartRoomPos();
         int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
-        foreach (ItemSpawn itemSpawn in startRoomItems)
+
+        foreach (LevelGenerationData.ItemGenerationData
+            igd in levelGenerationData.startRoomItemGenerationData)
         {
-            for(int k=0; k<itemSpawn.quantity; k++)
+            if (GameProcessInfo.CurrentLevel >= igd.minLevel && GameProcessInfo.CurrentLevel <= igd.maxLevel)
             {
-                Vector3 pos;
-                do
+                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+
+                for (int i = 0; i < max; i++)
                 {
-                    int x = rnd.Next(1, roomSize - 1);
-                    int y = rnd.Next(1, roomSize - 1);
-                    pos = roomPos + new Vector3(x, y);
-                } while (usedPositions.Contains(pos));
-                usedPositions.Add(pos);
-                itemSpawner.SpawnItem(itemSpawn.itemData, pos);
+                    double chance = new Random().NextDouble() * 100;
+
+                    if (i < min || chance < igd.spawnChance)
+                    {
+                        Vector3 pos;
+                        do
+                        {
+                            int x = rnd.Next(1, roomSize - 1);
+                            int y = rnd.Next(1, roomSize - 1);
+                            pos = roomPos + new Vector3(x, y);
+                        } while (usedPositions.Contains(pos));
+                        usedPositions.Add(pos);
+                        Debug.Log("Spawn " + chance + " "+igd.itemData.name);
+                        itemSpawner.SpawnItem(igd.itemData, pos);
+                    }
+                }
             }
         }
     }
@@ -71,22 +68,37 @@ public class ItemGenerator : MonoBehaviour
         Random rnd = new Random();
         List<Vector3> roomsPos = levelGenerator.GetCommonRoomPos();
         int roomSize = levelGenerator.GetCellSize();
-        List<Vector3> usedPositions = new List<Vector3>();
-        foreach (ItemSpawn itemSpawn in commonRoomItems)
+        for (int j=0; j< levelGenerator.GetCommonRoomPos().Count; j++)
         {
-            for (int k = 0; k < itemSpawn.quantity; k++)
+            Vector3 roomPos = levelGenerator.GetCommonRoomPos()[j];
+            List<Vector3> usedPositions = new List<Vector3>();
+            foreach (LevelGenerationData.ItemGenerationData
+            igd in levelGenerationData.commonRoomItemGenerationData)
             {
-                Vector3 pos;
-                do
+                if (GameProcessInfo.CurrentLevel >= igd.minLevel && GameProcessInfo.CurrentLevel <= igd.maxLevel)
                 {
-                    int roomIndex = rnd.Next(roomsPos.Count);
-                    int x = rnd.Next(1, roomSize - 1);
-                    int y = rnd.Next(1, roomSize - 1);
-                    pos = roomsPos[roomIndex] + new Vector3(x, y, roomIndex);
-                } while (usedPositions.Contains(pos));
-                usedPositions.Add(pos);
-                itemSpawner.SpawnItem(itemSpawn.itemData, pos);
-            }       
+                    int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                    int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+
+                    for (int i = 0; i < max; i++)
+                    {
+                        double chance = new Random().NextDouble() * 100;
+
+                        if (i < min || chance < igd.spawnChance)
+                        {
+                            Vector3 pos;
+                            do
+                            {
+                                int x = rnd.Next(1, roomSize - 1);
+                                int y = rnd.Next(1, roomSize - 1);
+                                pos = roomPos + new Vector3(x, y);
+                            } while (usedPositions.Contains(pos));
+                            usedPositions.Add(pos);
+                            itemSpawner.SpawnItem(igd.itemData, pos);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -96,19 +108,31 @@ public class ItemGenerator : MonoBehaviour
         Vector3 roomPos = levelGenerator.GetBossRoomPos();
         int roomSize = levelGenerator.GetCellSize();
         List<Vector3> usedPositions = new List<Vector3>();
-        foreach (ItemSpawn itemSpawn in bossRoomItems)
+        foreach (LevelGenerationData.ItemGenerationData
+            igd in levelGenerationData.bossRoomItemGenerationData)
         {
-            for (int k = 0; k < itemSpawn.quantity; k++)
+            if (GameProcessInfo.CurrentLevel >= igd.minLevel && GameProcessInfo.CurrentLevel <= igd.maxLevel)
             {
-                Vector3 pos;
-                do
+                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+
+                for (int i = 0; i < max; i++)
                 {
-                    int x = rnd.Next(1, roomSize - 1);
-                    int y = rnd.Next(1, roomSize - 1);
-                    pos = roomPos + new Vector3(x, y);
-                } while (usedPositions.Contains(pos));
-                usedPositions.Add(pos);
-                itemSpawner.SpawnItem(itemSpawn.itemData, pos);
+                    double chance = new Random().NextDouble() * 100;
+
+                    if (i < min || chance < igd.spawnChance)
+                    {
+                        Vector3 pos;
+                        do
+                        {
+                            int x = rnd.Next(1, roomSize - 1);
+                            int y = rnd.Next(1, roomSize - 1);
+                            pos = roomPos + new Vector3(x, y);
+                        } while (usedPositions.Contains(pos));
+                        usedPositions.Add(pos);
+                        itemSpawner.SpawnItem(igd.itemData, pos);
+                    }
+                }
             }
         }
     }
