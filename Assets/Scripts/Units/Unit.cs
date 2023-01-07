@@ -41,7 +41,6 @@ public class Unit : MonoBehaviour
         maxAttackDistance = unitData.maxAttackDistance;
         moveSpeed = unitData.moveSpeed;
         currentHP = maxHP;
-        if(unitData.name == "Player") Debug.Log($"Unit.Awake hp {currentHP}"); 
         pathfindingXMaxDistance = unitData.pathfindingXMaxDistance;
         pathfindingYMaxDistance = unitData.pathfindingYMaxDistance;
         gameObject.GetComponent<SpriteRenderer>().sprite = unitData.sprite;
@@ -58,7 +57,6 @@ public class Unit : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        if (unitData.name == "Player") Debug.Log($"Unit.SetHealth hp {health}");
         currentHP = health;
         UpdateHealthBar();
     }

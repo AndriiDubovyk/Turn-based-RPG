@@ -55,7 +55,6 @@ public class ItemGenerator : MonoBehaviour
                             pos = roomPos + new Vector3(x, y);
                         } while (usedPositions.Contains(pos));
                         usedPositions.Add(pos);
-                        Debug.Log("Spawn " + chance + " "+igd.itemData.name);
                         itemSpawner.SpawnItem(igd.itemData, pos);
                     }
                 }

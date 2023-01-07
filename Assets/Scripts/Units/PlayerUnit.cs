@@ -89,7 +89,6 @@ public class PlayerUnit : Unit
     public void LoadData()
     {
         currentHP = GameProcessInfo.CurrentHP;
-        if (unitData.name == "Player") Debug.Log($"PlayerUnit.LoadData hp {GameProcessInfo.CurrentHP}");
         attack = GameProcessInfo.Attack;
         inventory = GameProcessInfo.Inventory;
         equipedWeapon = GameProcessInfo.EquipedWeapon;

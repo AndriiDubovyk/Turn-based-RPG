@@ -15,7 +15,6 @@ public class GameSaver : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"Save exist {IsSaveExist()}");
         player = GameObject.Find("Player");
         if (IsSaveExist()) LoadGame();
         
@@ -69,7 +68,6 @@ public class GameSaver : MonoBehaviour
         FileStream file = File.Create($"{Application.persistentDataPath}/{SAVE_FILE_NAME}");
         bf.Serialize(file, savedData);
         file.Close();
-        Debug.Log("Game saved");
     }
 
     public bool IsSaveExist()
@@ -95,14 +93,12 @@ public class GameSaver : MonoBehaviour
             savedData = (SavedData)bf.Deserialize(file);
             file.Close();
             GenerateWorld();
-            Debug.Log("Game loaded");
         }
     }
 
     private void GenerateWorld()
     {
         GameProcessInfo.CurrentLevel = savedData.levelSavedData.levelIndex;
-        Debug.Log("Current level " + GameProcessInfo.CurrentLevel);
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
         lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete, new Vector3(savedData.levelSavedData.exitPosX, savedData.levelSavedData.exitPosY));
 

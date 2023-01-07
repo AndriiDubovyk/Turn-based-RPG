@@ -50,8 +50,8 @@ MonoBehaviour:
     spawnChance: 15
   startRoomItemGenerationData:
   - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
-    minQuantity: 1
-    maxQuantity: 1
+    minQuantity: 3
+    maxQuantity: 3
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1
