@@ -12,13 +12,12 @@ public class ItemSpawner : MonoBehaviour
         GameObject spawnedItem = null;
         foreach (ItemPickup ip in itemsPickupList.itemsPickup)
         {
-            if(ip.itemData.Equals(itemData))
+            if (ip.itemData.name.Equals(itemData.name))
             {
                 Vector3 newPos = new Vector3(position.x, position.y, ip.gameObject.transform.position.z);
                 ip.gameObject.transform.position = newPos;
                 spawnedItem = Instantiate(ip.gameObject);
                 spawnedItem.GetComponent<ItemPickup>().itemData = itemData.Clone(); // new link
-                Debug.Log($"Spawn {itemData.name}");
                 break;
             }
         }

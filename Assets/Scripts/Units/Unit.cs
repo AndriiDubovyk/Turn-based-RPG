@@ -143,7 +143,6 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        Debug.Log($"{unitData.defense} has {defense}");
         int realDamageAmount = damageAmount - defense;
         if (realDamageAmount < 1) realDamageAmount = 1; // min damage = 1
         currentHP -= realDamageAmount;

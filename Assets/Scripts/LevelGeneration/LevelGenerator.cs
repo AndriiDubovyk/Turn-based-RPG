@@ -76,7 +76,7 @@ public class LevelGenerator : MonoBehaviour
 
         shiftX = -templete.GetLength(0) / 2;
         shiftY = -templete.GetLength(1) / 2;
-        ShowWorld(templete);
+        //ShowWorld(templete);
         CreateRooms();
         CreateExit(exitPosition);
     }
