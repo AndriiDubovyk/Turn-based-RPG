@@ -35,10 +35,11 @@ public class LevelExit : MonoBehaviour
             }
             else
             {
-                GameProcessInfo.CurrentLevel++;
-                player.GetComponent<PlayerUnit>().SaveData();
-                SceneManager.LoadScene("RandomLevel");
+                GameObject.Find("UICanvas").GetComponent<UI>().ShowLevelExitPanel();
             }
+        } else if(!player.transform.position.Equals(gameObject.transform.position) && isExitProcessed)
+        {
+            isExitProcessed = false;
         }
     }
 }

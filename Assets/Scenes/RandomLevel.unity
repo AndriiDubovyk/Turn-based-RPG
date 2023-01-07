@@ -781,7 +781,7 @@ MonoBehaviour:
     quantity: 2
   bossRoomEnemies:
   - unitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
-    quantity: 2
+    quantity: 0
   - unitData: {fileID: 11400000, guid: eb61d79feb264a54294fbeb81535c5a7, type: 2}
     quantity: 1
   levelGenerator: {fileID: 1522314645}

@@ -17,6 +17,8 @@ public class UI : MonoBehaviour
     private GameObject resultPanel;
     [SerializeField]
     private GameObject menuPanel;
+    [SerializeField]
+    private GameObject levelExitPanel;
 
     private bool isMouseOverInvetoryButton;
     private bool isMouseOverTakeItemButton;
@@ -38,7 +40,11 @@ public class UI : MonoBehaviour
 
     public bool IsUIBlockingActions()
     {
-        return IsMouseOverUI() || IsInventoryOpened() || IsResultPanelActive() || IsMenuOpened();
+        return IsMouseOverUI() || IsInventoryOpened() || IsResultPanelActive() || IsMenuOpened() || IsLevelExitPanelOpened();
+    }
+
+    public void ShowLevelExitPanel() {
+        levelExitPanel.SetActive(true);
     }
 
 
@@ -47,13 +53,18 @@ public class UI : MonoBehaviour
         return inventoryPanel != null && inventoryPanel.activeSelf;
     }
 
+    private bool IsLevelExitPanelOpened()
+    {
+        return levelExitPanel != null && levelExitPanel.activeSelf;
+    }
+
     private bool IsResultPanelActive()
     {
-        return resultPanel.activeSelf;
+        return resultPanel != null && resultPanel.activeSelf;
     }
     private bool IsMenuOpened()
     {
-        return menuPanel.activeSelf;
+        return menuPanel!= null && menuPanel.activeSelf;
     }
 
     private bool IsMouseOverUI()
