@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = System.Random;
 
+// Unity has different then temlete generator y-axis direction, so there may be some confusion with top or bottom positions
 public class LevelGenerator : MonoBehaviour
 {
 
@@ -17,8 +18,36 @@ public class LevelGenerator : MonoBehaviour
     private GameObject levelExit;
     [SerializeField]
     private Tile defaultGroundTile;
+
     [SerializeField]
     private Tile defaultObstaclesTile;
+
+    [SerializeField]
+    private Tile topWallTile;
+    [SerializeField]
+    private Tile rightWallTile;
+    [SerializeField]
+    private Tile bottomWallTile;
+    [SerializeField]
+    private Tile leftWallTile;
+    [SerializeField]
+    private Tile leftBottomWallTile;
+    [SerializeField]
+    private Tile rightBottomWallTile;
+    [SerializeField]
+    private Tile leftTopWallTile;
+    [SerializeField]
+    private Tile rightTopWallTile;
+
+    [SerializeField]
+    private Tile leftBottomRoomWallTile;
+    [SerializeField]
+    private Tile rightBottomRoomWallTile;
+    [SerializeField]
+    private Tile leftTopRoomWallTile;
+    [SerializeField]
+    private Tile rightTopRoomWallTile;
+
 
     [SerializeField]
     private int templeteCellSize = 17;
@@ -92,6 +121,7 @@ public class LevelGenerator : MonoBehaviour
         CreateRooms();
         CreateExit();
     }
+
 
     public int[,] GetLevelTemplete()
     {
@@ -189,8 +219,8 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y+i);
-                gridManager.collidersTilemap.SetTile(posLeft, defaultObstaclesTile);
-                gridManager.collidersTilemap.SetTile(posRight, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(posLeft, rightWallTile);
+                gridManager.collidersTilemap.SetTile(posRight, leftWallTile);
             }
         }
         else
@@ -199,7 +229,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + i - 1,
                     topLeftCorner.y + shift - 1);
-                gridManager.collidersTilemap.SetTile(pos, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(pos, topWallTile);
             }
         }
         if (bottomSpace != 0)
@@ -216,8 +246,8 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y + templeteCellSize - 1 - i);
-                gridManager.collidersTilemap.SetTile(posLeft, defaultObstaclesTile);
-                gridManager.collidersTilemap.SetTile(posRight, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(posLeft, rightWallTile);
+                gridManager.collidersTilemap.SetTile(posRight, leftWallTile);
             }
         }
         else
@@ -226,7 +256,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + i - 1,
                     topLeftCorner.y + templeteCellSize - shift);
-                gridManager.collidersTilemap.SetTile(pos, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(pos, bottomWallTile);
             }
         }
         if (leftSpace != 0)
@@ -243,8 +273,18 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x+i,
                     topLeftCorner.y + shift + corridorWidth);
-                gridManager.collidersTilemap.SetTile(posTop, defaultObstaclesTile);
-                gridManager.collidersTilemap.SetTile(posBot, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(posTop, topWallTile);
+                gridManager.collidersTilemap.SetTile(posBot, bottomWallTile);
+            }
+            if(topSpace!=0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y + shift - 1), leftBottomWallTile);
+            }
+            if (bottomSpace != 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y + shift + corridorWidth), leftTopWallTile);
             }
         }
         else
@@ -253,7 +293,17 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift - 1,
                     topLeftCorner.y + shift + i - 1);
-                gridManager.collidersTilemap.SetTile(pos, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(pos, rightWallTile);
+            }
+            if (topSpace == 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y + shift - 1), rightBottomRoomWallTile);
+            }
+            if (bottomSpace == 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y + shift + corridorWidth), rightTopRoomWallTile);
             }
         }
         if (rightSpace != 0)
@@ -270,8 +320,18 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - i,
                     topLeftCorner.y + shift + corridorWidth);
-                gridManager.collidersTilemap.SetTile(posTop, defaultObstaclesTile);
-                gridManager.collidersTilemap.SetTile(posBot, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(posTop, topWallTile);
+                gridManager.collidersTilemap.SetTile(posBot, bottomWallTile);
+            }
+            if (topSpace != 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - shift + 1,
+                    topLeftCorner.y + shift - 1), rightBottomWallTile);
+            }
+            if (bottomSpace != 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - shift + 1,
+                    topLeftCorner.y + shift + corridorWidth), rightTopWallTile);
             }
         }
         else
@@ -280,7 +340,17 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
                     topLeftCorner.y + shift + i - 1);
-                gridManager.collidersTilemap.SetTile(pos, defaultObstaclesTile);
+                gridManager.collidersTilemap.SetTile(pos, leftWallTile);
+            }
+            if (topSpace == 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
+                    topLeftCorner.y + shift - 1), leftBottomRoomWallTile);
+            }
+            if (bottomSpace == 0)
+            {
+                gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
+                    topLeftCorner.y + shift + corridorWidth), leftTopRoomWallTile);
             }
         }
     }
@@ -307,7 +377,7 @@ public class LevelGenerator : MonoBehaviour
 
     private Vector3Int CreateRoom(int x, int y) // return room coords
     {
-        FillCell(gridManager.collidersTilemap, defaultObstaclesTile, new Vector3Int(x, y), true);
+        FillRoom(gridManager.collidersTilemap, new Vector3Int(x, y), true);
         int width = templete.GetLength(0);
         int height = templete.GetLength(1);
 
@@ -327,6 +397,10 @@ public class LevelGenerator : MonoBehaviour
                     topLeftCorner.y);
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y), leftBottomWallTile);
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift + corridorWidth,
+                    topLeftCorner.y), rightBottomWallTile);
         }
         if (bottomSpace != 0)
         {
@@ -336,6 +410,10 @@ public class LevelGenerator : MonoBehaviour
                     topLeftCorner.y + templeteCellSize - 1);
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
+                    topLeftCorner.y + templeteCellSize - 1), leftTopWallTile);
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift + corridorWidth,
+                    topLeftCorner.y + templeteCellSize - 1), rightTopWallTile);
         }
         if (leftSpace != 0)
         {
@@ -345,6 +423,10 @@ public class LevelGenerator : MonoBehaviour
                     topLeftCorner.y + shift + i);
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x,
+                    topLeftCorner.y + shift -1 ), leftBottomWallTile);
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x,
+                    topLeftCorner.y + shift + corridorWidth), leftTopWallTile);
         }
         if (rightSpace != 0)
         {
@@ -354,6 +436,10 @@ public class LevelGenerator : MonoBehaviour
                     topLeftCorner.y + shift + i);
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1,
+                    topLeftCorner.y + shift + -1), rightBottomWallTile);
+            gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1,
+                    topLeftCorner.y + shift + corridorWidth), rightTopWallTile);
         }
         for (int i = 0; i< templeteCellSize; i++)
         {
@@ -365,7 +451,7 @@ public class LevelGenerator : MonoBehaviour
         return topLeftCorner;
     }
 
-    private void FillCell(Tilemap tilemmap, Tile tile, Vector3Int cellPoint, bool onlyOutline = false)
+    private void FillRoom(Tilemap tilemmap, Vector3Int cellPoint, bool onlyOutline = false)
     {
         Vector3Int shiftPoint = new Vector3Int(cellPoint.x+shiftX, cellPoint.y+shiftY);
         for(int x=0; x< templeteCellSize; x++)
@@ -376,6 +462,16 @@ public class LevelGenerator : MonoBehaviour
                     continue;
                 Vector3Int pos = new Vector3Int(shiftPoint.x * templeteCellSize + x,
                     shiftPoint.y * templeteCellSize + y);
+                Tile tile = null;
+                if (x == 0 && y == 0) tile = rightBottomRoomWallTile;
+                else if (x == 0 && y == templeteCellSize - 1) tile = rightTopRoomWallTile;
+                else if (x == templeteCellSize - 1 && y == 0) tile = leftBottomRoomWallTile;
+                else if (x == templeteCellSize - 1 && y == templeteCellSize - 1) tile = leftTopRoomWallTile;
+                else if (x == 0) tile = rightWallTile;
+                else if (x == templeteCellSize - 1) tile = leftWallTile;
+                else if (y == templeteCellSize - 1) tile = bottomWallTile;
+                else if (y == 0) tile = topWallTile;
+
                 tilemmap.SetTile(pos, tile);
             }
         }

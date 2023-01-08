@@ -857,7 +857,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelExit: {fileID: 8516737359112469485, guid: c6fc63ce3fc28d841b7a295c5f03bab3, type: 3}
   defaultGroundTile: {fileID: 11400000, guid: f6841fd1ee3a10549b1d402b8992bec7, type: 2}
-  defaultObstaclesTile: {fileID: 11400000, guid: 0bcb10668b78e4247b9943f9d01c939e, type: 2}
+  defaultObstaclesTile: {fileID: 11400000, guid: 0ebb7d46dcf29ca4e95c45b6ec8b9345, type: 2}
+  topWallTile: {fileID: 11400000, guid: 06b87831253f8f845ac6329b3de088c2, type: 2}
+  rightWallTile: {fileID: 11400000, guid: ed01cc31bb868c84ba186945084c88aa, type: 2}
+  bottomWallTile: {fileID: 11400000, guid: dc3cc2d50362f54439a72a0d2176daf3, type: 2}
+  leftWallTile: {fileID: 11400000, guid: 023f64971096011449e51060e4b2700d, type: 2}
+  leftBottomWallTile: {fileID: 11400000, guid: 31398a40282b2564097df191c861095b, type: 2}
+  rightBottomWallTile: {fileID: 11400000, guid: 3d5c7900c59145544b2c0848992758bf, type: 2}
+  leftTopWallTile: {fileID: 11400000, guid: 72ce46179665cfd499cd4898e55ad011, type: 2}
+  rightTopWallTile: {fileID: 11400000, guid: 4f974bb3f72da514ba71db897752247d, type: 2}
+  leftBottomRoomWallTile: {fileID: 11400000, guid: d1b429b3247318d46bcbebe3d61ac4c8, type: 2}
+  rightBottomRoomWallTile: {fileID: 11400000, guid: 1f786d54b62478b4196131164fde0132, type: 2}
+  leftTopRoomWallTile: {fileID: 11400000, guid: f4917382aeaad03468d60a431fcf6666, type: 2}
+  rightTopRoomWallTile: {fileID: 11400000, guid: 42aa0d90f89e5e24180d2520975c728f, type: 2}
   templeteCellSize: 11
   corridorWidth: 3
   enemyRoomMaxCellDistFromEdge: 3
