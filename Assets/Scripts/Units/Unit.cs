@@ -26,6 +26,8 @@ public class Unit : MonoBehaviour
     protected List<Vector3Int> movementPath;
     protected Unit attackTarget;
 
+    private Animator animator;
+
     // States
     protected State state;
     public enum State
@@ -46,6 +48,7 @@ public class Unit : MonoBehaviour
         pathfindingXMaxDistance = unitData.pathfindingXMaxDistance;
         pathfindingYMaxDistance = unitData.pathfindingYMaxDistance;
         gameObject.GetComponent<SpriteRenderer>().sprite = unitData.sprite;
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void Start()
@@ -54,7 +57,7 @@ public class Unit : MonoBehaviour
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
         attackTarget = null;
-        state = State.IsThinking;      
+        SetState(State.IsThinking);
     }
 
     public void SetHealth(int health)
@@ -83,13 +86,24 @@ public class Unit : MonoBehaviour
     {
         Attack(attackTarget);
         attackTarget = null;
-        state = State.IsWaiting;
+        SetState(State.IsWaiting);
     }
 
     protected virtual void MoveUpdate()
     {
         // Find next cell point
         Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y * gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
+
+        // Flip sprite if requires   
+        if (nextCellPoint.x > gameObject.transform.position.x)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (nextCellPoint.x < transform.position.x)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
 
         // Move to next cell point
         transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
@@ -102,7 +116,7 @@ public class Unit : MonoBehaviour
             {
                 movementPath = null;
             }
-            state = State.IsWaiting;
+            SetState(State.IsWaiting);
         }
     }
 
@@ -210,6 +224,14 @@ public class Unit : MonoBehaviour
     public void SetState(State newState)
     {
         state = newState;
+        if (animator != null)
+        {
+            bool isWalking = state == State.IsMakingTurn && movementPath != null;
+            if(isWalking)
+                animator.SetBool("IsWalking", isWalking);
+            else if(!isWalking && movementPath==null)
+                animator.SetBool("IsWalking", isWalking);
+        }
     }
 
     public bool CanAttack(Unit enemy)
@@ -224,11 +246,11 @@ public class Unit : MonoBehaviour
 
     public void ConfirmTurn()
     {
-        state = State.IsMakingTurn;
+        SetState(State.IsMakingTurn);
         // Skip turn. Unit has no action to do
         if (attackTarget == null && movementPath == null)
         {
-            state = State.IsWaiting;
+            SetState(State.IsWaiting);
         }
     }
 

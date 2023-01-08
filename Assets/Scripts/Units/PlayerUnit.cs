@@ -277,7 +277,7 @@ public class PlayerUnit : Unit
     public void SkipTurn()
     {
         if (state == State.IsThinking)
-            state = State.IsWaiting;
+            SetState(State.IsWaiting);
     }
 
     public ItemData GetEquipedWeapon()
