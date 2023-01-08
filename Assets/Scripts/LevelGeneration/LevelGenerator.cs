@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -23,30 +21,30 @@ public class LevelGenerator : MonoBehaviour
     private Tile defaultObstaclesTile;
 
     [SerializeField]
-    private Tile topWallTile;
+    private Tile botWall;
     [SerializeField]
-    private Tile rightWallTile;
+    private Tile leftWall;
     [SerializeField]
-    private Tile bottomWallTile;
+    private Tile topWall;
     [SerializeField]
-    private Tile leftWallTile;
+    private Tile rightWall;
     [SerializeField]
-    private Tile leftBottomWallTile;
+    private Tile botLeftCorner;
     [SerializeField]
-    private Tile rightBottomWallTile;
+    private Tile botRightCorner;
     [SerializeField]
-    private Tile leftTopWallTile;
+    private Tile topLeftCorner;
     [SerializeField]
-    private Tile rightTopWallTile;
+    private Tile topRightCorner;
 
     [SerializeField]
-    private Tile leftBottomRoomWallTile;
+    private Tile botRightInnerCorner;
     [SerializeField]
-    private Tile rightBottomRoomWallTile;
+    private Tile botLeftInnerCorner;
     [SerializeField]
-    private Tile leftTopRoomWallTile;
+    private Tile topRightInnerCorner;
     [SerializeField]
-    private Tile rightTopRoomWallTile;
+    private Tile topLeftInnerCorner;
 
 
     [SerializeField]
@@ -219,8 +217,8 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y+i);
-                gridManager.collidersTilemap.SetTile(posLeft, rightWallTile);
-                gridManager.collidersTilemap.SetTile(posRight, leftWallTile);
+                gridManager.collidersTilemap.SetTile(posLeft, leftWall);
+                gridManager.collidersTilemap.SetTile(posRight, rightWall);
             }
         }
         else
@@ -229,7 +227,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + i - 1,
                     topLeftCorner.y + shift - 1);
-                gridManager.collidersTilemap.SetTile(pos, topWallTile);
+                gridManager.collidersTilemap.SetTile(pos, botWall);
             }
         }
         if (bottomSpace != 0)
@@ -246,8 +244,8 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posRight = new Vector3Int(topLeftCorner.x + shift + corridorWidth,
                     topLeftCorner.y + templeteCellSize - 1 - i);
-                gridManager.collidersTilemap.SetTile(posLeft, rightWallTile);
-                gridManager.collidersTilemap.SetTile(posRight, leftWallTile);
+                gridManager.collidersTilemap.SetTile(posLeft, leftWall);
+                gridManager.collidersTilemap.SetTile(posRight, rightWall);
             }
         }
         else
@@ -256,7 +254,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift + i - 1,
                     topLeftCorner.y + templeteCellSize - shift);
-                gridManager.collidersTilemap.SetTile(pos, bottomWallTile);
+                gridManager.collidersTilemap.SetTile(pos, topWall);
             }
         }
         if (leftSpace != 0)
@@ -273,18 +271,18 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x+i,
                     topLeftCorner.y + shift + corridorWidth);
-                gridManager.collidersTilemap.SetTile(posTop, topWallTile);
-                gridManager.collidersTilemap.SetTile(posBot, bottomWallTile);
+                gridManager.collidersTilemap.SetTile(posTop, botWall);
+                gridManager.collidersTilemap.SetTile(posBot, topWall);
             }
             if(topSpace!=0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y + shift - 1), leftBottomWallTile);
+                    topLeftCorner.y + shift - 1), botLeftCorner);
             }
             if (bottomSpace != 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y + shift + corridorWidth), leftTopWallTile);
+                    topLeftCorner.y + shift + corridorWidth), this.topLeftCorner);
             }
         }
         else
@@ -293,17 +291,17 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + shift - 1,
                     topLeftCorner.y + shift + i - 1);
-                gridManager.collidersTilemap.SetTile(pos, rightWallTile);
+                gridManager.collidersTilemap.SetTile(pos, leftWall);
             }
             if (topSpace == 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y + shift - 1), rightBottomRoomWallTile);
+                    topLeftCorner.y + shift - 1), botLeftInnerCorner);
             }
             if (bottomSpace == 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y + shift + corridorWidth), rightTopRoomWallTile);
+                    topLeftCorner.y + shift + corridorWidth), topLeftInnerCorner);
             }
         }
         if (rightSpace != 0)
@@ -320,18 +318,18 @@ public class LevelGenerator : MonoBehaviour
                 }
                 Vector3Int posBot = new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - i,
                     topLeftCorner.y + shift + corridorWidth);
-                gridManager.collidersTilemap.SetTile(posTop, topWallTile);
-                gridManager.collidersTilemap.SetTile(posBot, bottomWallTile);
+                gridManager.collidersTilemap.SetTile(posTop, botWall);
+                gridManager.collidersTilemap.SetTile(posBot, topWall);
             }
             if (topSpace != 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - shift + 1,
-                    topLeftCorner.y + shift - 1), rightBottomWallTile);
+                    topLeftCorner.y + shift - 1), botRightCorner);
             }
             if (bottomSpace != 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1 - shift + 1,
-                    topLeftCorner.y + shift + corridorWidth), rightTopWallTile);
+                    topLeftCorner.y + shift + corridorWidth), topRightCorner);
             }
         }
         else
@@ -340,17 +338,17 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
                     topLeftCorner.y + shift + i - 1);
-                gridManager.collidersTilemap.SetTile(pos, leftWallTile);
+                gridManager.collidersTilemap.SetTile(pos, rightWall);
             }
             if (topSpace == 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
-                    topLeftCorner.y + shift - 1), leftBottomRoomWallTile);
+                    topLeftCorner.y + shift - 1), botRightInnerCorner);
             }
             if (bottomSpace == 0)
             {
                 gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - shift,
-                    topLeftCorner.y + shift + corridorWidth), leftTopRoomWallTile);
+                    topLeftCorner.y + shift + corridorWidth), topRightInnerCorner);
             }
         }
     }
@@ -398,9 +396,9 @@ public class LevelGenerator : MonoBehaviour
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y), leftBottomWallTile);
+                    topLeftCorner.y), botLeftCorner);
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift + corridorWidth,
-                    topLeftCorner.y), rightBottomWallTile);
+                    topLeftCorner.y), botRightCorner);
         }
         if (bottomSpace != 0)
         {
@@ -411,9 +409,9 @@ public class LevelGenerator : MonoBehaviour
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift - 1,
-                    topLeftCorner.y + templeteCellSize - 1), leftTopWallTile);
+                    topLeftCorner.y + templeteCellSize - 1), this.topLeftCorner);
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + shift + corridorWidth,
-                    topLeftCorner.y + templeteCellSize - 1), rightTopWallTile);
+                    topLeftCorner.y + templeteCellSize - 1), topRightCorner);
         }
         if (leftSpace != 0)
         {
@@ -424,9 +422,9 @@ public class LevelGenerator : MonoBehaviour
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x,
-                    topLeftCorner.y + shift -1 ), leftBottomWallTile);
+                    topLeftCorner.y + shift -1 ), botLeftCorner);
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x,
-                    topLeftCorner.y + shift + corridorWidth), leftTopWallTile);
+                    topLeftCorner.y + shift + corridorWidth), this.topLeftCorner);
         }
         if (rightSpace != 0)
         {
@@ -437,9 +435,9 @@ public class LevelGenerator : MonoBehaviour
                 gridManager.collidersTilemap.SetTile(pos, null);
             }
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1,
-                    topLeftCorner.y + shift + -1), rightBottomWallTile);
+                    topLeftCorner.y + shift + -1), botRightCorner);
             gridManager.collidersTilemap.SetTile(new Vector3Int(topLeftCorner.x + templeteCellSize - 1,
-                    topLeftCorner.y + shift + corridorWidth), rightTopWallTile);
+                    topLeftCorner.y + shift + corridorWidth), topRightCorner);
         }
         for (int i = 0; i< templeteCellSize; i++)
         {
@@ -463,14 +461,14 @@ public class LevelGenerator : MonoBehaviour
                 Vector3Int pos = new Vector3Int(shiftPoint.x * templeteCellSize + x,
                     shiftPoint.y * templeteCellSize + y);
                 Tile tile = null;
-                if (x == 0 && y == 0) tile = rightBottomRoomWallTile;
-                else if (x == 0 && y == templeteCellSize - 1) tile = rightTopRoomWallTile;
-                else if (x == templeteCellSize - 1 && y == 0) tile = leftBottomRoomWallTile;
-                else if (x == templeteCellSize - 1 && y == templeteCellSize - 1) tile = leftTopRoomWallTile;
-                else if (x == 0) tile = rightWallTile;
-                else if (x == templeteCellSize - 1) tile = leftWallTile;
-                else if (y == templeteCellSize - 1) tile = bottomWallTile;
-                else if (y == 0) tile = topWallTile;
+                if (x == 0 && y == 0) tile = botLeftInnerCorner;
+                else if (x == 0 && y == templeteCellSize - 1) tile = topLeftInnerCorner;
+                else if (x == templeteCellSize - 1 && y == 0) tile = botRightInnerCorner;
+                else if (x == templeteCellSize - 1 && y == templeteCellSize - 1) tile = topRightInnerCorner;
+                else if (x == 0) tile = leftWall;
+                else if (x == templeteCellSize - 1) tile = rightWall;
+                else if (y == templeteCellSize - 1) tile = topWall;
+                else if (y == 0) tile = botWall;
 
                 tilemmap.SetTile(pos, tile);
             }
