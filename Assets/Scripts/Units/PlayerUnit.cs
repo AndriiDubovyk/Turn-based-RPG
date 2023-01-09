@@ -15,7 +15,8 @@ public class PlayerUnit : Unit
     [SerializeField]
     private Tile pathMarkTile;
 
-    private TextMeshProUGUI healthBar;
+    [SerializeField]
+    private PlayerHealthBar healthBar;
 
     private bool isPathConfirmed;
     private bool isItemTakingActive;
@@ -36,7 +37,6 @@ public class PlayerUnit : Unit
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddPlayer(gameObject);
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
-        healthBar = GameObject.Find("PlayerHealthBar").GetComponent<TextMeshProUGUI>();
     }
 
     public void SaveData()
@@ -373,7 +373,7 @@ public class PlayerUnit : Unit
 
     public override void UpdateHealthBar()
     {
-        healthBar.text = "HP: " + GetCurrentHP();
+        healthBar.UpdateHealth(GetCurrentHP(), GetMaxHP());
     }
 
     private void ShowAttackTargetSelectionOverlay(Unit attackTarget)
