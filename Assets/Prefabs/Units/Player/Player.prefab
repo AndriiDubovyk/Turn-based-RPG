@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: e5a595b3f5e1d7246bce8db810260ccb, type: 2}
+  blood: {fileID: 5430630751847308375, guid: e069fa6d93898f346883c58f0d1cdd18, type: 3}
   selectionTile: {fileID: 11400000, guid: 67dc417c13881c94f9fb5684a8aeb411, type: 2}
   attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}

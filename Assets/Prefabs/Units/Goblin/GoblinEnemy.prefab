@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569387430450957854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 51.5, y: -3.5, z: 0}
+  m_LocalPosition: {x: 24.5, y: -19.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+  blood: {fileID: 5430630751847308375, guid: e069fa6d93898f346883c58f0d1cdd18, type: 3}
 --- !u!1 &856846650111277935
 GameObject:
   m_ObjectHideFlags: 0

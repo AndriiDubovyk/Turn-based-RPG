@@ -28,6 +28,9 @@ public class Unit : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField]
+    private GameObject blood;
+
     // States
     protected State state;
     public enum State
@@ -162,6 +165,11 @@ public class Unit : MonoBehaviour
         currentHP -= realDamageAmount;
         if (currentHP < 0) currentHP = 0;
         UpdateHealthBar();
+
+        if(blood!=null)
+        {
+            Instantiate(blood, transform.position, Quaternion.identity);
+        }
     }
 
     public virtual void UpdateHealthBar() {}
