@@ -239,6 +239,13 @@ public class Unit : MonoBehaviour
                 animator.SetBool("IsWalking", isWalking);
             else if(!isWalking && movementPath==null)
                 animator.SetBool("IsWalking", isWalking);
+            
+            bool isAttacking = state == State.IsMakingTurn && attackTarget != null;
+            if (isAttacking)
+                animator.SetBool("IsAttacking", isAttacking);
+            else if (!isAttacking && attackTarget == null)
+                animator.SetBool("IsAttacking", isAttacking);
+
         }
     }
 
