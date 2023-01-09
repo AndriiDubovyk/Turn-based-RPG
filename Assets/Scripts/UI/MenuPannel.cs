@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPannel : MonoBehaviour
 {
+    private GameSaver gs;
+
     // Start is called before the first frame update
     void Start()
     {
+        gs = GameObject.Find("GameHandler").GetComponent<GameSaver>();
+        Debug.Log(gs != null);
         gameObject.SetActive(false);
     }
 
@@ -17,6 +22,7 @@ public class MenuPannel : MonoBehaviour
 
     public void SaveAndExit()
     {
-        Application.Quit();
+        gs.Save();
+        SceneManager.LoadScene("Menu");
     }
 }

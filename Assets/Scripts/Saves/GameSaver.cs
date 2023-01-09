@@ -20,7 +20,7 @@ public class GameSaver : MonoBehaviour
         
     }
 
-    private void OnApplicationQuit()
+    public void Save()
     {
         savedData = new SavedData();
 
@@ -32,7 +32,7 @@ public class GameSaver : MonoBehaviour
         ItemData[] inv = player.GetComponent<PlayerUnit>().GetInventory();
         savedData.playerSavedData.inventoryNames = Array.ConvertAll(inv.ToArray(), it => it != null ? it.name : "");
         ItemData equipedWeapon = player.GetComponent<PlayerUnit>().GetEquipedWeapon();
-        savedData.playerSavedData.equipedWeaponName = equipedWeapon!=null ? equipedWeapon.name : "";
+        savedData.playerSavedData.equipedWeaponName = equipedWeapon != null ? equipedWeapon.name : "";
         ItemData equipedArmor = player.GetComponent<PlayerUnit>().GetEquipedArmor();
         savedData.playerSavedData.equipedArmorName = equipedArmor != null ? equipedArmor.name : "";
 
@@ -42,7 +42,7 @@ public class GameSaver : MonoBehaviour
         savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
 
         List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().GetEnemiesGO();
-        foreach(GameObject enemy in enemies)
+        foreach (GameObject enemy in enemies)
         {
             SavedData.EnemySavedData enemySavedData = new SavedData.EnemySavedData();
             enemySavedData.unitName = enemy.GetComponent<Unit>().unitData.name;

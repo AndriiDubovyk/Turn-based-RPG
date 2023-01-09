@@ -18,6 +18,15 @@ public class ItemDisplayPanel : MonoBehaviour
     private Button dropButton;
     [SerializeField]
     private Button equipButton;
+    [SerializeField]
+    private Image statsIcon;
+
+    [SerializeField]
+    private Sprite attackIcon;
+    [SerializeField]
+    private Sprite defenseIcon;
+    [SerializeField]
+    private Sprite healIcon;
 
     private ItemData itemData;
 
@@ -45,7 +54,11 @@ public class ItemDisplayPanel : MonoBehaviour
             dropButton.gameObject.SetActive(true);
             if(itemData.attack>0)
             {
-                itemStats.SetText($"Attack: {itemData.attack}");
+                itemStats.SetText($"{itemData.attack}");
+                tmpColor = statsIcon.color;
+                tmpColor.a = 1f;
+                statsIcon.color = tmpColor;
+                statsIcon.sprite = attackIcon;
                 equipButton.gameObject.SetActive(true);
                 if (itemData != inventoryPanel.GetEquipedWeapon())
                 {
@@ -58,7 +71,11 @@ public class ItemDisplayPanel : MonoBehaviour
             }
             else if(itemData.defense>0)
             {
-                itemStats.SetText($"Defense: {itemData.defense}");
+                itemStats.SetText($"{itemData.defense}");
+                tmpColor = statsIcon.color;
+                tmpColor.a = 1f;
+                statsIcon.color = tmpColor;
+                statsIcon.sprite = defenseIcon;
                 equipButton.gameObject.SetActive(true);
                 if (itemData != inventoryPanel.GetEquipedArmor())
                 {
@@ -71,12 +88,19 @@ public class ItemDisplayPanel : MonoBehaviour
             }
             else if(itemData.healing>0)
             {
-                itemStats.SetText($"Healing: {itemData.healing}");
+                itemStats.SetText($"{itemData.healing}");
+                tmpColor = statsIcon.color;
+                tmpColor.a = 1f;
+                statsIcon.color = tmpColor;
+                statsIcon.sprite = healIcon;
                 equipButton.gameObject.SetActive(true);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Use");
             }
             else
             {
+                tmpColor = statsIcon.color;
+                tmpColor.a = 0f;
+                statsIcon.color = tmpColor;
                 itemStats.SetText("");
                 equipButton.gameObject.SetActive(false);
             }
@@ -85,6 +109,7 @@ public class ItemDisplayPanel : MonoBehaviour
         else
         {
             image.sprite = null;
+            statsIcon.sprite = null;
             itemName.SetText("");
             itemStats.SetText("");
             itemDescription.SetText("");
@@ -92,6 +117,10 @@ public class ItemDisplayPanel : MonoBehaviour
             tmpColor = image.color;
             tmpColor.a = 0f;
             image.color = tmpColor;
+
+            tmpColor = statsIcon.color;
+            tmpColor.a = 0f;
+            statsIcon.color = tmpColor;
 
             dropButton.gameObject.SetActive(false);
             equipButton.gameObject.SetActive(false);
