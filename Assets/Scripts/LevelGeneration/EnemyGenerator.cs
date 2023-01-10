@@ -38,10 +38,10 @@ public class EnemyGenerator : MonoBehaviour
         
         foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.bossRoomEnemiesGenerationData)
         {
-            if (GameProcessInfo.CurrentLevel >= egd.minLevel && GameProcessInfo.CurrentLevel <= egd.maxLevel)
+            if (GameProcessInfo.CurrentDungeonLevel >= egd.minLevel && GameProcessInfo.CurrentDungeonLevel <= egd.maxLevel)
             {
-                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
-                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
 
                 for(int i = 0; i < max; i++)
                 {
@@ -78,10 +78,10 @@ public class EnemyGenerator : MonoBehaviour
 
             foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.commonRoomEnemiesGenerationData)
             {
-                if (GameProcessInfo.CurrentLevel >= egd.minLevel && GameProcessInfo.CurrentLevel <= egd.maxLevel)
+                if (GameProcessInfo.CurrentDungeonLevel >= egd.minLevel && GameProcessInfo.CurrentDungeonLevel <= egd.maxLevel)
                 {
-                    int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
-                    int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+                    int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                    int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
 
                     for (int i = 0; i < max; i++)
                     {

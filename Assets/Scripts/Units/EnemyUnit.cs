@@ -61,4 +61,10 @@ public class EnemyUnit : Unit
     {
         healthBar.UpdateHealth(currentHP, maxHP);
     }
+
+    public override void Die()
+    {
+        GameObject.Find("Player").GetComponent<PlayerUnit>().AddExp(unitData.expReward);
+        base.Die();
+    }
 }

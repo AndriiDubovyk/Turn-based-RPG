@@ -17,6 +17,12 @@ public class PlayerUnit : Unit
 
     [SerializeField]
     private PlayerHealthBar healthBar;
+    [SerializeField]
+    private PlayerLevelInfo playerLevelInfo;
+
+    public LevelingData levelingData;
+    private int level;
+    private int exp;
 
     private bool isPathConfirmed;
     private bool isItemTakingActive;
@@ -47,14 +53,89 @@ public class PlayerUnit : Unit
         tm.AddPlayer(gameObject);
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
         lastCellWalkAudioWasPlaying = new Vector3Int(-1, -1, -1);
+        level = 1;
+        exp = 0;
+    }
+
+
+    protected override void Start()
+    {
+        base.Start();
+        isPathConfirmed = false;
+        isItemTakingActive = false;
+        ui = GameObject.Find("UICanvas").GetComponent<UI>();
+
+        LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
+        bool isSaveExist = GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist();
+        if (lg != null && !isSaveExist)
+        {
+            // player starts at the center of the room
+            int cellSize = lg.GetCellSize();
+            Vector3 startRoomPos = lg.GetStartRoomPos();
+            gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
+        }
+
+        if (GameProcessInfo.CurrentDungeonLevel > 1 && !isSaveExist) LoadData();
+        UpdateHealthBar();
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
     }
 
     public void SaveData()
     {
         GameProcessInfo.CurrentHP = currentHP;
         GameProcessInfo.Attack = attack;
+        GameProcessInfo.Level = level;
+        GameProcessInfo.Exp = exp;
         GameProcessInfo.Inventory = inventory;
         GameProcessInfo.EquipedWeapon = equipedWeapon;
+    }
+
+    public void LoadData()
+    {
+        currentHP = GameProcessInfo.CurrentHP;
+        attack = GameProcessInfo.Attack;
+        inventory = GameProcessInfo.Inventory;
+        level = GameProcessInfo.Level;
+        exp = GameProcessInfo.Exp;
+        equipedWeapon = GameProcessInfo.EquipedWeapon;
+        equipedArmor = GameProcessInfo.EquipedArmor;
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level - 1));
+
+    }
+
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level+1));
+    }
+
+    public int GetExp()
+    {
+        return exp;
+    }
+
+    public void SetExp(int exp)
+    {
+        this.exp = exp;
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
+    }
+
+    public void AddExp(int plusExp)
+    {
+        this.exp += plusExp;
+        int expToNextLevel = levelingData.GetExpToNextLevel(level + 1);
+        while (this.exp >= expToNextLevel)
+        {
+            this.level += 1;
+            this.exp -= expToNextLevel;
+        }
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
     }
 
     public void SetInventory(ItemData[] inventory)
@@ -115,35 +196,7 @@ public class PlayerUnit : Unit
         this.equipedArmor = ea;
     }
 
-    public void LoadData()
-    {
-        currentHP = GameProcessInfo.CurrentHP;
-        attack = GameProcessInfo.Attack;
-        inventory = GameProcessInfo.Inventory;
-        equipedWeapon = GameProcessInfo.EquipedWeapon;
-        equipedArmor = GameProcessInfo.EquipedArmor;
-    }
 
-    protected override void Start()
-    {
-        base.Start();
-        isPathConfirmed = false;
-        isItemTakingActive = false;
-        ui = GameObject.Find("UICanvas").GetComponent<UI>();
-
-        LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
-        bool isSaveExist = GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist();
-        if (lg!=null && !isSaveExist)
-        {
-            // player starts at the center of the room
-            int cellSize = lg.GetCellSize();
-            Vector3 startRoomPos = lg.GetStartRoomPos();
-            gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
-        }
-
-        if (GameProcessInfo.CurrentLevel > 1 && !isSaveExist) LoadData();
-        UpdateHealthBar();
-    }
 
     protected override void Update()
     {

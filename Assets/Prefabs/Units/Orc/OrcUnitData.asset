@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: OrcUnitData
   m_EditorClassIdentifier: 
   name: Orc
-  maxHP: 150
-  attack: 15
+  maxHP: 160
+  attack: 18
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6
   defense: 0
+  expReward: 90
   moveSpeed: 22
   sprite: {fileID: 21300000, guid: 6e3b6944a286e374596f0aba3f960f56, type: 3}
   drops:

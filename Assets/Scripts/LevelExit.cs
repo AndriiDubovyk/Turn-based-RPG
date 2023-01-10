@@ -28,7 +28,7 @@ public class LevelExit : MonoBehaviour
         {
             isExitProcessed = true;
             GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
-            if(GameProcessInfo.CurrentLevel == GameProcessInfo.MaxLevel)
+            if(GameProcessInfo.CurrentDungeonLevel == GameProcessInfo.MaxDungeonLevel)
             {
                 resultPanel.SetResult(true);
                 resultPanel.Display();

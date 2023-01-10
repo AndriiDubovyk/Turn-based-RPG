@@ -25,7 +25,7 @@ public class ResultPanel : MonoBehaviour
     {
         if(result)
         {
-            text.SetText($"You comlete all {GameProcessInfo.MaxLevel} levels");
+            text.SetText($"You comlete all {GameProcessInfo.MaxDungeonLevel} levels");
         }
         else
         {
@@ -41,7 +41,7 @@ public class ResultPanel : MonoBehaviour
     public void Restart()
     {
         GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
-        GameProcessInfo.CurrentLevel = 1;
+        GameProcessInfo.CurrentDungeonLevel = 1;
         SceneManager.LoadScene("RandomLevel");
     }
 

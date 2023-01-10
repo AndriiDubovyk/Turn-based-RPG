@@ -44,6 +44,8 @@ public class SavedData
         public int health;
         public int attack;
         public int defense;
+        public int level;
+        public int exp;
         public string[] inventoryNames;
         public string equipedWeaponName;
         public string equipedArmorName;

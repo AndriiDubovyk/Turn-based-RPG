@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c15ebcb3972bede4aa35300598446b93, type: 3}
-  m_Name: SwordItemData
+  m_Script: {fileID: 11500000, guid: bcc7a06cabd3fa04691a06035c0ad4ad, type: 3}
+  m_Name: LevelingData
   m_EditorClassIdentifier: 
-  name: Sword
-  description: Rusty iron sword
-  attack: 25
-  defense: 0
-  healing: 0
-  sprite: {fileID: 21300000, guid: 5abad86129deb71439fec5d6cc46757f, type: 3}
+  expirienceToSecondLevel: 100
+  expirienceIncreaseForLevel: 50

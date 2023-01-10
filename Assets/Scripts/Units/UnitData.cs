@@ -13,6 +13,7 @@ public class UnitData : ScriptableObject
     public int pathfindingXMaxDistance;
     public int pathfindingYMaxDistance;
     public int defense;
+    public int expReward;
     public float moveSpeed;
     public Sprite sprite;
 

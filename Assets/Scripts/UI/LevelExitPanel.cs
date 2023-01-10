@@ -21,7 +21,7 @@ public class LevelExitPanel : MonoBehaviour
 
     public void Confirm()
     {
-        GameProcessInfo.CurrentLevel++;
+        GameProcessInfo.CurrentDungeonLevel++;
         player.GetComponent<PlayerUnit>().SaveData();
         SceneManager.LoadScene("RandomLevel");
     }

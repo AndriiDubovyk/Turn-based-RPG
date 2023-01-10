@@ -35,8 +35,10 @@ public class GameSaver : MonoBehaviour
         savedData.playerSavedData.equipedWeaponName = equipedWeapon != null ? equipedWeapon.name : "";
         ItemData equipedArmor = player.GetComponent<PlayerUnit>().GetEquipedArmor();
         savedData.playerSavedData.equipedArmorName = equipedArmor != null ? equipedArmor.name : "";
+        savedData.playerSavedData.level = player.GetComponent<PlayerUnit>().GetLevel();
+        savedData.playerSavedData.exp = player.GetComponent<PlayerUnit>().GetExp();
 
-        savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentLevel;
+        savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentDungeonLevel;
         savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
         savedData.levelSavedData.exitPosX = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().x;
         savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
@@ -101,7 +103,7 @@ public class GameSaver : MonoBehaviour
 
     private void GenerateWorld()
     {
-        GameProcessInfo.CurrentLevel = savedData.levelSavedData.levelIndex;
+        GameProcessInfo.CurrentDungeonLevel = savedData.levelSavedData.levelIndex;
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
         lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete, new Vector3(savedData.levelSavedData.exitPosX, savedData.levelSavedData.exitPosY));
 
@@ -124,6 +126,7 @@ public class GameSaver : MonoBehaviour
         player.GetComponent<PlayerUnit>().SetEquipedWeapon(savedData.playerSavedData.equipedWeaponName);
         player.GetComponent<PlayerUnit>().SetEquipedArmor(savedData.playerSavedData.equipedArmorName);
         player.GetComponent<PlayerUnit>().SetInventory(savedData.playerSavedData.inventoryNames);
-
+        player.GetComponent<PlayerUnit>().SetLevel(savedData.playerSavedData.level);
+        player.GetComponent<PlayerUnit>().SetExp(savedData.playerSavedData.exp);
     }
 }

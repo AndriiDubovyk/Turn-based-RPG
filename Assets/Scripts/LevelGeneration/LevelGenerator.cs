@@ -81,7 +81,7 @@ public class LevelGenerator : MonoBehaviour
     {
         if (GameObject.Find("GameHandler").GetComponent<GameSaver>().IsSaveExist()) return;
 
-        numberOfEnemyRooms = (int)(levelGenerationData.startCommonRoomsNumber + levelGenerationData.commonRoomsNumberIncreasePerLevel * (GameProcessInfo.CurrentLevel - 1));
+        numberOfEnemyRooms = (int)(levelGenerationData.startCommonRoomsNumber + levelGenerationData.commonRoomsNumberIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
         levelWidthCells = levelHeightCells = 6 + (int)(levelGenerationData.startCommonRoomsNumber);
 
         templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();

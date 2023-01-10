@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wooden Stick
   description: Large wooden stick
-  attack: 20
+  attack: 15
+  defense: 0
   healing: 0
   sprite: {fileID: 21300000, guid: 99d3d8362ebf6eb4d9fa50716f461147, type: 3}
