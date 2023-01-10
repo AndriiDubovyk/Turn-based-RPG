@@ -19,6 +19,6 @@ MonoBehaviour:
   pathfindingXMaxDistance: 22
   pathfindingYMaxDistance: 14
   defense: 0
-  moveSpeed: 25
+  moveSpeed: 22
   sprite: {fileID: -2065521865, guid: 06e808c4cbeb8a04f8127709d9b70f63, type: 3}
   drops: []

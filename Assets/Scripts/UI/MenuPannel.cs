@@ -11,7 +11,6 @@ public class MenuPannel : MonoBehaviour
     void Start()
     {
         gs = GameObject.Find("GameHandler").GetComponent<GameSaver>();
-        Debug.Log(gs != null);
         gameObject.SetActive(false);
     }
 

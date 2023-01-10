@@ -25,11 +25,20 @@ public class PlayerUnit : Unit
     private ItemData equipedWeapon;
     private ItemData equipedArmor;
 
+
+    [SerializeField]
+    private ItemsPickupList ips;
+
     private UI ui;
     private TurnManager tm;
     private ResultPanel resultPanel;
     [SerializeField]
-    private ItemsPickupList ips;
+    private AudioSource attackAudio;
+
+    [SerializeField]
+    private AudioSource walkAudio;
+    private Vector3Int lastCellWalkAudioWasPlaying;
+    
 
     protected override void Awake()
     {
@@ -37,6 +46,7 @@ public class PlayerUnit : Unit
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddPlayer(gameObject);
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
+        lastCellWalkAudioWasPlaying = new Vector3Int(-1, -1, -1);
     }
 
     public void SaveData()
@@ -280,6 +290,19 @@ public class PlayerUnit : Unit
             SetState(State.IsWaiting);
     }
 
+    public override void SetState(State newState)
+    {
+        base.SetState(newState);
+        bool isWalking = state == State.IsMakingTurn && movementPath != null && movementPath.Count>0;
+        bool wasAudioPlayingAtThisCell = movementPath != null ? (lastCellWalkAudioWasPlaying == movementPath[0]) : true;
+        if (isWalking && !wasAudioPlayingAtThisCell)
+        {
+            if(movementPath!=null) lastCellWalkAudioWasPlaying = movementPath[0];
+            walkAudio.Play();
+        }
+            
+    }
+
     public ItemData GetEquipedWeapon()
     {
         return equipedWeapon;
@@ -328,6 +351,7 @@ public class PlayerUnit : Unit
         base.Attack(another);
         attackTarget = null;
         UpdateOverlayMarks();
+        attackAudio.Play();
     }
 
     public void SetItemTaking(bool active)

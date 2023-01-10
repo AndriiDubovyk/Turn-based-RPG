@@ -229,7 +229,7 @@ public class Unit : MonoBehaviour
         return state;
     }
 
-    public void SetState(State newState)
+    public virtual void SetState(State newState)
     {
         state = newState;
         if (animator != null)
