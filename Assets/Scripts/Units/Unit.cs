@@ -272,7 +272,7 @@ public class Unit : MonoBehaviour
     public virtual void Die()
     {
         DropItem();
-        Destroy(gameObject);
+        Destroy(gameObject); // Destroy(gameObject, 5f); 5f - 5s delay
     }
 
     private void DropItem()

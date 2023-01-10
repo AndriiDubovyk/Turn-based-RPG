@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expirienceToSecondLevel: 100
   expirienceIncreaseForLevel: 50
+  maxHealthPerLevel: 5
+  attackPerLevel: 1
+  defensePerLevel: 1

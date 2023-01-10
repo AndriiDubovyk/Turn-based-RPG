@@ -11,6 +11,7 @@ public static class GameProcessInfo
 
     // Player cross scene data
     public static int Attack { get; set; } = 0;
+    public static int MaxHP { get; set; } = 0;
     public static int CurrentHP { get; set; } = 0;
     public static int Defense { get; set; } = 0;
     public static int Level { get; set; } = 0;

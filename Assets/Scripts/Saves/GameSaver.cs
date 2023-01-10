@@ -37,6 +37,7 @@ public class GameSaver : MonoBehaviour
         savedData.playerSavedData.equipedArmorName = equipedArmor != null ? equipedArmor.name : "";
         savedData.playerSavedData.level = player.GetComponent<PlayerUnit>().GetLevel();
         savedData.playerSavedData.exp = player.GetComponent<PlayerUnit>().GetExp();
+        savedData.playerSavedData.maxHealth = player.GetComponent<PlayerUnit>().GetMaxHP();
 
         savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentDungeonLevel;
         savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
@@ -120,6 +121,7 @@ public class GameSaver : MonoBehaviour
         }
 
         player.transform.position = new Vector3(savedData.playerSavedData.posX, savedData.playerSavedData.posY);
+        player.GetComponent<PlayerUnit>().SetMaxHealth(savedData.playerSavedData.maxHealth);
         player.GetComponent<PlayerUnit>().SetHealth(savedData.playerSavedData.health);
         player.GetComponent<PlayerUnit>().SetAttack(savedData.playerSavedData.attack);
         player.GetComponent<PlayerUnit>().SetDefense(savedData.playerSavedData.defense);

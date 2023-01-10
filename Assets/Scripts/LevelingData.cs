@@ -7,6 +7,9 @@ public class LevelingData : ScriptableObject
 {
     public int expirienceToSecondLevel;
     public int expirienceIncreaseForLevel;
+    public int maxHealthPerLevel;
+    public int attackPerLevel;
+    public int defensePerLevel;
 
     public int GetExpToNextLevel(int nextLevel)
     {

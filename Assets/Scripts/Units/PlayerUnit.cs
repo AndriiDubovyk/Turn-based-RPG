@@ -81,9 +81,11 @@ public class PlayerUnit : Unit
     }
 
     public void SaveData()
-    {
+    {  
         GameProcessInfo.CurrentHP = currentHP;
+        GameProcessInfo.MaxHP = maxHP;
         GameProcessInfo.Attack = attack;
+        GameProcessInfo.Defense = defense;
         GameProcessInfo.Level = level;
         GameProcessInfo.Exp = exp;
         GameProcessInfo.Inventory = inventory;
@@ -93,7 +95,9 @@ public class PlayerUnit : Unit
     public void LoadData()
     {
         currentHP = GameProcessInfo.CurrentHP;
+        maxHP = GameProcessInfo.MaxHP;
         attack = GameProcessInfo.Attack;
+        defense = GameProcessInfo.Defense;
         inventory = GameProcessInfo.Inventory;
         level = GameProcessInfo.Level;
         exp = GameProcessInfo.Exp;
@@ -129,13 +133,21 @@ public class PlayerUnit : Unit
     public void AddExp(int plusExp)
     {
         this.exp += plusExp;
-        int expToNextLevel = levelingData.GetExpToNextLevel(level + 1);
-        while (this.exp >= expToNextLevel)
+        while (this.exp >= levelingData.GetExpToNextLevel(level + 1))
         {
-            this.level += 1;
-            this.exp -= expToNextLevel;
+            this.exp -= levelingData.GetExpToNextLevel(level + 1);
+            GetLevelUp();   
         }
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
+    }
+
+    private void GetLevelUp()
+    {
+        this.level += 1;
+        this.maxHP += levelingData.maxHealthPerLevel;
+        this.currentHP += levelingData.maxHealthPerLevel;
+        this.attack += levelingData.attackPerLevel;
+        this.defense += levelingData.defensePerLevel;
     }
 
     public void SetInventory(ItemData[] inventory)
@@ -255,6 +267,13 @@ public class PlayerUnit : Unit
         if (currentHP > maxHP) currentHP = maxHP;
         UpdateHealthBar();
         SkipTurn();
+    }
+
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        this.maxHP = maxHealth;
+        UpdateHealthBar();
     }
 
     public void RemoveItem(ItemData itemData)

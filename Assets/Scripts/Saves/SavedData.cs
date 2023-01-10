@@ -41,6 +41,7 @@ public class SavedData
     {
         public float posX;
         public float posY;
+        public int maxHealth;
         public int health;
         public int attack;
         public int defense;
