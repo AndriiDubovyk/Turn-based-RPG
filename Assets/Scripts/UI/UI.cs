@@ -12,6 +12,8 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject menuButton;
     [SerializeField]
+    private GameObject statsButton;
+    [SerializeField]
     private GameObject inventoryPanel;
     [SerializeField]
     private GameObject resultPanel;
@@ -19,10 +21,13 @@ public class UI : MonoBehaviour
     private GameObject menuPanel;
     [SerializeField]
     private GameObject levelExitPanel;
+    [SerializeField]
+    private GameObject statsPanel;
 
     private bool isMouseOverInvetoryButton;
     private bool isMouseOverTakeItemButton;
     private bool isMouseOverMenuButton;
+    private bool isMouseOverStatsButton;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +35,7 @@ public class UI : MonoBehaviour
         isMouseOverInvetoryButton = false;
         isMouseOverTakeItemButton = false;
         isMouseOverMenuButton = false;
+        isMouseOverStatsButton = false;
     }
 
     // Update is called once per frame
@@ -40,7 +46,7 @@ public class UI : MonoBehaviour
 
     public bool IsUIBlockingActions()
     {
-        return IsMouseOverUI() || IsInventoryOpened() || IsResultPanelActive() || IsMenuOpened() || IsLevelExitPanelOpened();
+        return IsMouseOverUI() || IsInventoryOpened() || IsResultPanelActive() || IsMenuOpened() || IsLevelExitPanelOpened() || IsStatsMenuOpened();
     }
 
     public void ShowLevelExitPanel() {
@@ -67,9 +73,14 @@ public class UI : MonoBehaviour
         return menuPanel!= null && menuPanel.activeSelf;
     }
 
+    private bool IsStatsMenuOpened()
+    {
+        return statsPanel != null && statsPanel.activeSelf;
+    }
+
     private bool IsMouseOverUI()
     {
-        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton; 
+        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton; 
     } 
 
     public void EnterInventoryButton(bool isMouseOver)
@@ -85,5 +96,10 @@ public class UI : MonoBehaviour
     public void EnterMenuButton(bool isMouseOver)
     {
         isMouseOverMenuButton = isMouseOver;
+    }
+
+    public void EnterStatsButton(bool isMouseOver)
+    {
+        isMouseOverStatsButton = isMouseOver;
     }
 }
