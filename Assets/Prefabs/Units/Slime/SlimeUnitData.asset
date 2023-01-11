@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72c637544994ab04091c80fc1d9759e3, type: 3}
-  m_Name: PlayerUnitData
+  m_Name: SlimeUnitData
   m_EditorClassIdentifier: 
-  name: Player
-  maxHP: 500
-  attack: 23
+  name: Slime
+  maxHP: 50
+  attack: 10
   maxAttackDistance: 1
-  pathfindingXMaxDistance: 22
-  pathfindingYMaxDistance: 14
+  pathfindingXMaxDistance: 6
+  pathfindingYMaxDistance: 6
   defense: 0
-  expReward: 0
+  expReward: 60
   moveSpeed: 22
-  sprite: {fileID: -2065521865, guid: 06e808c4cbeb8a04f8127709d9b70f63, type: 3}
-  drops: []
+  sprite: {fileID: 1690223325, guid: 07a124c9b6d9e1d438d25ae831cbc3e0, type: 3}
+  drops:
+  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
+    dropChance: 25
+  - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
+    dropChance: 15

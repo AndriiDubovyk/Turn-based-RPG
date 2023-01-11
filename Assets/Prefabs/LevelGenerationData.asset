@@ -32,9 +32,9 @@ MonoBehaviour:
     maxLevel: 999
     spawnChance: 50
   bossRoomEnemiesGenerationData:
-  - enemyUnitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+  - enemyUnitData: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
     minQuantity: 1
-    maxQuantity: 3
+    maxQuantity: 1
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1

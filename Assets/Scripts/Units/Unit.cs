@@ -242,9 +242,8 @@ public class Unit : MonoBehaviour
             
             bool isAttacking = state == State.IsMakingTurn && attackTarget != null;
             if (isAttacking)
-                animator.SetBool("IsAttacking", isAttacking);
-            else if (!isAttacking && attackTarget == null)
-                animator.SetBool("IsAttacking", isAttacking);
+                animator.SetTrigger("AttackTrigger");
+                
 
         }
     }
