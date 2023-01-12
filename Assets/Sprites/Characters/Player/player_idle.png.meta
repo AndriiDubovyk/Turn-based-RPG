@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68b7491db3436fd468869efa923b452b
+guid: 06e808c4cbeb8a04f8127709d9b70f63
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,11 +128,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hero_attack_0
+      name: hero_idle_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
+        y: 0
         width: 16
         height: 24
       alignment: 9
@@ -142,56 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8e102f7cb9551409d7006f90b4e282
-      internalID: -1322621923
+      spriteID: e24aa7dcfaf6c7f488549064e707123b
+      internalID: -2065521865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 24
-        width: 16
-        height: 24
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95b16180dca20f348b83ff81f59cb651
-      internalID: -1223980785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hero_attack_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 24
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 02ec431d783b034478a7ebbd74c93156
-      internalID: 389080203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hero_attack_3
+      name: hero_idle_1
       rect:
         serializedVersion: 2
         x: 16
@@ -199,14 +157,14 @@ TextureImporter:
         width: 16
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d8094fd0fb65cc4197eef2af89395e5
-      internalID: 1782940606
+      spriteID: cd588d4e23df8cc488940ff3ea07fb6a
+      internalID: -1896339176
       vertices: []
       indices: 
       edges: []
@@ -222,10 +180,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hero_attack_1: -1223980785
-      hero_attack_0: -1322621923
-      hero_attack_2: 389080203
-      hero_attack_3: 1782940606
+      hero_idle_1: -1896339176
+      hero_idle_0: -2065521865
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

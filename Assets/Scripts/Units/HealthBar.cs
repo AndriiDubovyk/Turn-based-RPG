@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateHealth(int currentHealth, int maxHealth)
     {
-        slider.gameObject.SetActive(currentHealth < maxHealth);
+        slider.gameObject.SetActive(currentHealth < maxHealth && currentHealth>0);
         slider.value = currentHealth;
         slider.maxValue = maxHealth;
     }

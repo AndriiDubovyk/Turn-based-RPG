@@ -279,8 +279,8 @@ public class Unit : MonoBehaviour
     public virtual void Die()
     {
         DropItem();
-        if(animator!=null) animator.SetBool("IsDying", true);
-        Destroy(gameObject, 1f); // Destroy(gameObject, 5f); 5f - 5s delay
+        if(animator!=null) animator.SetTrigger("DieTrigger");
+        Destroy(gameObject, 1f); 
     }
 
     private void DropItem()

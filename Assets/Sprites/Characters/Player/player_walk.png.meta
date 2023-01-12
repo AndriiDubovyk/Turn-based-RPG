@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68b7491db3436fd468869efa923b452b
+guid: 7c4595b2c0ff29246bec2f2928ae7edc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hero_attack_0
+      name: hero_walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8e102f7cb9551409d7006f90b4e282
-      internalID: -1322621923
+      spriteID: 5d3e5da2606ca844cb1741063b924d55
+      internalID: 1021079384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_1
+      name: hero_walk_1
       rect:
         serializedVersion: 2
         x: 16
@@ -157,20 +157,41 @@ TextureImporter:
         width: 16
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95b16180dca20f348b83ff81f59cb651
-      internalID: -1223980785
+      spriteID: 23c2a298b7d0955479baec55118d2a53
+      internalID: -1024589005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_2
+      name: hero_walk_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f9dcefdd981fe34bab080c046d5310b
+      internalID: -30823757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hero_walk_3
       rect:
         serializedVersion: 2
         x: 0
@@ -178,20 +199,20 @@ TextureImporter:
         width: 16
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02ec431d783b034478a7ebbd74c93156
-      internalID: 389080203
+      spriteID: 598b3d6c8863e124f99e23d14f001fc8
+      internalID: -1044094490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_3
+      name: hero_walk_4
       rect:
         serializedVersion: 2
         x: 16
@@ -199,14 +220,35 @@ TextureImporter:
         width: 16
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d8094fd0fb65cc4197eef2af89395e5
-      internalID: 1782940606
+      spriteID: 45e29290ee8b8a44b8ef361ecd770960
+      internalID: 1877570377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hero_walk_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 806ab5fda3a44d74f9c20b14bb9b89ff
+      internalID: 992855562
       vertices: []
       indices: 
       edges: []
@@ -222,10 +264,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hero_attack_1: -1223980785
-      hero_attack_0: -1322621923
-      hero_attack_2: 389080203
-      hero_attack_3: 1782940606
+      hero_walk_3: -1044094490
+      hero_walk_0: 1021079384
+      hero_walk_5: 992855562
+      hero_walk_1: -1024589005
+      hero_walk_2: -30823757
+      hero_walk_4: 1877570377
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
