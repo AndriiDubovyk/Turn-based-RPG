@@ -237,7 +237,7 @@ public class Unit : MonoBehaviour
             bool isWalking = state == State.IsMakingTurn && movementPath != null;
             if(isWalking)
                 animator.SetBool("IsWalking", isWalking);
-            else if(!isWalking && movementPath==null)
+            else if(!isWalking)
                 animator.SetBool("IsWalking", isWalking);
             
             bool isAttacking = state == State.IsMakingTurn && attackTarget != null;
@@ -271,7 +271,8 @@ public class Unit : MonoBehaviour
     public virtual void Die()
     {
         DropItem();
-        Destroy(gameObject); // Destroy(gameObject, 5f); 5f - 5s delay
+        if(animator!=null) animator.SetBool("IsDying", true);
+        Destroy(gameObject, 1f); // Destroy(gameObject, 5f); 5f - 5s delay
     }
 
     private void DropItem()
