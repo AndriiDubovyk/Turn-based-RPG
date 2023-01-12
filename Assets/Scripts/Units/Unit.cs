@@ -98,15 +98,7 @@ public class Unit : MonoBehaviour
         Vector3 nextCellPoint = new Vector3(movementPath[0].x * gridManager.tileSize + gridManager.tileSize * gridManager.xTilePivot, movementPath[0].y * gridManager.tileSize + gridManager.tileSize * gridManager.yTilePivot, 0);
 
         // Flip sprite if requires   
-        if (nextCellPoint.x > gameObject.transform.position.x)
-        {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (nextCellPoint.x < transform.position.x)
-        {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
-        }
-
+        FlipToPoint(nextCellPoint);
 
         // Move to next cell point
         transform.position = Vector3.MoveTowards(transform.position, nextCellPoint, moveSpeed * Time.deltaTime);
@@ -123,8 +115,24 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void FlipToPoint(Vector3 point)
+    {
+        // Flip sprite if requires   
+        if (point.x > gameObject.transform.position.x)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (point.x < transform.position.x)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+    }
+
     public virtual void Attack(Unit another)
     {
+        // Flip sprite if requires   
+        FlipToPoint(another.transform.position);
         another.TakeDamage(this.attack);
     }
 
