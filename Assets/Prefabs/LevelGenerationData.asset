@@ -15,22 +15,14 @@ MonoBehaviour:
   startCommonRoomsNumber: 2
   commonRoomsNumberIncreasePerLevel: 0.35
   commonRoomEnemiesGenerationData:
-  - enemyUnitData: {fileID: 11400000, guid: 299eb12f48ddb3145b8171ae4c0bda34, type: 2}
+  - enemyUnitData: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
     minQuantity: 1
-    maxQuantity: 2
-    minQuantityIncreasePerLevel: 0.5
-    maxQuantityIncreasePerLevel: 0.5
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
     minLevel: 1
-    maxLevel: 3
-    spawnChance: 50
-  - enemyUnitData: {fileID: 11400000, guid: eb61d79feb264a54294fbeb81535c5a7, type: 2}
-    minQuantity: 0
-    maxQuantity: 2
-    minQuantityIncreasePerLevel: 0.2
-    maxQuantityIncreasePerLevel: 0.2
-    minLevel: 4
     maxLevel: 999
-    spawnChance: 50
+    spawnChance: 0
   bossRoomEnemiesGenerationData:
   - enemyUnitData: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
     minQuantity: 1
@@ -38,32 +30,32 @@ MonoBehaviour:
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1
-    maxLevel: 3
-    spawnChance: 25
-  - enemyUnitData: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
-    minQuantity: 1
-    maxQuantity: 1
-    minQuantityIncreasePerLevel: 0.25
-    maxQuantityIncreasePerLevel: 0.25
-    minLevel: 1
     maxLevel: 999
-    spawnChance: 15
+    spawnChance: 0
   - enemyUnitData: {fileID: 11400000, guid: 4493492c8a027414ab01dce285be55ce, type: 2}
     minQuantity: 1
     maxQuantity: 1
-    minQuantityIncreasePerLevel: 0.25
-    maxQuantityIncreasePerLevel: 0.25
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
     minLevel: 1
     maxLevel: 999
-    spawnChance: 15
+    spawnChance: 0
+  - enemyUnitData: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
   - enemyUnitData: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
     minQuantity: 1
     maxQuantity: 1
-    minQuantityIncreasePerLevel: 0.25
-    maxQuantityIncreasePerLevel: 0.25
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
     minLevel: 1
     maxLevel: 999
-    spawnChance: 15
+    spawnChance: 0
   startRoomItemGenerationData:
   - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
     minQuantity: 1
