@@ -56,6 +56,7 @@ public class InventoryPanel : MonoBehaviour
         InitializeInventory(); // reinitialize inventory
         ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
         itemSpawner.SpawnItem(itemData, player.transform.position); // spawn item pickup
+        player.SkipTurn();
     }
 
     public void UseHealingItem(ItemData itemData)
@@ -64,6 +65,7 @@ public class InventoryPanel : MonoBehaviour
         {
             player.RemoveItem(itemData); // remove from main inventory
             player.Heal(itemData.healing);
+            player.SkipTurn();
             InitializeInventory(); // reinitialize inventory
         }
     }
@@ -72,6 +74,7 @@ public class InventoryPanel : MonoBehaviour
     {
         player.RemoveItem(itemData); // remove from main inventory
         player.EquipWeapon(itemData);
+        player.SkipTurn();
         InitializeInventory(); // reinitialize inventory       
     }
 
@@ -79,6 +82,7 @@ public class InventoryPanel : MonoBehaviour
     {
         player.RemoveItem(itemData); // remove from main inventory
         player.EquipArmor(itemData);
+        player.SkipTurn();
         InitializeInventory(); // reinitialize inventory       
     }
 
@@ -88,6 +92,7 @@ public class InventoryPanel : MonoBehaviour
         {
             player.RemoveItem(itemData); // remove from main inventory
             player.AddItem(itemData);
+            player.SkipTurn();
             InitializeInventory(); // reinitialize inventory
         }
     }
@@ -98,6 +103,7 @@ public class InventoryPanel : MonoBehaviour
         {
             player.RemoveItem(itemData); // remove from main inventory
             player.AddItem(itemData);
+            player.SkipTurn();
             InitializeInventory(); // reinitialize inventory
         }
     }

@@ -31,10 +31,12 @@ public class ItemDisplayPanel : MonoBehaviour
     private ItemData itemData;
 
     private InventoryPanel inventoryPanel;
+    private PlayerUnit player;
 
     void Awake()
     {
         inventoryPanel = GameObject.Find("InventoryPanel").GetComponent<InventoryPanel>();
+        player = GameObject.Find("Player").GetComponent<PlayerUnit>();
     }
 
     public void SetItemData(ItemData itemData)
@@ -129,7 +131,8 @@ public class ItemDisplayPanel : MonoBehaviour
 
     public void DropItem()
     {
-        inventoryPanel.DropItem(itemData);
+        player.SetItemTaking(false); // to prevent taking back immediately
+        inventoryPanel.DropItem(itemData);   
     }
 
     public void UseItem()

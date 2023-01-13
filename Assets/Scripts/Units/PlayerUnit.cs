@@ -243,6 +243,7 @@ public class PlayerUnit : Unit
         {
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
+            SkipTurn();
         }
         SetItemTaking(false);
     }
@@ -266,7 +267,6 @@ public class PlayerUnit : Unit
         currentHP += healing;
         if (currentHP > maxHP) currentHP = maxHP;
         UpdateHealthBar();
-        SkipTurn();
     }
 
 
@@ -330,7 +330,6 @@ public class PlayerUnit : Unit
                 if (equipedWeapon != null) this.attack += equipedWeapon.attack;
             }
         }
-        SkipTurn();
     }
 
     public void EquipArmor(ItemData newArmor)
@@ -353,7 +352,6 @@ public class PlayerUnit : Unit
                 if (equipedArmor != null) this.defense += equipedArmor.defense;
             }
         }
-        SkipTurn();
     }
 
     public void SkipTurn()
