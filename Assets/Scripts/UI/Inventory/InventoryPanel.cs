@@ -27,9 +27,12 @@ public class InventoryPanel : MonoBehaviour
 
     public void Toggle()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
-        ItemData[] inventory = player.GetInventory();
-        InitializeInventory();
+        if(player.GetState()==Unit.State.IsThinking) // Possible only on player's turn
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+            ItemData[] inventory = player.GetInventory();
+            InitializeInventory();
+        }
     }
 
     public void InitializeInventory()

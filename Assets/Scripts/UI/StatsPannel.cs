@@ -24,9 +24,12 @@ public class StatsPannel : MonoBehaviour
     }
 
     public void Toggle()
-    {
-        gameObject.SetActive(!gameObject.activeSelf);
-        UpdateStats();
+    { 
+        if (player.GetState() == Unit.State.IsThinking) // Possible only on player's turn
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+            UpdateStats();
+        }
     }
 
     public void UpdateStats()

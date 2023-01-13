@@ -428,6 +428,7 @@ public class PlayerUnit : Unit
 
     public void SetItemTaking(bool active)
     {
+        if (active && GetState() != State.IsThinking) return; //  // Possible only on player's turn
         isItemTakingActive = active;
     }
 
