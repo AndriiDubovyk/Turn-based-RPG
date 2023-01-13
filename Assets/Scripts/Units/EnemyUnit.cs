@@ -11,6 +11,10 @@ public class EnemyUnit : Unit
     [SerializeField]
     private FloatingText floatingExp;
 
+    [SerializeField]
+    private float atackTimeWait;
+    private float timeToAttack = float.MaxValue;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +22,37 @@ public class EnemyUnit : Unit
         tm.AddEnemy(gameObject);
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(GetCurrentHP(), GetMaxHP());
+    }
+
+    protected override void Update()
+    {
+        if (state == State.IsMakingTurn)
+        {
+            if (attackTarget != null)
+            {
+                if (timeToAttack == float.MaxValue)
+                {
+                    timeToAttack = atackTimeWait;
+                    
+                }
+                else
+                {
+                    timeToAttack -= Time.deltaTime;
+                    Debug.Log($"{timeToAttack}");
+                }
+
+                if(timeToAttack<=0)
+                {
+                    timeToAttack = float.MaxValue;
+                    AttackUpdate();
+                }
+            }
+            else if (movementPath != null && movementPath.Count > 0)
+            {
+                MoveUpdate();
+            }
+
+        }
     }
 
     // Start is called before the first frame update

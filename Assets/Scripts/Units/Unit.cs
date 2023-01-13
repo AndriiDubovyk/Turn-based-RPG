@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void AttackUpdate()
+    protected void AttackUpdate()
     {
         Attack(attackTarget);
         attackTarget = null;
@@ -137,6 +137,7 @@ public class Unit : MonoBehaviour
     {
         // Flip sprite if requires   
         FlipToPoint(another.transform.position);
+        if(animator!=null) animator.SetTrigger("AttackTrigger");
         another.TakeDamage(this.attack);
     }
 
@@ -257,12 +258,7 @@ public class Unit : MonoBehaviour
                 animator.SetBool("IsWalking", isWalking);
             else if(!isWalking)
                 animator.SetBool("IsWalking", isWalking);
-            
-            bool isAttacking = state == State.IsMakingTurn && attackTarget != null;
-            if (isAttacking)
-                animator.SetTrigger("AttackTrigger");
-                
-
+               
         }
     }
 

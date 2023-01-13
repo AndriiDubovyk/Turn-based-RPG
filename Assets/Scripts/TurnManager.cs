@@ -17,7 +17,6 @@ public class TurnManager : MonoBehaviour
     private int activeEnemyIndex;
 
     private Unit activeUnit;
-
     
 
     // Start is called before the first frame update
