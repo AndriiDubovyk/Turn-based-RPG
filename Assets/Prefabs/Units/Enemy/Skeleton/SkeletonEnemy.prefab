@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569387430450957854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.5, y: -38.5, z: 0}
+  m_LocalPosition: {x: -5.5, y: -26.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -103,6 +103,7 @@ MonoBehaviour:
   blood: {fileID: 5430630751847308375, guid: e069fa6d93898f346883c58f0d1cdd18, type: 3}
   canvas: {fileID: 92025011182786132}
   floatingDamage: {fileID: 2990700838744793476, guid: eb587dfe947c4c44bb8eaf3d240ca9ea, type: 3}
+  floatingExp: {fileID: 2990700838744793476, guid: 97420ebaf05f1ce4f84fb4c80b6bf558, type: 3}
 --- !u!95 &9214454661408307256
 Animator:
   serializedVersion: 4

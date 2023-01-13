@@ -8,6 +8,8 @@ public class EnemyUnit : Unit
 {
     private HealthBar healthBar;
     private TurnManager tm;
+    [SerializeField]
+    private FloatingText floatingExp;
 
     protected override void Awake()
     {
@@ -65,6 +67,12 @@ public class EnemyUnit : Unit
     public override void Die()
     {
         GameObject.Find("Player").GetComponent<PlayerUnit>().AddExp(unitData.expReward);
+        if (canvas != null && floatingExp != null)
+        {
+            FloatingText fe = Instantiate(floatingExp, transform.position, Quaternion.identity);
+            fe.SetParentCanvas(canvas);
+            fe.SetText($"+{unitData.expReward} EXP");
+        }
         base.Die();
     }
 }

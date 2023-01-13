@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     private GameObject blood;
     [SerializeField]
-    private GameObject canvas;
+    protected GameObject canvas;
     [SerializeField]
     private FloatingText floatingDamage;
 
