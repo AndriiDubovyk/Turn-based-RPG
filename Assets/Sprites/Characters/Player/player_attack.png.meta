@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hero_attack_0
+      name: player_attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_1
+      name: player_attack_1
       rect:
         serializedVersion: 2
         x: 16
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_2
+      name: player_attack_2
       rect:
         serializedVersion: 2
         x: 0
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_attack_3
+      name: player_attack_3
       rect:
         serializedVersion: 2
         x: 16
@@ -222,10 +222,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hero_attack_1: -1223980785
-      hero_attack_0: -1322621923
-      hero_attack_2: 389080203
-      hero_attack_3: 1782940606
+      player_attack_0: -1322621923
+      player_attack_1: -1223980785
+      player_attack_2: 389080203
+      player_attack_3: 1782940606
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

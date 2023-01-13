@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hero_walk_0
+      name: player_walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_walk_1
+      name: player_walk_1
       rect:
         serializedVersion: 2
         x: 16
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_walk_2
+      name: player_walk_2
       rect:
         serializedVersion: 2
         x: 32
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_walk_3
+      name: player_walk_3
       rect:
         serializedVersion: 2
         x: 0
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_walk_4
+      name: player_walk_4
       rect:
         serializedVersion: 2
         x: 16
@@ -233,7 +233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_walk_5
+      name: player_walk_5
       rect:
         serializedVersion: 2
         x: 32
@@ -264,12 +264,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hero_walk_3: -1044094490
-      hero_walk_0: 1021079384
-      hero_walk_5: 992855562
-      hero_walk_1: -1024589005
-      hero_walk_2: -30823757
-      hero_walk_4: 1877570377
+      player_walk_4: 1877570377
+      player_walk_5: 992855562
+      player_walk_3: -1044094490
+      player_walk_2: -30823757
+      player_walk_1: -1024589005
+      player_walk_0: 1021079384
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

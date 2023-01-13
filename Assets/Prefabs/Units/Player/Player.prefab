@@ -106,9 +106,11 @@ MonoBehaviour:
   attackSelectionTile: {fileID: 11400000, guid: dca6f1e24e2ee7b4f9f2d36429a7ad62, type: 2}
   pathMarkTile: {fileID: 11400000, guid: e9a51fbd43d53734c8092a5b8def2d95, type: 2}
   healthBar: {fileID: 0}
+  playerLevelInfo: {fileID: 0}
+  levelingData: {fileID: 0}
+  ips: {fileID: 11400000, guid: ca46b40d222786c42ab7f5cfb51e3625, type: 2}
   attackAudio: {fileID: 367848569469798748}
   walkAudio: {fileID: 6717776256499546313}
-  ips: {fileID: 11400000, guid: ca46b40d222786c42ab7f5cfb51e3625, type: 2}
 --- !u!95 &5487636991277579279
 Animator:
   serializedVersion: 4

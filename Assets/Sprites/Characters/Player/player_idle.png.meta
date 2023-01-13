@@ -128,7 +128,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hero_idle_0
+      name: player_idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hero_idle_1
+      name: player_idle_1
       rect:
         serializedVersion: 2
         x: 16
@@ -180,8 +180,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hero_idle_1: -1896339176
-      hero_idle_0: -2065521865
+      player_idle_1: -1896339176
+      player_idle_0: -2065521865
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
