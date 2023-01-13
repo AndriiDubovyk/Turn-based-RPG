@@ -38,7 +38,6 @@ public class EnemyUnit : Unit
                 else
                 {
                     timeToAttack -= Time.deltaTime;
-                    Debug.Log($"{timeToAttack}");
                 }
 
                 if(timeToAttack<=0)
