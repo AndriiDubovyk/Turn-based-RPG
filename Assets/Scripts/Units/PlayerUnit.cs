@@ -46,6 +46,7 @@ public class PlayerUnit : Unit
     private AudioSource takeItemAudio;
 
     private Vector3Int lastCellWalkAudioWasPlaying;
+    private Vector3 mouseDownPos;
     
 
     protected override void Awake()
@@ -220,8 +221,15 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
-        if (Input.GetMouseButtonDown(0) && !ui.IsUIBlockingActions())
+        if(Input.GetMouseButtonDown(0))
         {
+            mouseDownPos = Input.mousePosition;
+        }
+        if (Input.GetMouseButtonUp(0) && !ui.IsUIBlockingActions())
+        {
+            Vector3 mouseUpPos = Input.mousePosition;
+            if (Vector3.Distance(mouseDownPos, mouseUpPos) > 100f) return; // panning
+
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
             Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
