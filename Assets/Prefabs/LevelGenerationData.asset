@@ -57,46 +57,70 @@ MonoBehaviour:
     maxLevel: 999
     spawnChance: 0
   startRoomItemGenerationData:
-  - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
+  - itemData: {fileID: 11400000, guid: 7bf2e9045180d374f83193aa06fe2d63, type: 2}
     minQuantity: 1
     maxQuantity: 1
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1
-    maxLevel: 1
-    spawnChance: 0
-  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
-    minQuantity: 1
-    maxQuantity: 1
-    minQuantityIncreasePerLevel: 0
-    maxQuantityIncreasePerLevel: 0
-    minLevel: 1
-    maxLevel: 1
-    spawnChance: 0
-  - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
-    minQuantity: 1
-    maxQuantity: 1
-    minQuantityIncreasePerLevel: 0
-    maxQuantityIncreasePerLevel: 0
-    minLevel: 2
     maxLevel: 999
-    spawnChance: 25
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: e04855f42822da745984ac9d247d5c06, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: 7c3de5e623443994589deddb22054ea7, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: 10ce1c6deec60574aa31ad80bb80902b, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
   - itemData: {fileID: 11400000, guid: 50f336c382a016c4788508c96d345c87, type: 2}
-    minQuantity: 2
-    maxQuantity: 2
-    minQuantityIncreasePerLevel: 0
-    maxQuantityIncreasePerLevel: 0
-    minLevel: 1
-    maxLevel: 999
-    spawnChance: 25
-  - itemData: {fileID: 11400000, guid: b567a968256914a4f91bdcb402303ba2, type: 2}
     minQuantity: 1
     maxQuantity: 1
     minQuantityIncreasePerLevel: 0
     maxQuantityIncreasePerLevel: 0
     minLevel: 1
     maxLevel: 999
-    spawnChance: 25
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: 49c0c4421b1484645a1cacbc02ef81d3, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: 0ac3d2306801240418ea182e912734d8, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
+  - itemData: {fileID: 11400000, guid: 4a4ecf43abca6214fa92cff1f9a7ade9, type: 2}
+    minQuantity: 1
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 0
+    maxQuantityIncreasePerLevel: 0
+    minLevel: 1
+    maxLevel: 999
+    spawnChance: 0
   commonRoomItemGenerationData:
   - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
     minQuantity: 1
