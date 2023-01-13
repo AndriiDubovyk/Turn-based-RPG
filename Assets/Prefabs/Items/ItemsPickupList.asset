@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ItemsPickupList
   m_EditorClassIdentifier: 
   itemsPickup:
-  - {fileID: 7513286182769675311, guid: 7dd427a89d2a4e041ba52b2a3688bb47, type: 3}
   - {fileID: 7513286182769675311, guid: f0b8d26b30bd636488e907dd29b3d1e6, type: 3}
   - {fileID: 7513286182769675311, guid: 4fd6bd82df24f4d41b5cec185d675669, type: 3}
   - {fileID: 7513286182769675311, guid: b5cbfb588648af6488bb21873bad8715, type: 3}

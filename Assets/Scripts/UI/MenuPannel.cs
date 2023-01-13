@@ -8,6 +8,9 @@ public class MenuPannel : MonoBehaviour
     private GameSaver gs;
     private PlayerUnit player;
 
+    [SerializeField]
+    private AudioSource uiSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +23,14 @@ public class MenuPannel : MonoBehaviour
     {
         if (player.GetState() == Unit.State.IsThinking) // Possible only on player's turn
         {
+            uiSound.Play();
             gameObject.SetActive(!gameObject.activeSelf);
         }
     }
 
     public void SaveAndExit()
     {
+        uiSound.Play();
         gs.Save();
         SceneManager.LoadScene("Menu");
     }

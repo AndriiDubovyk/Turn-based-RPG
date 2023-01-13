@@ -8,6 +8,8 @@ public class ResultPanel : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI text;
+    [SerializeField]
+    private AudioSource uiSound;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class ResultPanel : MonoBehaviour
 
     public void Restart()
     {
+        uiSound.Play();
         GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
         GameProcessInfo.CurrentDungeonLevel = 1;
         SceneManager.LoadScene("RandomLevel");

@@ -40,9 +40,11 @@ public class PlayerUnit : Unit
     private ResultPanel resultPanel;
     [SerializeField]
     private AudioSource attackAudio;
-
     [SerializeField]
     private AudioSource walkAudio;
+    [SerializeField]
+    private AudioSource takeItemAudio;
+
     private Vector3Int lastCellWalkAudioWasPlaying;
     
 
@@ -243,6 +245,7 @@ public class PlayerUnit : Unit
         {
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
+            takeItemAudio.Play();
             SkipTurn();
         }
         SetItemTaking(false);
