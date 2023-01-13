@@ -30,6 +30,10 @@ public class Unit : MonoBehaviour
 
     [SerializeField]
     private GameObject blood;
+    [SerializeField]
+    private GameObject canvas;
+    [SerializeField]
+    private FloatingText floatingDamage;
 
     // States
     protected State state;
@@ -177,6 +181,12 @@ public class Unit : MonoBehaviour
         if(blood!=null)
         {
             Instantiate(blood, transform.position, Quaternion.identity);
+        }
+        if(canvas!=null && floatingDamage!=null)
+        {
+            FloatingText fd = Instantiate(floatingDamage, transform.position, Quaternion.identity);
+            fd.SetParentCanvas(canvas);
+            fd.SetText(realDamageAmount.ToString());              
         }
     }
 
