@@ -47,6 +47,7 @@ public class PlayerUnit : Unit
 
     private Vector3Int lastCellWalkAudioWasPlaying;
     private Vector3 mouseDownPos;
+    private List<Vector3Int> mouseDownPrecalculatedPath;
     
 
     protected override void Awake()
@@ -221,9 +222,18 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && movementPath == null)
         {
             mouseDownPos = Input.mousePosition;
+            Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
+            Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
+            if (clickedUnit == null)
+            {
+                movementPath = SetMovementPathTo(clickedCell);
+                if (movementPath != null) mouseDownPrecalculatedPath = new List<Vector3Int>(movementPath);
+                movementPath = null;
+            }
         }
         if (Input.GetMouseButtonUp(0) && !ui.IsUIBlockingActions())
         {
@@ -237,6 +247,7 @@ public class PlayerUnit : Unit
             {
                 attackTarget = null;
                 SelectDestinationCell(clickedCell);
+                mouseDownPrecalculatedPath = null;
                 SetItemTaking(false);
             }
             else if (clickedUnit != this && CanAttack(clickedUnit))
@@ -404,7 +415,15 @@ public class PlayerUnit : Unit
         else
         {
             isPathConfirmed = false;
-            SetMovementPathTo(clickedCell);
+            if(mouseDownPrecalculatedPath!=null)
+            {
+                movementPath = new List<Vector3Int>(mouseDownPrecalculatedPath);
+                mouseDownPrecalculatedPath = null;
+            }
+            else
+            {
+                SetMovementPathTo(clickedCell);
+            }
             UpdateOverlayMarks();
         }
     }

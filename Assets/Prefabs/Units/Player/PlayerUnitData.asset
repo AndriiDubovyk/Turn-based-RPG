@@ -16,8 +16,8 @@ MonoBehaviour:
   maxHP: 500
   attack: 23
   maxAttackDistance: 1
-  pathfindingXMaxDistance: 250
-  pathfindingYMaxDistance: 250
+  pathfindingXMaxDistance: 150
+  pathfindingYMaxDistance: 150
   defense: 100
   expReward: 0
   moveSpeed: 22

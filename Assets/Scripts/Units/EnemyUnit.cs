@@ -63,7 +63,7 @@ public class EnemyUnit : Unit
         base.Start();
     }
 
-    public override void SetMovementPathTo(Vector3Int destinationCell)
+    public override List<Vector3Int> SetMovementPathTo(Vector3Int destinationCell)
     {
         Vector3Int currentCell = GetCell();
         int offsetX = currentCell.x - pathfindingXMaxDistance;
@@ -73,22 +73,24 @@ public class EnemyUnit : Unit
             || Math.Abs(destinationCell.y - currentCell.y) > pathfindingYMaxDistance)
         {
             movementPath = null;
-            return;
+            return null;
         }
         List<Vector3Int> otherUnitsCells = gridManager.GetOccupiedCells();
         otherUnitsCells.Remove(this.GetCell());
         // Player cell must be considered as walkable for enemy for pathifinding
         otherUnitsCells.Remove(gridManager.GetPlayerCell());
 
-        UnitsPathfinder pf = new UnitsPathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, otherUnitsCells);
+        UnitsPathfinder pf = new UnitsPathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, gridManager.groundTilemap, otherUnitsCells);
         List<Coords> movementPathCoords = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
-        if (movementPathCoords == null) return;
+        if (movementPathCoords == null) return null;
         movementPath = movementPathCoords.ConvertAll<Vector3Int>(c => new Vector3Int(c.X, c.Y));
         if (movementPath != null)
         {
             movementPath.RemoveAt(movementPath.Count - 1);
             if (movementPath.Count == 0) movementPath = null;
+            return movementPath;
         }
+        return null;
     }
 
     public override void Attack(Unit another)

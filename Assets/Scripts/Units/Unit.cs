@@ -198,13 +198,13 @@ public class Unit : MonoBehaviour
         return currentHP <= 0;
     }
 
-    public virtual void SetMovementPathTo(Vector3Int destinationCell)
+    public virtual List<Vector3Int> SetMovementPathTo(Vector3Int destinationCell)
     {
         Vector3Int currentCell = GetCell();
         if(currentCell.Equals(destinationCell))
         {
             movementPath = null;
-            return;
+            return null;
         }
         int offsetX = currentCell.x - pathfindingXMaxDistance;
         int offsetY = currentCell.y - pathfindingYMaxDistance;
@@ -213,14 +213,15 @@ public class Unit : MonoBehaviour
             || Math.Abs(destinationCell.y - currentCell.y) > pathfindingYMaxDistance)
         {
             movementPath = null;
-            return;
+            return null;
         }
         List<Vector3Int> otherUnitsCells = gridManager.GetOccupiedCells();
         otherUnitsCells.Remove(this.GetCell());
-        UnitsPathfinder pf = new UnitsPathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, otherUnitsCells);
+        UnitsPathfinder pf = new UnitsPathfinder(offsetX, offsetY, pathfindingXMaxDistance * 2 + 1, pathfindingYMaxDistance * 2 + 1, gridManager.collidersTilemap, gridManager.groundTilemap, otherUnitsCells);
         List<Coords> movementPathCoords = pf.GetPath(currentCell.x - offsetX, currentCell.y - offsetY, destinationCell.x - offsetX, destinationCell.y - offsetY);
-        if (movementPathCoords == null) return;
+        if (movementPathCoords == null) return null;
         movementPath = movementPathCoords.ConvertAll<Vector3Int>(c => new Vector3Int(c.X, c.Y));
+        return movementPath;
     }
 
     public void SetAttackTarget(Unit target)

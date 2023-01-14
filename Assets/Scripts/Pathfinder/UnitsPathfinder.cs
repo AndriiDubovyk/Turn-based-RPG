@@ -6,12 +6,12 @@ using UnityEngine.Tilemaps;
 public class UnitsPathfinder : Pathfinder
 {
 
-    public UnitsPathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions) : base(offsetX, offsetY, width, height, GetObstacles(offsetX, offsetY, width, height, collidersTilemap, otherUnitsPositions))
+    public UnitsPathfinder(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, Tilemap groundTilemap, List<Vector3Int> otherUnitsPositions) : base(offsetX, offsetY, width, height, GetObstacles(offsetX, offsetY, width, height, collidersTilemap, groundTilemap, otherUnitsPositions))
     {
         
     }
 
-    private static bool[,] GetObstacles(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, List<Vector3Int> otherUnitsPositions)
+    private static bool[,] GetObstacles(int offsetX, int offsetY, int width, int height, Tilemap collidersTilemap, Tilemap groundTilemap, List<Vector3Int> otherUnitsPositions)
     {
         bool[,] obstacles = new bool[width, height];
         for (int x = 0; x < width; x++)
@@ -20,7 +20,7 @@ public class UnitsPathfinder : Pathfinder
             {
                 Vector3Int realTilePos = new Vector3Int(x + offsetX, y + offsetY);
                 // allow movement if there no colliders
-                bool isWalkable = collidersTilemap.GetTile(realTilePos) == null;
+                bool isWalkable = collidersTilemap.GetTile(realTilePos) == null && groundTilemap.GetTile(realTilePos) != null;
                 obstacles[x, y] = !isWalkable;
             }
         }
