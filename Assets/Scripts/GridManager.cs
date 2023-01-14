@@ -10,6 +10,11 @@ public class GridManager : MonoBehaviour
     public Tilemap groundTilemap;
     public Tilemap uiOverlayTilemap;
     public Tilemap collidersTilemap;
+    public Tilemap fogOfWarTilemap;
+
+    [SerializeField]
+    private Tile fogOfWarTile;
+
 
     public float tileSize = 1f;
     public float xTilePivot = 0.5f;
@@ -24,6 +29,13 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
+        for (int i = -200; i < 200; i++)
+        {
+            for (int j = -200; j < 200; j++)
+            {
+                fogOfWarTilemap.SetTile(new Vector3Int(i, j), fogOfWarTile);
+            }
+        }
     }
 
     public void AddItemPickup(ItemPickup itemPickup)
@@ -44,7 +56,15 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3Int playerCell = GetPlayerCell();
+        for (int i = -6; i <= 6; i++)
+        {
+            for (int j = -6; j <= 6; j++)
+            {
+                Vector3Int cell = playerCell + new Vector3Int(i, j);
+                fogOfWarTilemap.SetTile(cell, null);
+            }
+        }
     }
 
     public Vector3Int GetPlayerCell()

@@ -243,6 +243,7 @@ public class PlayerUnit : Unit
 
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int clickedCell = gridManager.groundTilemap.WorldToCell(worldClickPos);
+            if (gridManager.fogOfWarTilemap.GetTile(clickedCell) != null) return;
             Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
             if (clickedUnit == null)
             {
