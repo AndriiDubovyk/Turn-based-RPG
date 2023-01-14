@@ -121,6 +121,11 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
+    public Vector3Int GetWorldSize()
+    {
+        return new Vector3Int(levelWidthCells * templeteCellSize, levelHeightCells * templeteCellSize);
+    }
+
     public int[,] GetLevelTemplete()
     {
         return templete;

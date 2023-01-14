@@ -28,12 +28,13 @@ public class MainCamera : MonoBehaviour
         zoomLevel = defaultZoom;
     }
 
+
     // Update is called once per frame
     void Update()
     {
         if (player.GetComponent<PlayerUnit>().GetState() == Unit.State.IsMakingTurn)
         {
-            transform.position = player.transform.position + new Vector3(0, 0, -5);
+            CenterOnPlayer();
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -48,6 +49,11 @@ public class MainCamera : MonoBehaviour
 
         Zoom(Input.GetAxis("Mouse ScrollWheel"));
         Zoom(GetPinchInput());
+    }
+
+    public void CenterOnPlayer()
+    {
+        transform.position = player.transform.position + new Vector3(0, 0, -5);
     }
 
     private float GetPinchInput()

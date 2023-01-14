@@ -15,6 +15,9 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private Tile fogOfWarTile;
 
+    [SerializeField]
+    private GameObject fieldOfView; // must be circle object
+    private float viewRadius;
 
     public float tileSize = 1f;
     public float xTilePivot = 0.5f;
@@ -23,20 +26,23 @@ public class GridManager : MonoBehaviour
     private TurnManager turnManager;
 
     private List<ItemPickup> itemPickupList = new List<ItemPickup>();
+    private Vector3Int worldSize;
 
 
     // Start is called before the first frame update
     void Start()
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
-        //GenerateFogOfWar();
+        worldSize = GetComponent<LevelGenerator>().GetWorldSize();
+        viewRadius = fieldOfView.transform.localScale.x/2;
+        GenerateFogOfWar();
     }
 
     public void GenerateFogOfWar()
     {
-        for (int i = -200; i < 200; i++)
+        for (int i = -worldSize.x; i < worldSize.x; i++)
         {
-            for (int j = -200; j < 200; j++)
+            for (int j = -worldSize.y; j < worldSize.y; j++)
             {
                 fogOfWarTilemap.SetTile(new Vector3Int(i, j), fogOfWarTile);
             }
@@ -67,12 +73,14 @@ public class GridManager : MonoBehaviour
     public void UpdateVisibility()
     {
         Vector3Int playerCell = GetPlayerCell();
-        for (int i = -6; i <= 6; i++)
+        int iR = (int)Math.Round(viewRadius);
+        for (int i = -iR; i <= iR; i++)
         {
-            for (int j = -6; j <= 6; j++)
+            for (int j = -iR; j <= iR; j++)
             {
                 Vector3Int cell = playerCell + new Vector3Int(i, j);
-                fogOfWarTilemap.SetTile(cell, null);
+                if(Vector3Int.Distance(playerCell, cell)<=viewRadius)
+                    fogOfWarTilemap.SetTile(cell, null);
             }
         }
     }

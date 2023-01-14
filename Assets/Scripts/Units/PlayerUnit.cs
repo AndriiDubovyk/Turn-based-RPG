@@ -82,6 +82,7 @@ public class PlayerUnit : Unit
         if (GameProcessInfo.CurrentDungeonLevel > 1 && !isSaveExist) LoadData();
         UpdateHealthBar();
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
+        GameObject.Find("MainCamera").GetComponent<MainCamera>().CenterOnPlayer();
     }
 
     public void SaveData()

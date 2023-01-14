@@ -651,6 +651,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1350274500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6122699321786804724, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
+  m_PrefabInstance: {fileID: 3516794436037003815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411383207
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +848,7 @@ MonoBehaviour:
   collidersTilemap: {fileID: 897360980}
   fogOfWarTilemap: {fileID: 2133458545}
   fogOfWarTile: {fileID: 11400000, guid: 8ec8a03a97bb4044ba0d06344cf9c1e9, type: 2}
+  fieldOfView: {fileID: 1350274500}
   tileSize: 1
   xTilePivot: 0.5
   yTilePivot: 0.5
@@ -1133,7 +1139,7 @@ Tilemap:
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.972549}
   m_Origin: {x: -4, y: 0, z: 0}
   m_Size: {x: 12, y: 6, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
