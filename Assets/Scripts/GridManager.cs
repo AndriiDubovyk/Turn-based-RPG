@@ -14,6 +14,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField]
     private Tile fogOfWarTile;
+    [SerializeField]
+    private Color darknesColor;
 
     [SerializeField]
     private GameObject fieldOfView; // must be circle object
@@ -27,6 +29,7 @@ public class GridManager : MonoBehaviour
 
     private List<ItemPickup> itemPickupList = new List<ItemPickup>();
     private Vector3Int worldSize;
+    private List<Vector3Int> visibleTilesPos = new List<Vector3Int>();
 
 
     // Start is called before the first frame update
@@ -44,7 +47,9 @@ public class GridManager : MonoBehaviour
         {
             for (int j = -worldSize.y; j < worldSize.y; j++)
             {
-                fogOfWarTilemap.SetTile(new Vector3Int(i, j), fogOfWarTile);
+                Vector3Int cell = new Vector3Int(i, j);
+                fogOfWarTilemap.SetTile(cell, fogOfWarTile);
+                SetTileVisibility(cell, false);
             }
         }
     }
@@ -72,6 +77,11 @@ public class GridManager : MonoBehaviour
 
     public void UpdateVisibility()
     {
+        foreach (Vector3Int cell in visibleTilesPos)
+        {
+            SetTileVisibility(cell, false);
+        }
+        visibleTilesPos.Clear();
         Vector3Int playerCell = GetPlayerCell();
         int iR = (int)Math.Round(viewRadius);
         for (int i = -iR; i <= iR; i++)
@@ -80,9 +90,22 @@ public class GridManager : MonoBehaviour
             {
                 Vector3Int cell = playerCell + new Vector3Int(i, j);
                 if(Vector3Int.Distance(playerCell, cell)<=viewRadius)
+                {
                     fogOfWarTilemap.SetTile(cell, null);
+                    SetTileVisibility(cell, true);
+                }
             }
         }
+    }
+
+    private void SetTileVisibility(Vector3Int cell, bool isVisible)
+    {
+        if (isVisible) visibleTilesPos.Add(cell);
+        groundTilemap.SetTileFlags(cell, TileFlags.None);
+        groundTilemap.SetColor(cell, isVisible ? Color.white : darknesColor);
+        collidersTilemap.SetTileFlags(cell, TileFlags.None);
+        collidersTilemap.SetColor(cell, isVisible ? Color.white : darknesColor);
+
     }
 
     public Vector3Int GetPlayerCell()
