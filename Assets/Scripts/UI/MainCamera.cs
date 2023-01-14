@@ -64,7 +64,7 @@ public class MainCamera : MonoBehaviour
             float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
             float difference = currentMagnitude - prevMagnitude;
-            return difference * 0.0001f;
+            return difference * 0.001f;
         }
         else return 0f;
     }

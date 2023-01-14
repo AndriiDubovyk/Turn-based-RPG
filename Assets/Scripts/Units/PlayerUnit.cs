@@ -222,7 +222,7 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
-        if(Input.GetMouseButtonDown(0) && movementPath == null)
+        if(Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -230,9 +230,10 @@ public class PlayerUnit : Unit
             Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
             if (clickedUnit == null)
             {
+                List<Vector3Int> tmp = movementPath!=null? new List<Vector3Int>(movementPath):null;
                 movementPath = SetMovementPathTo(clickedCell);
                 if (movementPath != null) mouseDownPrecalculatedPath = new List<Vector3Int>(movementPath);
-                movementPath = null;
+                movementPath = tmp;
             }
         }
         if (Input.GetMouseButtonUp(0) && !ui.IsUIBlockingActions())
