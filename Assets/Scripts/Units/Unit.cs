@@ -124,11 +124,11 @@ public class Unit : MonoBehaviour
         // Flip sprite if requires   
         if (point.x > gameObject.transform.position.x)
         {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            gameObject.transform.localScale = new Vector3(1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
         else if (point.x < transform.position.x)
         {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            gameObject.transform.localScale = new Vector3(-1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
 
     }

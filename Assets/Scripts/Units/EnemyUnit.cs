@@ -25,6 +25,7 @@ public class EnemyUnit : Unit
         tm.AddEnemy(gameObject);
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.UpdateHealth(GetCurrentHP(), GetMaxHP());
+        SetVisibility(false);
     }
 
     protected override void Update()
@@ -114,5 +115,24 @@ public class EnemyUnit : Unit
             fe.SetText($"+{unitData.expReward} EXP");
         }
         base.Die();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag=="FieldOfView") SetVisibility(true);   
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "FieldOfView") SetVisibility(false);   
+    }
+
+    private void SetVisibility(bool isVisible)
+    {
+        Color tmp = GetComponent<SpriteRenderer>().color;
+        if (isVisible) tmp.a = 1f;
+        else tmp.a = 0f;
+        GetComponent<SpriteRenderer>().color=tmp;
     }
 }

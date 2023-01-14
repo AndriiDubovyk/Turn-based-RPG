@@ -29,6 +29,11 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
+        //GenerateFogOfWar();
+    }
+
+    public void GenerateFogOfWar()
+    {
         for (int i = -200; i < 200; i++)
         {
             for (int j = -200; j < 200; j++)
@@ -55,6 +60,11 @@ public class GridManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        UpdateVisibility();
+    }
+
+    public void UpdateVisibility()
     {
         Vector3Int playerCell = GetPlayerCell();
         for (int i = -6; i <= 6; i++)
