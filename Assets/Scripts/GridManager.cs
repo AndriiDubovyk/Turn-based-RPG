@@ -129,12 +129,32 @@ public class GridManager : MonoBehaviour
                 {
                     Vector2 playerPos = player.transform.position;
                     playerPos.y +=  0.01f;
-                    RaycastHit2D raycast = Physics2D.Raycast(playerPos, new Vector2(i, j), Vector2.Distance(playerPos, playerPos + new Vector2(i, j)) - 1);
-                    if (raycast.collider == null)
+                    Vector2 target = new Vector2(i, j);
+                    
+                    if(collidersTilemap.GetTile(cell) == null) // no wall or other obstacles
                     {
-                        fogOfWarTilemap.SetTile(cell, null);
-                        SetTileVisibility(cell, true);
+                        RaycastHit2D raycast = Physics2D.Raycast(playerPos, target, Vector2.Distance(playerPos, playerPos + target));
+                        if (raycast.collider == null)
+                        {
+                            fogOfWarTilemap.SetTile(cell, null);
+                            SetTileVisibility(cell, true);
+                        }
+                    } 
+                    else
+                    {
+                        if (i > 0) target += new Vector2(-1f, 0); // right wall
+                        if (i < 0) target += new Vector2(1f, 0); // left wall
+                        if (j > 0) target += new Vector2(0, -1f); // top wall
+                        if (j < 0) target += new Vector2(0, 1f); // bot wall
+                        RaycastHit2D raycast = Physics2D.Raycast(playerPos, target, Vector2.Distance(playerPos, playerPos + target));
+                        if (raycast.collider == null)
+                        {
+                            fogOfWarTilemap.SetTile(cell, null); 
+                            if (j > 0) fogOfWarTilemap.SetTile(cell+new Vector3Int(0, 1), null);
+                            SetTileVisibility(cell, true);
+                        }
                     }
+
                 }
             }
         }
