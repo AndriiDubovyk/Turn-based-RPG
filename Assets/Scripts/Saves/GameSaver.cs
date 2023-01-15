@@ -45,8 +45,6 @@ public class GameSaver : MonoBehaviour
         savedData.playerSavedData.exp = player.GetComponent<PlayerUnit>().GetExp();
         savedData.playerSavedData.maxHealth = player.GetComponent<PlayerUnit>().GetMaxHP();
 
-        GameObject.Find("Grid").GetComponent<GridManager>().UpdateVisibility();
-
 
         List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().GetEnemiesGO();
         foreach (GameObject enemy in enemies)
@@ -135,5 +133,6 @@ public class GameSaver : MonoBehaviour
         player.GetComponent<PlayerUnit>().SetInventory(savedData.playerSavedData.inventoryNames);
         player.GetComponent<PlayerUnit>().SetLevel(savedData.playerSavedData.level);
         player.GetComponent<PlayerUnit>().SetExp(savedData.playerSavedData.exp);
+
     }
 }

@@ -93,7 +93,7 @@ public class LevelGenerator : MonoBehaviour
             templete = new TempleteGenerator(levelWidthCells, levelHeightCells, numberOfEnemyRooms, enemyRoomMaxCellDistFromEdge, minCellDistBetweenEnemyRooms, numberOfInvisibleObstacles, minCellDistBetweenInvisibleObstacles).GetTemplete();
         }
 
-        GenerateLevelWithTemplete(templete);
+        GenerateLevelWithTemplete(templete);  
     }
 
     public void GenerateLevelWithTemplete(int[,] templete, Vector3 exitPosition)
@@ -115,7 +115,7 @@ public class LevelGenerator : MonoBehaviour
 
         shiftX = -templete.GetLength(0) / 2;
         shiftY = -templete.GetLength(1) / 2;
-        ShowWorld(templete);
+        //ShowWorld(templete);
         CreateRooms();
         CreateExit();
     }

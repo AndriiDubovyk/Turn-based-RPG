@@ -861,7 +861,7 @@ MonoBehaviour:
   fogOfWarTilemap: {fileID: 2133458545}
   fogOfWarTile: {fileID: 11400000, guid: 8ec8a03a97bb4044ba0d06344cf9c1e9, type: 2}
   darknesColor: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 1}
-  visibilityRadius: 7
+  visibilityRadius: 8
   tileSize: 1
   xTilePivot: 0.5
   yTilePivot: 0.5

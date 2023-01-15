@@ -74,7 +74,6 @@ public class GridManager : MonoBehaviour
 
     public void UpdateVisibility()
     {
-        Debug.Log("Update visibility");
         UpdateGridVisibility();
         UpdateItemsVisibility();
         UpdateEnemiesVisibility();
@@ -117,23 +116,7 @@ public class GridManager : MonoBehaviour
             fogOfWarTilemap.SetTile(x, null);
             SetTileVisibility(x, false);
         }
-        UpdateVisibility();
-    }
-
-    public List<SavedData.Cell> GetRevealedFogOfWarCells()
-    {
-        List<SavedData.Cell> list = new List<SavedData.Cell>();
-        for (int i = -worldSize.x; i < worldSize.x; i++)
-        {
-            for (int j = -worldSize.y; j < worldSize.y; j++)
-            {       
-                Vector3Int cell = new Vector3Int(i, j);
-                if (fogOfWarTilemap.GetTile(cell)==null)
-                    list.Add(cell);
-            }
-        }
-        Debug.Log(list.Count);
-        return list;
+        //UpdateVisibility();
     }
 
     private void UpdateGridVisibility()
@@ -184,6 +167,22 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    public List<SavedData.Cell> GetRevealedFogOfWarCells()
+    {
+        List<SavedData.Cell> list = new List<SavedData.Cell>();
+        for (int i = -worldSize.x; i < worldSize.x; i++)
+        {
+            for (int j = -worldSize.y; j < worldSize.y; j++)
+            {
+                Vector3Int cell = new Vector3Int(i, j);
+                if (fogOfWarTilemap.GetTile(cell) == null)
+                    list.Add(cell);
+            }
+        }
+        return list;
     }
 
     private void SetTileVisibility(Vector3Int cell, bool isVisible)
