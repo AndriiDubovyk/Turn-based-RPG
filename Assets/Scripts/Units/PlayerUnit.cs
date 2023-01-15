@@ -44,6 +44,8 @@ public class PlayerUnit : Unit
     private AudioSource walkAudio;
     [SerializeField]
     private AudioSource takeItemAudio;
+    [SerializeField]
+    private FloatingText floatingWaitText;
 
     private Vector3Int lastCellWalkAudioWasPlaying;
     private Vector3 mouseDownPos;
@@ -530,5 +532,14 @@ public class PlayerUnit : Unit
     {
         base.MoveUpdate();
         UpdateOverlayMarks();
+    }
+
+    public void ShowFloatingWaitText()
+    {
+        if (canvas != null && floatingWaitText != null)
+        {
+            FloatingText fd = Instantiate(floatingWaitText, transform.position, Quaternion.identity);
+            fd.SetParentCanvas(canvas);
+        }
     }
 }

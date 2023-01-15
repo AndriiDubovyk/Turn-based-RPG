@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1557100792}
-  defaultZoom: 4
-  maxZoom: 6
+  defaultZoom: 5
+  maxZoom: 9
 --- !u!114 &301473824 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5726634811047015919, guid: 06f71e8fa28a71442894adf48e721284, type: 3}

@@ -10,6 +10,8 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject takeItemButton;
     [SerializeField]
+    private GameObject skipTurnButton;
+    [SerializeField]
     private GameObject menuButton;
     [SerializeField]
     private GameObject statsButton;
@@ -24,16 +26,24 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject statsPanel;
 
-    private bool isMouseOverInvetoryButton;
-    private bool isMouseOverTakeItemButton;
-    private bool isMouseOverMenuButton;
-    private bool isMouseOverStatsButton;
+    [SerializeField]
+    private AudioSource uiSound;
+    private PlayerUnit player;
+
+    private bool 
+        isMouseOverInvetoryButton,
+        isMouseOverTakeItemButton,
+        isMouseOverSkipTurnButton,
+        isMouseOverMenuButton,
+        isMouseOverStatsButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         isMouseOverInvetoryButton = false;
         isMouseOverTakeItemButton = false;
+        isMouseOverSkipTurnButton = false;
         isMouseOverMenuButton = false;
         isMouseOverStatsButton = false;
     }
@@ -80,7 +90,7 @@ public class UI : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton; 
+        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton || isMouseOverSkipTurnButton; 
     } 
 
     public void EnterInventoryButton(bool isMouseOver)
@@ -93,6 +103,11 @@ public class UI : MonoBehaviour
         isMouseOverTakeItemButton = isMouseOver;
     }
 
+    public void EnterSkipTurnButton(bool isMouseOver)
+    {
+        isMouseOverSkipTurnButton = isMouseOver;
+    }
+
     public void EnterMenuButton(bool isMouseOver)
     {
         isMouseOverMenuButton = isMouseOver;
@@ -101,5 +116,15 @@ public class UI : MonoBehaviour
     public void EnterStatsButton(bool isMouseOver)
     {
         isMouseOverStatsButton = isMouseOver;
+    }
+
+    public void SkipTurn()
+    {
+        if(player.GetState()==Unit.State.IsThinking)
+        {
+            player.SkipTurn();
+            player.ShowFloatingWaitText();
+            uiSound.Play();
+        }
     }
 }
