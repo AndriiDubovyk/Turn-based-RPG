@@ -15,6 +15,7 @@ public class StatsPannel : MonoBehaviour
     private TextMeshProUGUI defenseText;
 
     private PlayerUnit player;
+    private MainCamera mainCamera;
 
     [SerializeField]
     private AudioSource uiSound;
@@ -23,6 +24,7 @@ public class StatsPannel : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
+        mainCamera = GameObject.Find("MainCamera").GetComponent<MainCamera>();
         gameObject.SetActive(false);
     }
 
@@ -32,6 +34,7 @@ public class StatsPannel : MonoBehaviour
         {
             uiSound.Play();
             gameObject.SetActive(!gameObject.activeSelf);
+            if (gameObject.activeSelf) mainCamera.CenterOnPlayer();
             UpdateStats();
         }
     }
