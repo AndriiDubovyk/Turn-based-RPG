@@ -45,18 +45,7 @@ public class ItemPickup : MonoBehaviour
         return gridManager.groundTilemap.WorldToCell(transform.position);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "FieldOfView") SetVisibility(true);
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "FieldOfView") SetVisibility(false);
-    }
-
-    private void SetVisibility(bool isVisible)
+    public void SetVisibility(bool isVisible)
     {
         Color tmp = GetComponent<SpriteRenderer>().color;
         if (isVisible) tmp.a = 1f;

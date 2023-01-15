@@ -18,8 +18,7 @@ public class GridManager : MonoBehaviour
     private Color darknesColor;
 
     [SerializeField]
-    private GameObject fieldOfView; // must be circle object
-    private float viewRadius;
+    private float visibilityRadius;
 
     public float tileSize = 1f;
     public float xTilePivot = 0.5f;
@@ -37,7 +36,6 @@ public class GridManager : MonoBehaviour
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         worldSize = GetComponent<LevelGenerator>().GetWorldSize();
-        viewRadius = fieldOfView.transform.localScale.x/2;
         GenerateFogOfWar();
     }
 
@@ -57,6 +55,7 @@ public class GridManager : MonoBehaviour
     public void AddItemPickup(ItemPickup itemPickup)
     {
         itemPickupList.Add(itemPickup);
+        UpdateItemsVisibility();
     }
 
     public void RemoveItemPickup(ItemPickup itemPickup)
@@ -72,27 +71,70 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateVisibility();
     }
 
     public void UpdateVisibility()
+    {
+        UpdateGridVisibility();
+        UpdateItemsVisibility();
+        UpdateEnemiesVisibility();
+    }
+
+    private void UpdateItemsVisibility()
+    {
+        foreach(ItemPickup it in itemPickupList)
+        {
+            if(groundTilemap.GetColor(it.GetCell())==darknesColor)
+            {
+                it.SetVisibility(false);         
+            }
+            else
+            {
+                it.SetVisibility(true);
+            }
+        }
+    }
+
+    private void UpdateEnemiesVisibility()
+    {
+        foreach (EnemyUnit eu in turnManager.GetEnemiesUnits())
+        {
+            if (groundTilemap.GetColor(eu.GetCell()) == darknesColor)
+            {
+                eu.SetVisibility(false);
+            }
+            else
+            {
+                eu.SetVisibility(true);
+            }
+        }
+    }
+
+    private void UpdateGridVisibility()
     {
         foreach (Vector3Int cell in visibleTilesPos)
         {
             SetTileVisibility(cell, false);
         }
         visibleTilesPos.Clear();
+
         Vector3Int playerCell = GetPlayerCell();
-        int iR = (int)Math.Round(viewRadius);
+        int iR = (int)Math.Round(visibilityRadius);
         for (int i = -iR; i <= iR; i++)
         {
             for (int j = -iR; j <= iR; j++)
             {
                 Vector3Int cell = playerCell + new Vector3Int(i, j);
-                if(Vector3Int.Distance(playerCell, cell)<=viewRadius)
+                if (Vector3Int.Distance(playerCell, cell) <= visibilityRadius)
                 {
-                    fogOfWarTilemap.SetTile(cell, null);
-                    SetTileVisibility(cell, true);
+                    Vector2 playerPos = player.transform.position;
+                    playerPos.y +=  0.01f;
+                    RaycastHit2D raycast = Physics2D.Raycast(playerPos, new Vector2(i, j), Vector2.Distance(playerPos, playerPos + new Vector2(i, j)) - 1);
+                    if (raycast.collider == null)
+                    {
+                        fogOfWarTilemap.SetTile(cell, null);
+                        SetTileVisibility(cell, true);
+                    }
                 }
             }
         }
@@ -105,7 +147,6 @@ public class GridManager : MonoBehaviour
         groundTilemap.SetColor(cell, isVisible ? Color.white : darknesColor);
         collidersTilemap.SetTileFlags(cell, TileFlags.None);
         collidersTilemap.SetColor(cell, isVisible ? Color.white : darknesColor);
-
     }
 
     public Vector3Int GetPlayerCell()

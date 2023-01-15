@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 897360978}
   - component: {fileID: 897360980}
   - component: {fileID: 897360979}
+  - component: {fileID: 897360981}
   m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
@@ -467,6 +468,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &897360981
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897360977}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &1000475244
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,11 +668,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1350274500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6122699321786804724, guid: 1efef88a304229b4f8a93776ebd75f90, type: 3}
-  m_PrefabInstance: {fileID: 3516794436037003815}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411383207
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +861,7 @@ MonoBehaviour:
   fogOfWarTilemap: {fileID: 2133458545}
   fogOfWarTile: {fileID: 11400000, guid: 8ec8a03a97bb4044ba0d06344cf9c1e9, type: 2}
   darknesColor: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 1}
-  fieldOfView: {fileID: 1350274500}
+  visibilityRadius: 7
   tileSize: 1
   xTilePivot: 0.5
   yTilePivot: 0.5

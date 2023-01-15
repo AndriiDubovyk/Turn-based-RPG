@@ -83,6 +83,7 @@ public class PlayerUnit : Unit
         UpdateHealthBar();
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
         GameObject.Find("MainCamera").GetComponent<MainCamera>().CenterOnPlayer();
+        gridManager.UpdateVisibility();
     }
 
     public void SaveData()

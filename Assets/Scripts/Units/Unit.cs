@@ -46,6 +46,7 @@ public class Unit : MonoBehaviour
 
     protected virtual void Awake()
     {
+        gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         maxHP = unitData.maxHP;
         attack = unitData.attack;
         defense = unitData.defense;
@@ -60,8 +61,6 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
-
-        gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         movementPath = null;
         attackTarget = null;
         SetState(State.IsThinking);
@@ -110,6 +109,7 @@ public class Unit : MonoBehaviour
         // Check if we reach next cell and if so stop moving
         if (nextCellPoint == transform.position)
         {
+            gridManager.UpdateVisibility();
             movementPath.RemoveAt(0);
             if (movementPath.Count == 0)
             {
