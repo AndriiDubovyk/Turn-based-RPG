@@ -24,6 +24,12 @@ public class GameSaver : MonoBehaviour
     {
         savedData = new SavedData();
 
+        savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentDungeonLevel;
+        savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
+        savedData.levelSavedData.exitPosX = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().x;
+        savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
+        savedData.levelSavedData.revealedFogOfWarCells = GameObject.Find("Grid").GetComponent<GridManager>().GetRevealedFogOfWarCells();
+
         savedData.playerSavedData.posX = player.transform.position.x;
         savedData.playerSavedData.posY = player.transform.position.y;
         savedData.playerSavedData.health = player.GetComponent<PlayerUnit>().GetCurrentHP();
@@ -39,10 +45,8 @@ public class GameSaver : MonoBehaviour
         savedData.playerSavedData.exp = player.GetComponent<PlayerUnit>().GetExp();
         savedData.playerSavedData.maxHealth = player.GetComponent<PlayerUnit>().GetMaxHP();
 
-        savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentDungeonLevel;
-        savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
-        savedData.levelSavedData.exitPosX = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().x;
-        savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
+        GameObject.Find("Grid").GetComponent<GridManager>().UpdateVisibility();
+
 
         List<GameObject> enemies = GameObject.Find("GameHandler").GetComponent<TurnManager>().GetEnemiesGO();
         foreach (GameObject enemy in enemies)
@@ -107,6 +111,7 @@ public class GameSaver : MonoBehaviour
         GameProcessInfo.CurrentDungeonLevel = savedData.levelSavedData.levelIndex;
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
         lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete, new Vector3(savedData.levelSavedData.exitPosX, savedData.levelSavedData.exitPosY));
+        GameObject.Find("Grid").GetComponent<GridManager>().RevealFogOfWar(savedData.levelSavedData.revealedFogOfWarCells);
 
         ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
         foreach (SavedData.ItemSavedData isd in savedData.itemsSavedData)

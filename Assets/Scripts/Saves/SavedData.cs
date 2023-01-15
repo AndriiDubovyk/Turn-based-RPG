@@ -6,19 +6,43 @@ using UnityEngine;
 [Serializable]
 public class SavedData 
 {
-    
+
     [Serializable]
-    public class LevelSavedData
+    public struct Cell
+    {
+        public int x;
+        public int y;
+
+        public Cell(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public static implicit operator Vector3Int(Cell rValue)
+        {
+            return new Vector3Int(rValue.x, rValue.y, 0);
+        }
+
+        public static implicit operator Cell(Vector3Int rValue)
+        {
+            return new Cell(rValue.x, rValue.y);
+        }
+    }
+
+    [Serializable]
+    public struct LevelSavedData
     {
         public int[,] levelTemplete;
         public int levelIndex;
         public float exitPosX;
         public float exitPosY;
+        public List<Cell> revealedFogOfWarCells;
     }
     public LevelSavedData levelSavedData = new LevelSavedData();
 
     [Serializable]
-    public class ItemSavedData
+    public struct ItemSavedData
     {
         public String itemName;
         public float posX;
@@ -27,7 +51,7 @@ public class SavedData
     public List<ItemSavedData> itemsSavedData = new List<ItemSavedData>();
 
     [Serializable]
-    public class EnemySavedData
+    public struct EnemySavedData
     {
         public string unitName;
         public float posX;
@@ -37,7 +61,7 @@ public class SavedData
     public List<EnemySavedData> enemiesSavedData = new List<EnemySavedData>();
 
     [Serializable]
-    public class PlayerSavedData
+    public struct PlayerSavedData
     {
         public float posX;
         public float posY;

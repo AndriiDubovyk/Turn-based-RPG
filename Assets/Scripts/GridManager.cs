@@ -30,9 +30,8 @@ public class GridManager : MonoBehaviour
     private Vector3Int worldSize;
     private List<Vector3Int> visibleTilesPos = new List<Vector3Int>();
 
-
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         turnManager = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         worldSize = GetComponent<LevelGenerator>().GetWorldSize();
@@ -75,6 +74,7 @@ public class GridManager : MonoBehaviour
 
     public void UpdateVisibility()
     {
+        Debug.Log("Update visibility");
         UpdateGridVisibility();
         UpdateItemsVisibility();
         UpdateEnemiesVisibility();
@@ -108,6 +108,32 @@ public class GridManager : MonoBehaviour
                 eu.SetVisibility(true);
             }
         }
+    }
+
+    public void RevealFogOfWar(List<SavedData.Cell> revealedCells)
+    {
+        foreach(SavedData.Cell x in revealedCells)
+        {
+            fogOfWarTilemap.SetTile(x, null);
+            SetTileVisibility(x, false);
+        }
+        UpdateVisibility();
+    }
+
+    public List<SavedData.Cell> GetRevealedFogOfWarCells()
+    {
+        List<SavedData.Cell> list = new List<SavedData.Cell>();
+        for (int i = -worldSize.x; i < worldSize.x; i++)
+        {
+            for (int j = -worldSize.y; j < worldSize.y; j++)
+            {       
+                Vector3Int cell = new Vector3Int(i, j);
+                if (fogOfWarTilemap.GetTile(cell)==null)
+                    list.Add(cell);
+            }
+        }
+        Debug.Log(list.Count);
+        return list;
     }
 
     private void UpdateGridVisibility()
