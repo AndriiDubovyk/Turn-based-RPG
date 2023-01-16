@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2990700838744793479}
   - component: {fileID: 2990700838744793476}
   m_Layer: 5
-  m_Name: FloatingExp
+  m_Name: FloatingInfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +7 EXP
+  m_text: Info
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbbb9139c5e2ba74aa2909d0c3d60edb, type: 2}
   m_sharedMaterial: {fileID: -7773373390116391592, guid: cbbb9139c5e2ba74aa2909d0c3d60edb, type: 2}
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58
-  m_fontSizeBase: 58
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -148,9 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58adee989a56824f8a44025076d5bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialColor: {r: 0, g: 0.55133057, b: 1, a: 1}
-  finalColor: {r: 0, g: 0.5529412, b: 1, a: 0}
+  initialColor: {r: 1, g: 1, b: 1, a: 1}
+  finalColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 0}
   initialPosition: {x: 0, y: 0, z: 0}
-  offset: {x: -0.9, y: 0.5, z: 0}
-  finalOffset: {x: 0, y: 100, z: 0}
-  fadeDuration: 1
+  offset: {x: 0, y: 1.5, z: 0}
+  finalOffset: {x: 0, y: 0, z: 0}
+  fadeDuration: 3

@@ -45,11 +45,13 @@ public class PlayerUnit : Unit
     private AudioSource takeItemAudio;
     [SerializeField]
     private FloatingText floatingWaitText;
+    [SerializeField]
+    private FloatingText floatingInfoText;
 
     private Vector3Int lastCellWalkAudioWasPlaying;
     private Vector3 mouseDownPos;
     private List<Vector3Int> mouseDownPrecalculatedPath;
-    
+
 
     protected override void Awake()
     {
@@ -87,7 +89,7 @@ public class PlayerUnit : Unit
     }
 
     public void SaveData()
-    {  
+    {
         GameProcessInfo.CurrentHP = currentHP;
         GameProcessInfo.MaxHP = maxHP;
         GameProcessInfo.Attack = attack;
@@ -122,7 +124,7 @@ public class PlayerUnit : Unit
     public void SetLevel(int level)
     {
         this.level = level;
-        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level+1));
+        playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
     }
 
     public int GetExp()
@@ -142,7 +144,7 @@ public class PlayerUnit : Unit
         while (this.exp >= levelingData.GetExpToNextLevel(level + 1))
         {
             this.exp -= levelingData.GetExpToNextLevel(level + 1);
-            GetLevelUp();   
+            GetLevelUp();
         }
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
     }
@@ -164,13 +166,13 @@ public class PlayerUnit : Unit
     public void SetInventory(string[] inventory)
     {
         ItemData[] inv = new ItemData[6];
-        for(int i=0; i<inventory.Length; i++)
+        for (int i = 0; i < inventory.Length; i++)
         {
             foreach (ItemPickup ip in ips.itemsPickup)
             {
                 if (ip.itemData.name == inventory[i])
                 {
-                    inv [i]= ip.itemData;
+                    inv[i] = ip.itemData;
                 }
             }
         }
@@ -191,9 +193,9 @@ public class PlayerUnit : Unit
     public void SetEquipedWeapon(string equipedWeaponName)
     {
         ItemData ew = null;
-        foreach(ItemPickup ip in ips.itemsPickup)
+        foreach (ItemPickup ip in ips.itemsPickup)
         {
-            if(ip.itemData.name == equipedWeaponName)
+            if (ip.itemData.name == equipedWeaponName)
             {
                 ew = ip.itemData;
             }
@@ -224,7 +226,7 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
             Vector3 worldClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -232,7 +234,7 @@ public class PlayerUnit : Unit
             Unit clickedUnit = gridManager.GetUnitAtCell(clickedCell);
             if (clickedUnit == null)
             {
-                List<Vector3Int> tmp = movementPath!=null? new List<Vector3Int>(movementPath):null;
+                List<Vector3Int> tmp = movementPath != null ? new List<Vector3Int>(movementPath) : null;
                 movementPath = SetMovementPathTo(clickedCell);
                 if (movementPath != null) mouseDownPrecalculatedPath = new List<Vector3Int>(movementPath);
                 movementPath = tmp;
@@ -271,17 +273,20 @@ public class PlayerUnit : Unit
             takeItemAudio.Play();
             SkipTurn();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
+        } else if(!HasFreeInventorySlots())
+        {
+            ShowInfo("My bag is full");
         }
     }
 
     public void AddItem(ItemData itemData)
     {
         if (HasFreeInventorySlots())
-        {   
+        {
             inventory[NumberOfOccupiedInvetorySlots()] = itemData;
 
             GameObject invPanel = GameObject.Find("InventoryPanel");
-            if(invPanel!=null && invPanel.GetComponent<InventoryPanel>()!=null)
+            if (invPanel != null && invPanel.GetComponent<InventoryPanel>() != null)
             {
                 invPanel.GetComponent<InventoryPanel>().InitializeInventory();
             }
@@ -304,7 +309,7 @@ public class PlayerUnit : Unit
 
     public void RemoveItem(ItemData itemData)
     {
-        if(itemData ==equipedWeapon)
+        if (itemData == equipedWeapon)
         {
             equipedWeapon = null;
             this.attack -= itemData.attack;
@@ -339,12 +344,12 @@ public class PlayerUnit : Unit
     public void EquipWeapon(ItemData newWeapon)
     {
         // Player can equip only item with damage or no item
-        if (newWeapon == null || newWeapon.attack>0)
+        if (newWeapon == null || newWeapon.attack > 0)
         {
-            if(equipedWeapon == null)
+            if (equipedWeapon == null)
             {
                 equipedWeapon = newWeapon;
-                if(equipedWeapon!=null) this.attack += equipedWeapon.attack;
+                if (equipedWeapon != null) this.attack += equipedWeapon.attack;
             }
             else
             {
@@ -352,7 +357,7 @@ public class PlayerUnit : Unit
                 RemoveItem(tmpItem); // alread has defense decreasing
                 equipedWeapon = newWeapon;
                 AddItem(tmpItem);
-               
+
                 if (equipedWeapon != null) this.attack += equipedWeapon.attack;
             }
         }
@@ -389,14 +394,14 @@ public class PlayerUnit : Unit
     public override void SetState(State newState)
     {
         base.SetState(newState);
-        bool isWalking = state == State.IsMakingTurn && movementPath != null && movementPath.Count>0;
+        bool isWalking = state == State.IsMakingTurn && movementPath != null && movementPath.Count > 0;
         bool wasAudioPlayingAtThisCell = movementPath != null ? (lastCellWalkAudioWasPlaying == movementPath[0]) : true;
         if (isWalking && !wasAudioPlayingAtThisCell)
         {
-            if(movementPath!=null) lastCellWalkAudioWasPlaying = movementPath[0];
+            if (movementPath != null) lastCellWalkAudioWasPlaying = movementPath[0];
             walkAudio.Play();
         }
-            
+
     }
 
     public ItemData GetEquipedWeapon()
@@ -419,7 +424,7 @@ public class PlayerUnit : Unit
         else
         {
             isPathConfirmed = false;
-            if(mouseDownPrecalculatedPath!=null)
+            if (mouseDownPrecalculatedPath != null)
             {
                 movementPath = new List<Vector3Int>(mouseDownPrecalculatedPath);
                 mouseDownPrecalculatedPath = null;
@@ -461,7 +466,7 @@ public class PlayerUnit : Unit
     public int NumberOfOccupiedInvetorySlots()
     {
         int slots = 0;
-        for(int i = 0; i < inventory.Length; i++)
+        for (int i = 0; i < inventory.Length; i++)
         {
             if (inventory[i] != null) slots++;
         }
@@ -527,6 +532,16 @@ public class PlayerUnit : Unit
         {
             FloatingText fd = Instantiate(floatingWaitText, transform.position, Quaternion.identity);
             fd.SetParentCanvas(canvas);
+        }
+    }
+
+    public void ShowInfo(string str)
+    {
+        if (canvas != null && floatingInfoText != null)
+        {
+            FloatingText fi = Instantiate(floatingInfoText, transform.position, Quaternion.identity);
+            fi.SetText(str);
+            fi.SetParentCanvas(canvas);
         }
     }
 }

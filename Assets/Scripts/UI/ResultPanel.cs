@@ -8,12 +8,13 @@ public class ResultPanel : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI text;
-    [SerializeField]
-    private AudioSource uiSound;
+    private CrossSceneAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
         Hide();
     }
 
@@ -42,7 +43,7 @@ public class ResultPanel : MonoBehaviour
 
     public void Restart()
     {
-        uiSound.Play();
+        if (audioManager != null) audioManager.PlayDefaultUISound();
         GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
         GameProcessInfo.CurrentDungeonLevel = 1;
         SceneManager.LoadScene("RandomLevel");

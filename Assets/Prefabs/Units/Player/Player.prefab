@@ -117,6 +117,7 @@ MonoBehaviour:
   walkAudio: {fileID: 6717776256499546313}
   takeItemAudio: {fileID: 893659486543922940}
   floatingWaitText: {fileID: 2990700838744793476, guid: 15261fcf690c3424ab94c348bdfb7c90, type: 3}
+  floatingInfoText: {fileID: 2990700838744793476, guid: 6051f25474250074fb2d5a86977a1aa0, type: 3}
 --- !u!95 &5487636991277579279
 Animator:
   serializedVersion: 4

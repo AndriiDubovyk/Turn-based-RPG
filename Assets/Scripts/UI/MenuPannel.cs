@@ -8,8 +8,7 @@ public class MenuPannel : MonoBehaviour
     private GameSaver gs;
     private PlayerUnit player;
 
-    [SerializeField]
-    private AudioSource uiSound;
+    private CrossSceneAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -17,20 +16,22 @@ public class MenuPannel : MonoBehaviour
         gs = GameObject.Find("GameHandler").GetComponent<GameSaver>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         gameObject.SetActive(false);
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
     }
 
     public void Toggle()
     {
         if (player.GetState() == Unit.State.IsThinking) // Possible only on player's turn
         {
-            uiSound.Play();
+            if (audioManager != null) audioManager.PlayDefaultUISound();
             gameObject.SetActive(!gameObject.activeSelf);
         }
     }
 
     public void SaveAndExit()
     {
-        uiSound.Play();
+        if (audioManager != null) audioManager.PlayDefaultUISound();
         gs.Save();
         SceneManager.LoadScene("Menu");
     }

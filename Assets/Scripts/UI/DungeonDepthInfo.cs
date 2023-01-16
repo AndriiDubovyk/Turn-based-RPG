@@ -14,7 +14,7 @@ public class DungeonDepthInfo : MonoBehaviour
 
     public void SetLevelInfo(int level)
     {
-        gameObject.GetComponent<TextMeshProUGUI>().SetText($"Dungeon Depth: {level}");
+        gameObject.GetComponent<TextMeshProUGUI>().SetText($"{level}");
     }
 
 }

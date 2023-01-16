@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - FieldOfView
+  - cross_scene_audio
   layers:
   - Default
   - TransparentFX
