@@ -268,10 +268,12 @@ public class PlayerUnit : Unit
     {
         if (HasFreeInventorySlots())
         {
+            gridManager.RemoveItemPickup(itemPickup);
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
             takeItemAudio.Play();
             SkipTurn();
+            GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
         }
         SetItemTaking(false);
     }

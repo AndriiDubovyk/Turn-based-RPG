@@ -53,6 +53,7 @@ public class GridManager : MonoBehaviour
 
     public void AddItemPickup(ItemPickup itemPickup)
     {
+        Debug.Log($"Add to gm {itemPickup.itemData.name}");
         itemPickupList.Add(itemPickup);
         UpdateItemsVisibility();
     }
@@ -116,7 +117,6 @@ public class GridManager : MonoBehaviour
             fogOfWarTilemap.SetTile(x, null);
             SetTileVisibility(x, false);
         }
-        //UpdateVisibility();
     }
 
     private void UpdateGridVisibility()

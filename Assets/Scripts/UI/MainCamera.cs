@@ -8,6 +8,8 @@ public class MainCamera : MonoBehaviour
     [SerializeField]
     private GameObject player;
     [SerializeField]
+    private UI ui;
+    [SerializeField]
     private int defaultZoom;
     [SerializeField]
     private int maxZoom;
@@ -36,19 +38,21 @@ public class MainCamera : MonoBehaviour
         {
             CenterOnPlayer();
         }
-        if (Input.GetMouseButtonDown(0))
+        if(!ui.IsUIBlockingActions())
         {
-            touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0))
+            {
+                touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            if (Input.touchCount != 2 && Input.GetMouseButton(0))
+            {
+                Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (Mathf.Abs(direction.x) < 0.04 && Mathf.Abs(direction.y) < 0.04) return; // weak touch
+                Camera.main.transform.position += direction;
+            }
+            Zoom(Input.GetAxis("Mouse ScrollWheel"));
+            Zoom(GetPinchInput());
         }
-        if (Input.touchCount != 2 && Input.GetMouseButton(0))
-        {
-            Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Mathf.Abs(direction.x) < 0.04 && Mathf.Abs(direction.y) < 0.04) return; // weak touch
-            Camera.main.transform.position += direction;
-        }
-
-        Zoom(Input.GetAxis("Mouse ScrollWheel"));
-        Zoom(GetPinchInput());
     }
 
     public void CenterOnPlayer()

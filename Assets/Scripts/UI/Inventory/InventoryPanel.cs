@@ -68,6 +68,7 @@ public class InventoryPanel : MonoBehaviour
         itemSpawner.SpawnItem(itemData, player.transform.position); // spawn item pickup
         itemDropSound.Play();
         player.SkipTurn();
+        GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
     }
 
     public void UseHealingItem(ItemData itemData)

@@ -25,27 +25,33 @@ public class UI : MonoBehaviour
     private GameObject levelExitPanel;
     [SerializeField]
     private GameObject statsPanel;
+    [SerializeField]
+    private GameObject itemTakeScrollView;
 
     [SerializeField]
     private AudioSource uiSound;
     private PlayerUnit player;
+    private GridManager gm;
 
     private bool 
         isMouseOverInvetoryButton,
         isMouseOverTakeItemButton,
         isMouseOverSkipTurnButton,
         isMouseOverMenuButton,
-        isMouseOverStatsButton;
+        isMouseOverStatsButton,
+        isMouseOverItemTakeScroll;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
+        gm = GameObject.Find("Grid").GetComponent<GridManager>();
         isMouseOverInvetoryButton = false;
         isMouseOverTakeItemButton = false;
         isMouseOverSkipTurnButton = false;
         isMouseOverMenuButton = false;
         isMouseOverStatsButton = false;
+        isMouseOverItemTakeScroll = false;
     }
 
     // Update is called once per frame
@@ -90,12 +96,17 @@ public class UI : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton || isMouseOverSkipTurnButton; 
+        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton || isMouseOverSkipTurnButton || isMouseOverItemTakeScroll; 
     } 
 
     public void EnterInventoryButton(bool isMouseOver)
     {
         isMouseOverInvetoryButton = isMouseOver;
+    }
+
+    public void EnterItemTakeScroll(bool isMouseOver)
+    {
+        isMouseOverItemTakeScroll = isMouseOver;
     }
 
     public void EnterTakeItemButton(bool isMouseOver)
@@ -120,11 +131,17 @@ public class UI : MonoBehaviour
 
     public void SkipTurn()
     {
-        if(player.GetState()==Unit.State.IsThinking)
+        if (player.GetState()==Unit.State.IsThinking)
         {
             player.SkipTurn();
             player.ShowFloatingWaitText();
             uiSound.Play();
         }
+    }
+
+    public void UpdateItemTakeScrollItems()
+    {
+        Debug.Log("Update items");
+        itemTakeScrollView.GetComponent<ItemTakeScroll>().UpdateItems(gm.GetItemPickupList());
     }
 }

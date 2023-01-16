@@ -11,21 +11,19 @@ public class ItemPickup : MonoBehaviour
 
     void Awake()
     {
-        SetVisibility(false);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         gameObject.GetComponent<SpriteRenderer>().sprite = itemData.sprite;
-        gridManager.AddItemPickup(this);  
+        gridManager.AddItemPickup(this);
+        SetVisibility(false);
     }
 
     private void OnDestroy()
     {
-        gridManager.RemoveItemPickup(this);
+        if(gridManager.GetItemPickupList().Contains(this))
+        {
+            gridManager.RemoveItemPickup(this);
+        }
     }
 
     // Update is called once per frame

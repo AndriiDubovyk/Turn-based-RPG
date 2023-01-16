@@ -110,6 +110,7 @@ public class Unit : MonoBehaviour
         if (nextCellPoint == transform.position)
         {
             gridManager.UpdateVisibility();
+            if(unitData.name=="Player") GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
             movementPath.RemoveAt(0);
             if (movementPath.Count == 0)
             {
