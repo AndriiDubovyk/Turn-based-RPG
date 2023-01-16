@@ -7,6 +7,9 @@ public class MenuUI : MonoBehaviour
 {
     private CrossSceneAudioManager audioManager;
 
+    [SerializeField]
+    private SettingsPanel settingsPanel;
+
     void Start()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
@@ -17,6 +20,17 @@ public class MenuUI : MonoBehaviour
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
         SceneManager.LoadScene("RandomLevel");
+    }
+
+    public void ToggleSettingPanel()
+    {
+        if (audioManager != null) audioManager.PlayDefaultUISound();
+        settingsPanel.Toggle();
+    }
+
+    public void OpenVillageMenu()
+    {
+        if (audioManager != null) audioManager.PlayDefaultUISound();
     }
 
     public void Exit()
