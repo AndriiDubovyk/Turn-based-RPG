@@ -53,7 +53,6 @@ public class GridManager : MonoBehaviour
 
     public void AddItemPickup(ItemPickup itemPickup)
     {
-        Debug.Log($"Add to gm {itemPickup.itemData.name}");
         itemPickupList.Add(itemPickup);
         UpdateItemsVisibility();
     }

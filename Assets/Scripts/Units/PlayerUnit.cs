@@ -25,7 +25,6 @@ public class PlayerUnit : Unit
     private int exp;
 
     private bool isPathConfirmed;
-    private bool isItemTakingActive;
 
     private ItemData[] inventory = new ItemData[6];
     private ItemData equipedWeapon;
@@ -68,7 +67,6 @@ public class PlayerUnit : Unit
     {
         base.Start();
         isPathConfirmed = false;
-        isItemTakingActive = false;
         ui = GameObject.Find("UICanvas").GetComponent<UI>();
 
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
@@ -254,7 +252,6 @@ public class PlayerUnit : Unit
                 attackTarget = null;
                 SelectDestinationCell(clickedCell);
                 mouseDownPrecalculatedPath = null;
-                SetItemTaking(false);
             }
             else if (clickedUnit != this && CanAttack(clickedUnit))
             {
@@ -266,7 +263,7 @@ public class PlayerUnit : Unit
 
     public void TakeItem(ItemPickup itemPickup)
     {
-        if (HasFreeInventorySlots())
+        if (HasFreeInventorySlots() && state == State.IsThinking)
         {
             gridManager.RemoveItemPickup(itemPickup);
             Destroy(itemPickup.gameObject);
@@ -275,7 +272,6 @@ public class PlayerUnit : Unit
             SkipTurn();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
         }
-        SetItemTaking(false);
     }
 
     public void AddItem(ItemData itemData)
@@ -460,17 +456,6 @@ public class PlayerUnit : Unit
         attackTarget = null;
         UpdateOverlayMarks();
         attackAudio.Play();
-    }
-
-    public void SetItemTaking(bool active)
-    {
-        if (active && GetState() != State.IsThinking) return; //  // Possible only on player's turn
-        isItemTakingActive = active;
-    }
-
-    public bool IsItemTakingActive()
-    {
-        return isItemTakingActive;
     }
 
     public int NumberOfOccupiedInvetorySlots()

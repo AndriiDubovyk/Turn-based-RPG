@@ -131,7 +131,6 @@ public class ItemDisplayPanel : MonoBehaviour
 
     public void DropItem()
     {
-        player.SetItemTaking(false); // to prevent taking back immediately
         inventoryPanel.DropItem(itemData);   
     }
 

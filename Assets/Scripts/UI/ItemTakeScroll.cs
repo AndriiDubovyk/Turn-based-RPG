@@ -28,7 +28,6 @@ public class ItemTakeScroll : MonoBehaviour
                 GameObject newElement = Instantiate(itemTakeElementPrefab, content.transform);
                 newElement.GetComponent<ItemTakeElement>().SetItemPickup(itemPickup);
                 itemTakeElements.Add(newElement);
-                Debug.Log($"Add {itemPickup.itemData.name}");
             }
         }
     }

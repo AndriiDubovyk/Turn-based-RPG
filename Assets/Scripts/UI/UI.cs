@@ -8,8 +8,6 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject inventoryButton;
     [SerializeField]
-    private GameObject takeItemButton;
-    [SerializeField]
     private GameObject skipTurnButton;
     [SerializeField]
     private GameObject menuButton;
@@ -35,7 +33,6 @@ public class UI : MonoBehaviour
 
     private bool 
         isMouseOverInvetoryButton,
-        isMouseOverTakeItemButton,
         isMouseOverSkipTurnButton,
         isMouseOverMenuButton,
         isMouseOverStatsButton,
@@ -47,7 +44,6 @@ public class UI : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         gm = GameObject.Find("Grid").GetComponent<GridManager>();
         isMouseOverInvetoryButton = false;
-        isMouseOverTakeItemButton = false;
         isMouseOverSkipTurnButton = false;
         isMouseOverMenuButton = false;
         isMouseOverStatsButton = false;
@@ -94,9 +90,9 @@ public class UI : MonoBehaviour
         return statsPanel != null && statsPanel.activeSelf;
     }
 
-    private bool IsMouseOverUI()
+    public bool IsMouseOverUI()
     {
-        return isMouseOverInvetoryButton || isMouseOverTakeItemButton || isMouseOverMenuButton || isMouseOverStatsButton || isMouseOverSkipTurnButton || isMouseOverItemTakeScroll; 
+        return isMouseOverInvetoryButton || isMouseOverMenuButton || isMouseOverStatsButton || isMouseOverSkipTurnButton || isMouseOverItemTakeScroll; 
     } 
 
     public void EnterInventoryButton(bool isMouseOver)
@@ -107,11 +103,6 @@ public class UI : MonoBehaviour
     public void EnterItemTakeScroll(bool isMouseOver)
     {
         isMouseOverItemTakeScroll = isMouseOver;
-    }
-
-    public void EnterTakeItemButton(bool isMouseOver)
-    {
-        isMouseOverTakeItemButton = isMouseOver;
     }
 
     public void EnterSkipTurnButton(bool isMouseOver)
@@ -141,7 +132,6 @@ public class UI : MonoBehaviour
 
     public void UpdateItemTakeScrollItems()
     {
-        Debug.Log("Update items");
         itemTakeScrollView.GetComponent<ItemTakeScroll>().UpdateItems(gm.GetItemPickupList());
     }
 }

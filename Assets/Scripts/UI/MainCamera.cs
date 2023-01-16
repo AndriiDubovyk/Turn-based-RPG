@@ -20,6 +20,7 @@ public class MainCamera : MonoBehaviour
     private int maxWidth;
     private int maxHeight;
     private Vector3 touchStart;
+    private Vector3 invalidTouchStartVector = new Vector3(-1, -1, -1); // should be used as the mark of invalid touchStart
 
 
     void Start()
@@ -38,21 +39,25 @@ public class MainCamera : MonoBehaviour
         {
             CenterOnPlayer();
         }
-        if(!ui.IsUIBlockingActions())
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!ui.IsMouseOverUI())
             {
                 touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
-            if (Input.touchCount != 2 && Input.GetMouseButton(0))
+            else
             {
-                Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (Mathf.Abs(direction.x) < 0.04 && Mathf.Abs(direction.y) < 0.04) return; // weak touch
-                Camera.main.transform.position += direction;
+                touchStart = invalidTouchStartVector;
             }
-            Zoom(Input.GetAxis("Mouse ScrollWheel"));
-            Zoom(GetPinchInput());
         }
+        if (Input.touchCount != 2 && Input.GetMouseButton(0) && !ui.IsUIBlockingActions() && !touchStart.Equals(invalidTouchStartVector))
+        {
+            Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Mathf.Abs(direction.x) < 0.04 && Mathf.Abs(direction.y) < 0.04) return; // weak touch
+            Camera.main.transform.position += direction;
+        }
+        Zoom(Input.GetAxis("Mouse ScrollWheel"));
+        Zoom(GetPinchInput());
     }
 
     public void CenterOnPlayer()

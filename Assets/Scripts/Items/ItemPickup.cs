@@ -26,18 +26,6 @@ public class ItemPickup : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(player.IsItemTakingActive())
-        {
-            if (player.GetCell().Equals(GetCell()))
-            {
-                GameObject.Find("Player").GetComponent<PlayerUnit>().TakeItem(this);
-            }
-        }     
-    }
-
     public Vector3Int GetCell()
     {
         return gridManager.groundTilemap.WorldToCell(transform.position);
