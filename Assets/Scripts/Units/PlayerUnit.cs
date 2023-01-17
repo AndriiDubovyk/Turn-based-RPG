@@ -45,11 +45,16 @@ public class PlayerUnit : Unit
     private Vector3Int lastCellWalkAudioWasPlaying;
     private Vector3 mouseDownPos;
     private List<Vector3Int> mouseDownPrecalculatedPath;
+    private GameProcessInfo gpi;
 
 
     protected override void Awake()
     {
         base.Awake();
+
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
+
         tm = GameObject.Find("GameHandler").GetComponent<TurnManager>();
         tm.AddPlayer(gameObject);
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
@@ -75,7 +80,7 @@ public class PlayerUnit : Unit
             gameObject.transform.position = new Vector3(startRoomPos.x + cellSize / 2, startRoomPos.y + cellSize / 2);
         }
 
-        if (GameProcessInfo.CurrentDungeonLevel > 1 && !isSaveExist) LoadData();
+        if (gpi.CurrentDungeonLevel > 1 && !isSaveExist) LoadData();
         UpdateHealthBar();
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level + 1));
         GameObject.Find("MainCamera").GetComponent<MainCamera>().CenterOnPlayer();
@@ -84,27 +89,27 @@ public class PlayerUnit : Unit
 
     public void SaveData()
     {
-        GameProcessInfo.CurrentHP = currentHP;
-        GameProcessInfo.MaxHP = maxHP;
-        GameProcessInfo.Attack = attack;
-        GameProcessInfo.Defense = defense;
-        GameProcessInfo.Level = level;
-        GameProcessInfo.Exp = exp;
-        GameProcessInfo.Inventory = inventory;
-        GameProcessInfo.EquipedWeapon = equipedWeapon;
+        gpi.CurrentHP = currentHP;
+        gpi.MaxHP = maxHP;
+        gpi.Attack = attack;
+        gpi.Defense = defense;
+        gpi.Level = level;
+        gpi.Exp = exp;
+        gpi.Inventory = inventory;
+        gpi.EquipedWeapon = equipedWeapon;
     }
 
     public void LoadData()
     {
-        currentHP = GameProcessInfo.CurrentHP;
-        maxHP = GameProcessInfo.MaxHP;
-        attack = GameProcessInfo.Attack;
-        defense = GameProcessInfo.Defense;
-        inventory = GameProcessInfo.Inventory;
-        level = GameProcessInfo.Level;
-        exp = GameProcessInfo.Exp;
-        equipedWeapon = GameProcessInfo.EquipedWeapon;
-        equipedArmor = GameProcessInfo.EquipedArmor;
+        currentHP = gpi.CurrentHP;
+        maxHP = gpi.MaxHP;
+        attack = gpi.Attack;
+        defense = gpi.Defense;
+        inventory = gpi.Inventory;
+        level = gpi.Level;
+        exp = gpi.Exp;
+        equipedWeapon = gpi.EquipedWeapon;
+        equipedArmor = gpi.EquipedArmor;
         playerLevelInfo.UpdateLevelInfo(level, exp, levelingData.GetExpToNextLevel(level - 1));
 
     }

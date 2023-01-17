@@ -13,7 +13,14 @@ public class ItemGenerator : MonoBehaviour
     private LevelGenerator levelGenerator;
     [SerializeField]
     private ItemSpawner itemSpawner;
+    private GameProcessInfo gpi;
 
+
+    void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +43,10 @@ public class ItemGenerator : MonoBehaviour
         foreach (LevelGenerationData.ItemGenerationData
             igd in levelGenerationData.startRoomItemGenerationData)
         {
-            if (GameProcessInfo.CurrentDungeonLevel >= igd.minLevel && GameProcessInfo.CurrentDungeonLevel <= igd.maxLevel)
+            if (gpi.CurrentDungeonLevel >= igd.minLevel && gpi.CurrentDungeonLevel <= igd.maxLevel)
             {
-                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
-                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
 
                 for (int i = 0; i < max; i++)
                 {
@@ -74,10 +81,10 @@ public class ItemGenerator : MonoBehaviour
             foreach (LevelGenerationData.ItemGenerationData
             igd in levelGenerationData.commonRoomItemGenerationData)
             {
-                if (GameProcessInfo.CurrentDungeonLevel >= igd.minLevel && GameProcessInfo.CurrentDungeonLevel <= igd.maxLevel)
+                if (gpi.CurrentDungeonLevel >= igd.minLevel && gpi.CurrentDungeonLevel <= igd.maxLevel)
                 {
-                    int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
-                    int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                    int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                    int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
 
                     for (int i = 0; i < max; i++)
                     {
@@ -110,10 +117,10 @@ public class ItemGenerator : MonoBehaviour
         foreach (LevelGenerationData.ItemGenerationData
             igd in levelGenerationData.bossRoomItemGenerationData)
         {
-            if (GameProcessInfo.CurrentDungeonLevel >= igd.minLevel && GameProcessInfo.CurrentDungeonLevel <= igd.maxLevel)
+            if (gpi.CurrentDungeonLevel >= igd.minLevel && gpi.CurrentDungeonLevel <= igd.maxLevel)
             {
-                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
-                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                int min = (int)(igd.minQuantity + igd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                int max = (int)(igd.maxQuantity + igd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
 
                 for (int i = 0; i < max; i++)
                 {

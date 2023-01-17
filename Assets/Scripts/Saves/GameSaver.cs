@@ -11,11 +11,14 @@ public class GameSaver : MonoBehaviour
     private SavedData savedData;
 
     private GameObject player;
+    private GameProcessInfo gpi;
     private const string SAVE_FILE_NAME = "SavedData.dat";
 
     private void Awake()
     {
         player = GameObject.Find("Player");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
         if (IsSaveExist()) LoadGame();
         
     }
@@ -24,7 +27,7 @@ public class GameSaver : MonoBehaviour
     {
         savedData = new SavedData();
 
-        savedData.levelSavedData.levelIndex = GameProcessInfo.CurrentDungeonLevel;
+        savedData.levelSavedData.levelIndex = gpi.CurrentDungeonLevel;
         savedData.levelSavedData.levelTemplete = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetLevelTemplete();
         savedData.levelSavedData.exitPosX = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().x;
         savedData.levelSavedData.exitPosY = GameObject.Find("Grid").GetComponent<LevelGenerator>().GetExitPosition().y;
@@ -106,7 +109,7 @@ public class GameSaver : MonoBehaviour
 
     private void GenerateWorld()
     {
-        GameProcessInfo.CurrentDungeonLevel = savedData.levelSavedData.levelIndex;
+        gpi.CurrentDungeonLevel = savedData.levelSavedData.levelIndex;
         LevelGenerator lg = GameObject.Find("Grid").GetComponent<LevelGenerator>();
         lg.GenerateLevelWithTemplete(savedData.levelSavedData.levelTemplete, new Vector3(savedData.levelSavedData.exitPosX, savedData.levelSavedData.exitPosY));
         GameObject.Find("Grid").GetComponent<GridManager>().RevealFogOfWar(savedData.levelSavedData.revealedFogOfWarCells);

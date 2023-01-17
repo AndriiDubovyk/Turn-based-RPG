@@ -8406,6 +8406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8010149235813103199, guid: ef643e1688bf75442ad6ad49554817fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef643e1688bf75442ad6ad49554817fc, type: 3}
 --- !u!224 &3498837226374606020 stripped

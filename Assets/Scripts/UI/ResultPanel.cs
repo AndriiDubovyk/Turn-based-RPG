@@ -9,11 +9,14 @@ public class ResultPanel : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI text;
     private CrossSceneAudioManager audioManager;
+    private GameProcessInfo gpi;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
+        objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
         if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
         Hide();
     }
@@ -28,7 +31,7 @@ public class ResultPanel : MonoBehaviour
     {
         if(result)
         {
-            text.SetText($"You comlete all {GameProcessInfo.MaxDungeonLevel} levels");
+            text.SetText($"You comlete all {gpi.MaxDungeonLevel} levels");
         }
         else
         {
@@ -45,7 +48,7 @@ public class ResultPanel : MonoBehaviour
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
         GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
-        GameProcessInfo.CurrentDungeonLevel = 1;
+        gpi.CurrentDungeonLevel = 1;
         GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(1);
     }
 

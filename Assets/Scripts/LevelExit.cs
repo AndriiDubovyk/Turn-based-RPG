@@ -9,9 +9,12 @@ public class LevelExit : MonoBehaviour
     private ResultPanel resultPanel;
 
     private bool isExitProcessed = false;
+    private GameProcessInfo gpi;
 
     private void Awake()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
         resultPanel = GameObject.Find("ResultPanel").GetComponent<ResultPanel>();
     }
 
@@ -28,7 +31,7 @@ public class LevelExit : MonoBehaviour
         {
             isExitProcessed = true;
             GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
-            if(GameProcessInfo.CurrentDungeonLevel == GameProcessInfo.MaxDungeonLevel)
+            if(gpi.CurrentDungeonLevel == gpi.MaxDungeonLevel)
             {
                 resultPanel.SetResult(true);
                 resultPanel.Display();

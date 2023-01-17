@@ -15,9 +15,12 @@ public class EnemyGenerator : MonoBehaviour
     private UnitSpawner unitSpawner;
     [SerializeField]
     private GameSaver gameSaver;
+    private GameProcessInfo gpi;
 
     void Awake()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
         if (gameSaver.IsSaveExist()) return;
     }
 
@@ -38,10 +41,10 @@ public class EnemyGenerator : MonoBehaviour
         
         foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.bossRoomEnemiesGenerationData)
         {
-            if (GameProcessInfo.CurrentDungeonLevel >= egd.minLevel && GameProcessInfo.CurrentDungeonLevel <= egd.maxLevel)
+            if (gpi.CurrentDungeonLevel >= egd.minLevel && gpi.CurrentDungeonLevel <= egd.maxLevel)
             {
-                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
-                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
 
                 for(int i = 0; i < max; i++)
                 {
@@ -78,10 +81,10 @@ public class EnemyGenerator : MonoBehaviour
 
             foreach (LevelGenerationData.EnemyGenerationData egd in levelGenerationData.commonRoomEnemiesGenerationData)
             {
-                if (GameProcessInfo.CurrentDungeonLevel >= egd.minLevel && GameProcessInfo.CurrentDungeonLevel <= egd.maxLevel)
+                if (gpi.CurrentDungeonLevel >= egd.minLevel && gpi.CurrentDungeonLevel <= egd.maxLevel)
                 {
-                    int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
-                    int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (GameProcessInfo.CurrentDungeonLevel - 1));
+                    int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                    int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
 
                     for (int i = 0; i < max; i++)
                     {

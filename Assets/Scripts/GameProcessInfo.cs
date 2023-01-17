@@ -1,23 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 // Save cross scene data
-public static class GameProcessInfo
+public class GameProcessInfo : MonoBehaviour
 {
-    public static int CurrentDungeonLevel { get; set; } = 1;
-    public static int MaxDungeonLevel { get; set; } = 5; //5
+    void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
+        if (objs.Length > 1)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    public int CurrentDungeonLevel { get; set; } = 1;
+    public int MaxDungeonLevel { get; set; } = 5; //5
 
     // Player cross scene data
-    public static int Attack { get; set; } = 0;
-    public static int MaxHP { get; set; } = 0;
-    public static int CurrentHP { get; set; } = 0;
-    public static int Defense { get; set; } = 0;
-    public static int Level { get; set; } = 0;
-    public static int Exp { get; set; } = 0;
-    public static ItemData[] Inventory { get; set; } = new ItemData[6];
-    public static ItemData EquipedWeapon { get; set; } = null;
-    public static ItemData EquipedArmor { get; set; } = null;
+    public int Attack { get; set; } = 0;
+    public int MaxHP { get; set; } = 0;
+    public int CurrentHP { get; set; } = 0;
+    public int Defense { get; set; } = 0;
+    public int Level { get; set; } = 0;
+    public int Exp { get; set; } = 0;
+    public ItemData[] Inventory { get; set; } = new ItemData[6];
+    public ItemData EquipedWeapon { get; set; } = null;
+    public ItemData EquipedArmor { get; set; } = null;
 }
     
