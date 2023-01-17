@@ -26,10 +26,9 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject itemTakeScrollView;
 
-    [SerializeField]
-    private AudioSource uiSound;
     private PlayerUnit player;
     private GridManager gm;
+    private CrossSceneAudioManager audioManager;
 
     private bool 
         isMouseOverInvetoryButton,
@@ -37,6 +36,12 @@ public class UI : MonoBehaviour
         isMouseOverMenuButton,
         isMouseOverStatsButton,
         isMouseOverItemTakeScroll;
+
+    void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -126,7 +131,7 @@ public class UI : MonoBehaviour
         {
             player.SkipTurn();
             player.ShowFloatingWaitText();
-            uiSound.Play();
+            if (audioManager != null) audioManager.PlayDefaultUISound();
         }
     }
 

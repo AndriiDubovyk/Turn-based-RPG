@@ -15,9 +15,6 @@ public class EnemyUnit : Unit
     private float atackTimeWait;
     private float timeToAttack = float.MaxValue;
 
-    [SerializeField]
-    private AudioSource attackSound;
-
     protected override void Awake()
     {
         base.Awake();
@@ -97,7 +94,7 @@ public class EnemyUnit : Unit
     public override void Attack(Unit another)
     {
         base.Attack(another);
-        attackSound.Play();
+        if (audioManager != null) audioManager.PlayAttackSound();
     }
 
     public override void UpdateHealthBar()

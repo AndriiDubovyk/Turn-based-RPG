@@ -17,18 +17,13 @@ public class InventoryPanel : MonoBehaviour
     [SerializeField]
     private GameObject armorSlotDisplay;
 
-    [SerializeField]
-    private AudioSource invetorySound;
-    [SerializeField]
-    private AudioSource itemEquipSound;
-    [SerializeField]
-    private AudioSource itemDropSound;
-    [SerializeField]
-    private AudioSource potionSound;
+    private CrossSceneAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         InitializeInventory();
         gameObject.SetActive(false);
@@ -38,7 +33,7 @@ public class InventoryPanel : MonoBehaviour
     {
         if(player.GetState()==Unit.State.IsThinking) // Possible only on player's turn
         {
-            invetorySound.Play();
+            if (audioManager != null) audioManager.PlayBagSound();
             gameObject.SetActive(!gameObject.activeSelf);
             ItemData[] inventory = player.GetInventory();
             InitializeInventory();
@@ -66,7 +61,7 @@ public class InventoryPanel : MonoBehaviour
         InitializeInventory(); // reinitialize inventory
         ItemSpawner itemSpawner = GameObject.Find("Grid").GetComponent<ItemSpawner>();
         itemSpawner.SpawnItem(itemData, player.transform.position); // spawn item pickup
-        itemDropSound.Play();
+        if (audioManager != null) audioManager.PlayDropItemSound();
         player.SkipTurn();
         GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
     }
@@ -77,7 +72,7 @@ public class InventoryPanel : MonoBehaviour
         {
             player.RemoveItem(itemData); // remove from main inventory
             player.Heal(itemData.healing);
-            potionSound.Play();
+            if (audioManager != null) audioManager.PlayPotionSound();
             player.SkipTurn();
             InitializeInventory(); // reinitialize inventory
         }
@@ -88,7 +83,7 @@ public class InventoryPanel : MonoBehaviour
         player.RemoveItem(itemData); // remove from main inventory
         player.EquipWeapon(itemData);
         player.SkipTurn();
-        itemEquipSound.Play();
+        if (audioManager != null) audioManager.PlayItemEquipSound();
         InitializeInventory(); // reinitialize inventory       
     }
 
@@ -97,7 +92,7 @@ public class InventoryPanel : MonoBehaviour
         player.RemoveItem(itemData); // remove from main inventory
         player.EquipArmor(itemData);
         player.SkipTurn();
-        itemEquipSound.Play();
+        if (audioManager != null) audioManager.PlayItemEquipSound();
         InitializeInventory(); // reinitialize inventory       
     }
 
@@ -108,7 +103,7 @@ public class InventoryPanel : MonoBehaviour
             player.RemoveItem(itemData); // remove from main inventory
             player.AddItem(itemData);
             player.SkipTurn();
-            itemEquipSound.Play();
+            if (audioManager != null) audioManager.PlayItemEquipSound();
             InitializeInventory(); // reinitialize inventory
         }
     }
@@ -120,7 +115,7 @@ public class InventoryPanel : MonoBehaviour
             player.RemoveItem(itemData); // remove from main inventory
             player.AddItem(itemData);
             player.SkipTurn();
-            itemEquipSound.Play();
+            if (audioManager != null) audioManager.PlayItemEquipSound();
             InitializeInventory(); // reinitialize inventory
         }
     }

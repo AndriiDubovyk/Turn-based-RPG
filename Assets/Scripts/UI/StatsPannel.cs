@@ -16,13 +16,13 @@ public class StatsPannel : MonoBehaviour
 
     private PlayerUnit player;
     private MainCamera mainCamera;
-
-    [SerializeField]
-    private AudioSource uiSound;
+    private CrossSceneAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
         player = GameObject.Find("Player").GetComponent<PlayerUnit>();
         mainCamera = GameObject.Find("MainCamera").GetComponent<MainCamera>();
         gameObject.SetActive(false);
@@ -32,7 +32,7 @@ public class StatsPannel : MonoBehaviour
     { 
         if (player.GetState() == Unit.State.IsThinking) // Possible only on player's turn
         {
-            uiSound.Play();
+            if (audioManager != null) audioManager.PlayDefaultUISound();
             gameObject.SetActive(!gameObject.activeSelf);
             if (gameObject.activeSelf) mainCamera.CenterOnPlayer();
             UpdateStats();

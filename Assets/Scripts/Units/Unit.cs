@@ -28,6 +28,8 @@ public class Unit : MonoBehaviour
 
     private Animator animator;
 
+    protected CrossSceneAudioManager audioManager;
+
     [SerializeField]
     private GameObject blood;
     [SerializeField]
@@ -46,6 +48,9 @@ public class Unit : MonoBehaviour
 
     protected virtual void Awake()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
+
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         maxHP = unitData.maxHP;
         attack = unitData.attack;

@@ -38,12 +38,6 @@ public class PlayerUnit : Unit
     private TurnManager tm;
     private ResultPanel resultPanel;
     [SerializeField]
-    private AudioSource attackAudio;
-    [SerializeField]
-    private AudioSource walkAudio;
-    [SerializeField]
-    private AudioSource takeItemAudio;
-    [SerializeField]
     private FloatingText floatingWaitText;
     [SerializeField]
     private FloatingText floatingInfoText;
@@ -270,7 +264,7 @@ public class PlayerUnit : Unit
             gridManager.RemoveItemPickup(itemPickup);
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
-            takeItemAudio.Play();
+            if (audioManager != null) audioManager.PlayTakeItemSound();
             SkipTurn();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
         } else if(!HasFreeInventorySlots())
@@ -399,7 +393,7 @@ public class PlayerUnit : Unit
         if (isWalking && !wasAudioPlayingAtThisCell)
         {
             if (movementPath != null) lastCellWalkAudioWasPlaying = movementPath[0];
-            walkAudio.Play();
+            if (audioManager != null) audioManager.PlayWalkSound();
         }
 
     }
@@ -460,7 +454,7 @@ public class PlayerUnit : Unit
         base.Attack(another);
         attackTarget = null;
         UpdateOverlayMarks();
-        attackAudio.Play();
+        if (audioManager != null) audioManager.PlayAttackSound();
     }
 
     public int NumberOfOccupiedInvetorySlots()
