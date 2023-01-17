@@ -33,6 +33,6 @@ public class MenuPannel : MonoBehaviour
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
         gs.Save();
-        SceneManager.LoadScene("Menu");
+        GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(0);
     }
 }

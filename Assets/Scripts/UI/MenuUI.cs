@@ -16,10 +16,9 @@ public class MenuUI : MonoBehaviour
         if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
     }
 
-    public void Play()
+    public void PlayButtonSound()
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
-        SceneManager.LoadScene("RandomLevel");
     }
 
     public void ToggleSettingPanel()

@@ -46,7 +46,7 @@ public class ResultPanel : MonoBehaviour
         if (audioManager != null) audioManager.PlayDefaultUISound();
         GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
         GameProcessInfo.CurrentDungeonLevel = 1;
-        SceneManager.LoadScene("RandomLevel");
+        GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(1);
     }
 
     // Update is called once per frame

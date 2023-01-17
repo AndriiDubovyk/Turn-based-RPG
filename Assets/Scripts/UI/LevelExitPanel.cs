@@ -28,6 +28,6 @@ public class LevelExitPanel : MonoBehaviour
         if (audioManager != null) audioManager.PlayDefaultUISound();
         GameProcessInfo.CurrentDungeonLevel++;
         player.GetComponent<PlayerUnit>().SaveData();
-        SceneManager.LoadScene("RandomLevel");
+        GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(1);
     }
 }

@@ -872,7 +872,7 @@ MonoBehaviour:
   collidersTilemap: {fileID: 897360980}
   fogOfWarTilemap: {fileID: 2133458545}
   fogOfWarTile: {fileID: 11400000, guid: 8ec8a03a97bb4044ba0d06344cf9c1e9, type: 2}
-  darknesColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+  darknesColor: {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
   visibilityRadius: 8
   tileSize: 1
   xTilePivot: 0.5
@@ -1528,3 +1528,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08517ee4eb10b574a983408f43ef4f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5730842784067252508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8607638035168268862, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
+  m_PrefabInstance: {fileID: 5730842784067252506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5730842784067252509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1257363128801482102, guid: 06f71e8fa28a71442894adf48e721284, type: 3}
+  m_PrefabInstance: {fileID: 5730842784067252506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5786825275230406370
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5786825275946129264, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: loadingPanel
+      value: 
+      objectReference: {fileID: 5730842784067252509}
+    - target: {fileID: 5786825275946129264, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: loadingBarFill
+      value: 
+      objectReference: {fileID: 5730842784067252508}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 319.81238
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 361.97266
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.0531754
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129265, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786825275946129267, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
+      propertyPath: m_Name
+      value: LoadingScene
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8aed99e90e786ba43b3d6c73ada02a7a, type: 3}
