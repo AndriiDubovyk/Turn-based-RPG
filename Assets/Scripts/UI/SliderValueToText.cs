@@ -8,20 +8,12 @@ public class SliderValueToText : MonoBehaviour
 {
     [SerializeField]
     private Slider slider;
+    [SerializeField]
     private TextMeshProUGUI text;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        text = GetComponent<TextMeshProUGUI>();
-    }
 
     public void UpdateValue()
     {
-        if(slider!=null && text!=null)
-        {
-            int sliderValue = (int)(slider.value);
-            text.SetText(sliderValue.ToString());
-        }
+        int sliderValue = (int)(slider.value);
+        text.SetText(sliderValue.ToString());
     }
 }

@@ -15,9 +15,7 @@ public class SettingsPanel : MonoBehaviour
 
     private void Awake()
     {
-        musicVolumeSettings.SetValue(PlayerPrefs.GetInt("musicVolume", 50));
-        uiSoundsVolumeSettings.SetValue(PlayerPrefs.GetInt("uiVolume", 50));
-        gameSoundsVolumeSettings.SetValue(PlayerPrefs.GetInt("gameVolume", 50));
+        
     }
 
     // Start is called before the first frame update
@@ -25,6 +23,9 @@ public class SettingsPanel : MonoBehaviour
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
         if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
+        musicVolumeSettings.SetValue(PlayerPrefs.GetInt("musicVolume", 50));
+        uiSoundsVolumeSettings.SetValue(PlayerPrefs.GetInt("uiVolume", 50));
+        gameSoundsVolumeSettings.SetValue(PlayerPrefs.GetInt("gameVolume", 50));
         gameObject.SetActive(false);
     }
 

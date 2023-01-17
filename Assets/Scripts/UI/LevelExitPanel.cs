@@ -6,26 +6,26 @@ using UnityEngine.SceneManagement;
 public class LevelExitPanel : MonoBehaviour
 {
     private GameObject player;
-
-    [SerializeField]
-    private AudioSource uiSound;
+    private CrossSceneAudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
+        if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
         gameObject.SetActive(false);
     }
 
     public void Cancel()
     {
-        uiSound.Play();
+        if (audioManager != null) audioManager.PlayDefaultUISound();
         gameObject.SetActive(false);
     }
 
     public void Confirm()
     {
-        uiSound.Play();
+        if (audioManager != null) audioManager.PlayDefaultUISound();
         GameProcessInfo.CurrentDungeonLevel++;
         player.GetComponent<PlayerUnit>().SaveData();
         SceneManager.LoadScene("RandomLevel");
