@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2165a57135bc0fa4bbe6df46ff68671d, type: 3}
+  m_Name: VillageUpgradesDataa
+  m_EditorClassIdentifier: 
+  alchemistUpgrades:
+  - plusStartPotion: 1
+    plusPotionPower: 0
+    price: 50
+  - plusStartPotion: 0
+    plusPotionPower: 5
+    price: 75
+  smithUpgrades:
+  - startWeapon: {fileID: 11400000, guid: e04855f42822da745984ac9d247d5c06, type: 2}
+    startArmor: {fileID: 0}
+    plusWeaponAttack: 0
+    plusArmorDefense: 0
+    price: 55
+  - startWeapon: {fileID: 0}
+    startArmor: {fileID: 11400000, guid: 50f336c382a016c4788508c96d345c87, type: 2}
+    plusWeaponAttack: 0
+    plusArmorDefense: 0
+    price: 55
+  - startWeapon: {fileID: 0}
+    startArmor: {fileID: 0}
+    plusWeaponAttack: 5
+    plusArmorDefense: 0
+    price: 90
+  - startWeapon: {fileID: 0}
+    startArmor: {fileID: 0}
+    plusWeaponAttack: 0
+    plusArmorDefense: 3
+    price: 90
+  librarianUpgrades:
+  - againstEnemy: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
+    attackBonus: 1
+    defenseBonus: 1
+    price: 35
+  - againstEnemy: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
+    attackBonus: 1
+    defenseBonus: 1
+    price: 45
+  - againstEnemy: {fileID: 11400000, guid: 4493492c8a027414ab01dce285be55ce, type: 2}
+    attackBonus: 1
+    defenseBonus: 1
+    price: 55
+  - againstEnemy: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
+    attackBonus: 1
+    defenseBonus: 1
+    price: 65

@@ -8,6 +8,7 @@ TagManager:
   - FieldOfView
   - cross_scene_audio
   - game_process_info
+  - village_info
   layers:
   - Default
   - TransparentFX
