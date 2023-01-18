@@ -113,11 +113,9 @@ MonoBehaviour:
   playerLevelInfo: {fileID: 0}
   levelingData: {fileID: 0}
   ips: {fileID: 11400000, guid: ca46b40d222786c42ab7f5cfb51e3625, type: 2}
-  attackAudio: {fileID: 367848569469798748}
-  walkAudio: {fileID: 6717776256499546313}
-  takeItemAudio: {fileID: 893659486543922940}
   floatingWaitText: {fileID: 2990700838744793476, guid: 15261fcf690c3424ab94c348bdfb7c90, type: 3}
   floatingInfoText: {fileID: 2990700838744793476, guid: 6051f25474250074fb2d5a86977a1aa0, type: 3}
+  healingPotionItemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
 --- !u!95 &5487636991277579279
 Animator:
   serializedVersion: 4

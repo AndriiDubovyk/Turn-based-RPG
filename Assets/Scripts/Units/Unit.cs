@@ -26,16 +26,17 @@ public class Unit : MonoBehaviour
     protected List<Vector3Int> movementPath;
     protected Unit attackTarget;
 
-    private Animator animator;
+    protected Animator animator;
 
     protected CrossSceneAudioManager audioManager;
+    protected VillageInfo villageInfo;
 
     [SerializeField]
-    private GameObject blood;
+    protected GameObject blood;
     [SerializeField]
     protected GameObject canvas;
     [SerializeField]
-    private FloatingText floatingDamage;
+    protected FloatingText floatingDamage;
 
     // States
     protected State state;
@@ -50,6 +51,9 @@ public class Unit : MonoBehaviour
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("cross_scene_audio");
         if (objs.Length > 0) audioManager = objs[0].GetComponent<CrossSceneAudioManager>();
+
+        objs = GameObject.FindGameObjectsWithTag("village_info");
+        if (objs.Length > 0) villageInfo = objs[0].GetComponent<VillageInfo>();
 
         gridManager = GameObject.Find("Grid").GetComponent<GridManager>();
         maxHP = unitData.maxHP;
@@ -125,7 +129,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private void FlipToPoint(Vector3 point)
+    protected void FlipToPoint(Vector3 point)
     {
         // Flip sprite if requires   
         if (point.x > gameObject.transform.position.x)
@@ -144,7 +148,7 @@ public class Unit : MonoBehaviour
         // Flip sprite if requires   
         FlipToPoint(another.transform.position);
         if(animator!=null) animator.SetTrigger("AttackTrigger");
-        another.TakeDamage(this.attack);
+        another.TakeDamage(this.attack, this);
     }
 
     public int GetCurrentHP()
@@ -177,7 +181,7 @@ public class Unit : MonoBehaviour
         this.defense = defense;
     }
 
-    public void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, Unit fromUnit)
     {
         int realDamageAmount = damageAmount - defense;
         if (realDamageAmount < 1) realDamageAmount = 1; // min damage = 1

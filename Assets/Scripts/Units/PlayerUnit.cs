@@ -47,6 +47,12 @@ public class PlayerUnit : Unit
     private List<Vector3Int> mouseDownPrecalculatedPath;
     private GameProcessInfo gpi;
 
+    [SerializeField]
+    private ItemData healingPotionItemData;
+    private int librarianLevel = 0;
+    private int alchemistLevel = 0;
+    
+
 
     protected override void Awake()
     {
@@ -61,6 +67,36 @@ public class PlayerUnit : Unit
         lastCellWalkAudioWasPlaying = new Vector3Int(-1, -1, -1);
         level = 1;
         exp = 0;
+    }
+
+
+    public void InitUpgrades()
+    {
+        librarianLevel = villageInfo.GetLibrarianLevel();
+        alchemistLevel = villageInfo.GetAlchemistLevel();
+        for(int i = 0; i < villageInfo.villageUpgradesData.alchemistUpgrades.Count; i++)
+        {
+            
+            VillageUpgradesData.AlchemistUpgrade upgrade = villageInfo.villageUpgradesData.alchemistUpgrades[i];
+            if (villageInfo.GetAlchemistLevel() > i)
+            {
+                for(int j =0; j<upgrade.plusStartPotion; j++)
+                {
+                    inventory[NumberOfOccupiedInvetorySlots()] = healingPotionItemData.Clone();
+                }
+            }
+        }
+        for (int i = 0; i < villageInfo.villageUpgradesData.smithUpgrades.Count; i++)
+        {
+           VillageUpgradesData.SmithUpgrade upgrade = villageInfo.villageUpgradesData.smithUpgrades[i];
+           if (villageInfo.GetSmithLevel()>i)
+           {
+                if (upgrade.startWeapon != null) equipedWeapon = upgrade.startWeapon;
+                if (upgrade.startArmor != null) equipedArmor = upgrade.startArmor;
+                attack += upgrade.plusWeaponAttack;
+                defense += upgrade.plusArmorDefense;
+           }
+        }
     }
 
 
@@ -294,7 +330,18 @@ public class PlayerUnit : Unit
 
     public void Heal(int healing)
     {
-        currentHP += healing;
+        int realHealing = healing;
+        for (int i = 0; i < villageInfo.villageUpgradesData.alchemistUpgrades.Count; i++)
+        {
+            VillageUpgradesData.AlchemistUpgrade upgrade = villageInfo.villageUpgradesData.alchemistUpgrades[i];
+            if (alchemistLevel > i)
+            {
+                realHealing += upgrade.plusPotionPower;
+            }
+        }
+
+
+        currentHP += realHealing;
         if (currentHP > maxHP) currentHP = maxHP;
         UpdateHealthBar();
     }
@@ -456,11 +503,61 @@ public class PlayerUnit : Unit
 
     public override void Attack(Unit another)
     {
-        base.Attack(another);
+        // Flip sprite if requires   
+        FlipToPoint(another.transform.position);
+        if (animator != null) animator.SetTrigger("AttackTrigger");
+
+        int attackValue = this.attack;
+        for(int i=0; i < villageInfo.villageUpgradesData.librarianUpgrades.Count; i++)
+        {
+            VillageUpgradesData.LibrarianUpgrade upgrade = villageInfo.villageUpgradesData.librarianUpgrades[i];
+            if (librarianLevel > i)
+            {
+                if (upgrade.againstEnemy.name == another.unitData.name)
+                {
+                    attackValue += upgrade.attackBonus;
+                }
+            }
+        }
+        another.TakeDamage(attackValue, this);
+
         attackTarget = null;
         UpdateOverlayMarks();
         if (audioManager != null) audioManager.PlayAttackSound();
     }
+
+    public override void TakeDamage(int damageAmount, Unit fromUnit)
+    {
+        int realDefense = defense;
+        for (int i = 0; i < villageInfo.villageUpgradesData.librarianUpgrades.Count; i++)
+        {
+            VillageUpgradesData.LibrarianUpgrade upgrade = villageInfo.villageUpgradesData.librarianUpgrades[i];
+            if (librarianLevel > i)
+            {
+                if (upgrade.againstEnemy.name == fromUnit.unitData.name)
+                {
+                    realDefense += upgrade.defenseBonus;
+                }
+            }
+        }
+        int realDamageAmount = damageAmount - realDefense;
+        if (realDamageAmount < 1) realDamageAmount = 1; // min damage = 1
+        currentHP -= realDamageAmount;
+        if (currentHP < 0) currentHP = 0;
+        UpdateHealthBar();
+
+        if (blood != null)
+        {
+            Instantiate(blood, transform.position, Quaternion.identity);
+        }
+        if (canvas != null && floatingDamage != null)
+        {
+            FloatingText fd = Instantiate(floatingDamage, transform.position, Quaternion.identity);
+            fd.SetParentCanvas(canvas);
+            fd.SetText(realDamageAmount.ToString());
+        }
+    }
+
 
     public int NumberOfOccupiedInvetorySlots()
     {

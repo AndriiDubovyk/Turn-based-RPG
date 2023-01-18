@@ -19,7 +19,14 @@ public class GameSaver : MonoBehaviour
         player = GameObject.Find("Player");
         GameObject[] objs = GameObject.FindGameObjectsWithTag("game_process_info");
         if (objs.Length > 0) gpi = objs[0].GetComponent<GameProcessInfo>();
-        if (IsSaveExist()) LoadGame();
+        if (IsSaveExist())
+        {
+            LoadGame();
+        }
+        else
+        {
+            player.GetComponent<PlayerUnit>().InitUpgrades(); // upgrades work only with new game
+        }
         
     }
 
