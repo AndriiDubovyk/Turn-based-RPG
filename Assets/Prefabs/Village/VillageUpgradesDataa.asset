@@ -57,3 +57,6 @@ MonoBehaviour:
     attackBonus: 1
     defenseBonus: 1
     price: 65
+  rewardData:
+    goldForFirstLevelCompleting: 10
+    goldIncreasePerLevel: 5

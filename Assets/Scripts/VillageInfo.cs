@@ -22,7 +22,7 @@ public class VillageInfo : MonoBehaviour
         alchemistLevel = PlayerPrefs.GetInt("alchemistLevel", 0);
         smithLevel = PlayerPrefs.GetInt("smithLevel", 0);
         librarianLevel = PlayerPrefs.GetInt("librarianLevel", 0);
-        gold = PlayerPrefs.GetInt("gold", 200);
+        gold = PlayerPrefs.GetInt("gold", 0);
     }
 
     public void Save()
@@ -91,6 +91,21 @@ public class VillageInfo : MonoBehaviour
     public bool CanBuyLibrarianUpgrade()
     {
         return gold >= GetLibrarianUpgradePrice();
+    }
+
+    public int GetRewardByDungeonLevel(int level)
+    {
+        if(level>0)
+        {
+            int reward = villageUpgradesData.rewardData.goldForFirstLevelCompleting;
+            for (int i = 2; i <= level; i++)
+            {
+                reward += villageUpgradesData.rewardData.goldForFirstLevelCompleting + villageUpgradesData.rewardData.goldIncreasePerLevel * (i - 1);
+            }
+            GetReward(reward);
+            return reward;
+        }
+        return 0;
     }
 
 

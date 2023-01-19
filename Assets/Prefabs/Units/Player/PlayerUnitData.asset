@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerUnitData
   m_EditorClassIdentifier: 
   name: Player
-  maxHP: 500
+  maxHP: 100
   attack: 23
   maxAttackDistance: 1
   pathfindingXMaxDistance: 40

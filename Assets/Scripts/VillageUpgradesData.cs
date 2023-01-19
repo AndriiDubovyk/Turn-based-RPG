@@ -36,4 +36,12 @@ public class VillageUpgradesData : ScriptableObject
         public int price;
     }
     public List<LibrarianUpgrade> librarianUpgrades;
+
+    [System.Serializable]
+    public class RewardData
+    {
+        public int goldForFirstLevelCompleting;
+        public int goldIncreasePerLevel;
+    }
+    public RewardData rewardData;
 }

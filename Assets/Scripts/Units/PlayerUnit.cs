@@ -133,6 +133,7 @@ public class PlayerUnit : Unit
         gpi.Exp = exp;
         gpi.Inventory = inventory;
         gpi.EquipedWeapon = equipedWeapon;
+        gpi.EquipedArmor = equipedArmor;
     }
 
     public void LoadData()

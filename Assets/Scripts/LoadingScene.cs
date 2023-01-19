@@ -30,7 +30,6 @@ public class LoadingScene : MonoBehaviour
         while(!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            Debug.Log(progressValue.ToString());
             loadingBarFill.fillAmount = progressValue;
 
             yield return null;
