@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dagger
   description: Small old dagger
-  attack: 10
+  attack: 5
   defense: 0
   healing: 0
   sprite: {fileID: 21300000, guid: 0a56d0899f4f2d043814167be16de03c, type: 3}

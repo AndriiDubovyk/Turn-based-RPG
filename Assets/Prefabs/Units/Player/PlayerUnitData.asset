@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Player
   maxHP: 100
-  attack: 23
+  attack: 15
   maxAttackDistance: 1
   pathfindingXMaxDistance: 40
   pathfindingYMaxDistance: 40

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc7a06cabd3fa04691a06035c0ad4ad, type: 3}
   m_Name: LevelingData
   m_EditorClassIdentifier: 
-  expirienceToSecondLevel: 100
-  expirienceIncreaseForLevel: 50
+  expirienceToSecondLevel: 35
+  expirienceIncreaseForLevel: 25
   maxHealthPerLevel: 5
-  attackPerLevel: 1
+  attackPerLevel: 3
   defensePerLevel: 1

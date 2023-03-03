@@ -17,7 +17,7 @@ MonoBehaviour:
     plusPotionPower: 0
     price: 50
   - plusStartPotion: 0
-    plusPotionPower: 5
+    plusPotionPower: 15
     price: 75
   smithUpgrades:
   - startWeapon: {fileID: 11400000, guid: e04855f42822da745984ac9d247d5c06, type: 2}
@@ -42,19 +42,19 @@ MonoBehaviour:
     price: 90
   librarianUpgrades:
   - againstEnemy: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
-    attackBonus: 1
+    attackBonus: 3
     defenseBonus: 1
     price: 35
   - againstEnemy: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
-    attackBonus: 1
+    attackBonus: 3
     defenseBonus: 1
     price: 45
   - againstEnemy: {fileID: 11400000, guid: 4493492c8a027414ab01dce285be55ce, type: 2}
-    attackBonus: 1
+    attackBonus: 3
     defenseBonus: 1
     price: 55
   - againstEnemy: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
-    attackBonus: 1
+    attackBonus: 3
     defenseBonus: 1
     price: 65
   rewardData:

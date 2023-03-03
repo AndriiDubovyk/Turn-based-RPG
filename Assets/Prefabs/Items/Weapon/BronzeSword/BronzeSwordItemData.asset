@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bronze Sword
   description: Still sharp
-  attack: 15
+  attack: 10
   defense: 0
   healing: 0
   sprite: {fileID: 21300000, guid: 3d0485d69d6bbe6428dda2f1554ebbc3, type: 3}

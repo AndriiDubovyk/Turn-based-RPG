@@ -19,11 +19,9 @@ MonoBehaviour:
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6
   defense: 0
-  expReward: 60
+  expReward: 10
   moveSpeed: 18
   sprite: {fileID: 1690223325, guid: 07a124c9b6d9e1d438d25ae831cbc3e0, type: 3}
   drops:
   - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
-    dropChance: 25
-  - itemData: {fileID: 11400000, guid: aa29d700dc1fb0f47887fe898a31aeb4, type: 2}
     dropChance: 15
