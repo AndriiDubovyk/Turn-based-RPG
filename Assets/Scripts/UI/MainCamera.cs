@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -22,6 +20,14 @@ public class MainCamera : MonoBehaviour
     private Vector3 touchStart;
     private Vector3 invalidTouchStartVector = new Vector3(-1, -1, -1); // should be used as the mark of invalid touchStart
 
+    // Player following
+    private Vector3 offset = new Vector3(0, 0, -5);
+    private float smoothTime = 0.25f;
+    private Vector3 velocity = Vector3.zero;
+    private float lastMoveTime = -1;
+    // How many second camera continue to follow the player after end of movement
+    private float additionalFollowTime = 0.7f;
+
 
     void Start()
     {
@@ -37,8 +43,14 @@ public class MainCamera : MonoBehaviour
     {
         if (player.GetComponent<PlayerUnit>().GetState() == Unit.State.IsMakingTurn)
         {
+            lastMoveTime = Time.time;
+            CenterOnPlayer();
+        } else if(Time.time - lastMoveTime < additionalFollowTime)
+        {
             CenterOnPlayer();
         }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!ui.IsMouseOverUI())
@@ -62,7 +74,15 @@ public class MainCamera : MonoBehaviour
 
     public void CenterOnPlayer()
     {
-        transform.position = player.transform.position + new Vector3(0, 0, -5);
+        Vector3 targetPosition = player.transform.position + offset;
+        if(Time.time - lastMoveTime < additionalFollowTime * 0.95f)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        } else
+        {
+            transform.position = targetPosition;
+        }
+
     }
 
     private float GetPinchInput()

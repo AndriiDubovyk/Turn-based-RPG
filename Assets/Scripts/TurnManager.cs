@@ -102,10 +102,9 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                // Path has been blocked by enemy - Clear path
-                playerUnit.SetMovementPathTo(playerUnit.GetCell());
-                playerUnit.UpdateOverlayMarks();
-                playerUnit.SetState(Unit.State.IsThinking);
+                // Path has been blocked by enemy
+                // Clear path
+                playerUnit.ResetMovementPath();
             }
         }
         else
@@ -143,7 +142,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    // true - if enemy has actions to do, flase - if enemy must skip turn
+    // true - if enemy has actions to do, false - if enemy must skip turn
     private bool PrepareEnemyAction(EnemyUnit enemyUnit)
     {
         Vector3Int playerCell = playerUnit.GetCell();

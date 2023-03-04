@@ -10,11 +10,6 @@ public class ItemTakeElement : MonoBehaviour
     [SerializeField]
     private Image image;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     public void SetItemPickup(ItemPickup itemPickup)
     {
         this.itemPickup = itemPickup;

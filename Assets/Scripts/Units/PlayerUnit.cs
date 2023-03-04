@@ -263,6 +263,7 @@ public class PlayerUnit : Unit
 
     public void SetAction()
     {
+        if (ui.IsUIBlockingActions()) return;
         if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
@@ -277,7 +278,7 @@ public class PlayerUnit : Unit
                 movementPath = tmp;
             }
         }
-        if (Input.GetMouseButtonUp(0) && !ui.IsUIBlockingActions())
+        if (Input.GetMouseButtonUp(0))
         {
             Vector3 mouseUpPos = Input.mousePosition;
             if (Vector3.Distance(mouseDownPos, mouseUpPos) > 100f) return; // panning
@@ -302,7 +303,8 @@ public class PlayerUnit : Unit
 
     public void TakeItem(ItemPickup itemPickup)
     {
-        if (HasFreeInventorySlots() && state == State.IsThinking)
+        if (state != State.IsThinking) return; // Can take item only on own turn
+        if (HasFreeInventorySlots())
         {
             SkipTurn();
             gridManager.RemoveItemPickup(itemPickup);
@@ -310,10 +312,13 @@ public class PlayerUnit : Unit
             AddItem(itemPickup.itemData);
             if (audioManager != null) audioManager.PlayTakeItemSound();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
-        } else if(!HasFreeInventorySlots())
+        } else
         {
             ShowInfo("My bag is full");
         }
+        ResetMovementPath();
+        // Exit from item take scroll to be able move again
+        ui.EnterItemTakeScroll(false);
     }
 
     public void AddItem(ItemData itemData)
@@ -615,6 +620,13 @@ public class PlayerUnit : Unit
             gridManager.uiOverlayTilemap.SetTile(movementPath[i], pathMarkTile);
         }
         gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
+    }
+
+    public void ResetMovementPath()
+    {
+        SetMovementPathTo(GetCell());
+        UpdateOverlayMarks();
+        SetState(Unit.State.IsThinking);
     }
 
     public override void Die()
