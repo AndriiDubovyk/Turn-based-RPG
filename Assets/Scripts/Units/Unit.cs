@@ -183,7 +183,11 @@ public class Unit : MonoBehaviour
 
     public virtual void TakeDamage(int damageAmount, Unit fromUnit)
     {
-        int realDamageAmount = damageAmount - defense;
+        // value from -5 to 5, we add this value to damage
+        Random rnd = new Random();
+        int damageSpread = rnd.Next(-5, 6); 
+
+        int realDamageAmount = damageAmount + damageSpread - defense;
         if (realDamageAmount < 1) realDamageAmount = 1; // min damage = 1
         currentHP -= realDamageAmount;
         if (currentHP < 0) currentHP = 0;
