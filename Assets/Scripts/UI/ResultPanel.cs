@@ -51,6 +51,8 @@ public class ResultPanel : MonoBehaviour
             reward = villageInfo.GetRewardByDungeonLevel(gpi.CurrentDungeonLevel - 1);
         }
         rewardText.SetText($"+{reward}");
+        // Delete save for starting new game
+        GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
     }
 
     public void Hide()
@@ -62,7 +64,6 @@ public class ResultPanel : MonoBehaviour
     public void Restart()
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
-        GameObject.Find("GameHandler").GetComponent<GameSaver>().DeleteSave();
         gpi.CurrentDungeonLevel = 1;
         GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(1);
     }
