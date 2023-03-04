@@ -41,8 +41,8 @@ MonoBehaviour:
     maxLevel: 999
     spawnChance: 50
   - enemyUnitData: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
-    minQuantity: 1
-    maxQuantity: 1
+    minQuantity: 2
+    maxQuantity: 3
     minQuantityIncreasePerLevel: 1
     maxQuantityIncreasePerLevel: 1
     minLevel: 4

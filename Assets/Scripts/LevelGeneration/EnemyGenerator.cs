@@ -43,8 +43,8 @@ public class EnemyGenerator : MonoBehaviour
         {
             if (gpi.CurrentDungeonLevel >= egd.minLevel && gpi.CurrentDungeonLevel <= egd.maxLevel)
             {
-                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
-                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - 1));
+                int min = (int)(egd.minQuantity + egd.minQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - egd.minLevel));
+                int max = (int)(egd.maxQuantity + egd.maxQuantityIncreasePerLevel * (gpi.CurrentDungeonLevel - egd.minLevel));
 
                 for(int i = 0; i < max; i++)
                 {
