@@ -15,48 +15,48 @@ MonoBehaviour:
   alchemistUpgrades:
   - plusStartPotion: 1
     plusPotionPower: 0
-    price: 50
+    price: 35
   - plusStartPotion: 0
     plusPotionPower: 15
-    price: 75
+    price: 55
   smithUpgrades:
   - startWeapon: {fileID: 11400000, guid: e04855f42822da745984ac9d247d5c06, type: 2}
     startArmor: {fileID: 0}
     plusWeaponAttack: 0
     plusArmorDefense: 0
-    price: 55
+    price: 30
   - startWeapon: {fileID: 0}
     startArmor: {fileID: 11400000, guid: 50f336c382a016c4788508c96d345c87, type: 2}
     plusWeaponAttack: 0
     plusArmorDefense: 0
-    price: 55
+    price: 35
   - startWeapon: {fileID: 0}
     startArmor: {fileID: 0}
     plusWeaponAttack: 5
     plusArmorDefense: 0
-    price: 90
+    price: 70
   - startWeapon: {fileID: 0}
     startArmor: {fileID: 0}
     plusWeaponAttack: 0
     plusArmorDefense: 3
-    price: 90
+    price: 80
   librarianUpgrades:
   - againstEnemy: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
     attackBonus: 3
     defenseBonus: 1
-    price: 35
+    price: 25
   - againstEnemy: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
     attackBonus: 3
     defenseBonus: 1
-    price: 45
+    price: 35
   - againstEnemy: {fileID: 11400000, guid: 4493492c8a027414ab01dce285be55ce, type: 2}
     attackBonus: 3
     defenseBonus: 1
-    price: 55
+    price: 50
   - againstEnemy: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
     attackBonus: 3
     defenseBonus: 1
-    price: 65
+    price: 60
   rewardData:
     goldForFirstLevelCompleting: 10
     goldIncreasePerLevel: 5
