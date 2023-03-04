@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GhostUnitData
   m_EditorClassIdentifier: 
   name: Ghost
-  maxHP: 110
-  attack: 14
+  maxHP: 115
+  attack: 17
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6

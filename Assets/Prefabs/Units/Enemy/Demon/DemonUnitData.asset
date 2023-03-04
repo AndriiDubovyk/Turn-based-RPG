@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DemonUnitData
   m_EditorClassIdentifier: 
   name: Demon
-  maxHP: 180
-  attack: 33
+  maxHP: 185
+  attack: 36
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6

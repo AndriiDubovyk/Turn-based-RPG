@@ -26,11 +26,6 @@ public class ItemTakeElement : MonoBehaviour
         return itemPickup;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TakeItem()
     {

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkeletonUnitData
   m_EditorClassIdentifier: 
   name: Skeleton
-  maxHP: 130
-  attack: 22
+  maxHP: 135
+  attack: 24
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
   pathfindingYMaxDistance: 6

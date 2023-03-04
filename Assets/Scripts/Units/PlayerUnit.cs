@@ -304,11 +304,11 @@ public class PlayerUnit : Unit
     {
         if (HasFreeInventorySlots() && state == State.IsThinking)
         {
+            SkipTurn();
             gridManager.RemoveItemPickup(itemPickup);
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
             if (audioManager != null) audioManager.PlayTakeItemSound();
-            SkipTurn();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
         } else if(!HasFreeInventorySlots())
         {
