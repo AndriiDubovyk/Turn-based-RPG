@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlimeUnitData
   m_EditorClassIdentifier: 
   name: Slime
-  maxHP: 55
+  maxHP: 60
   attack: 12
   maxAttackDistance: 1
   pathfindingXMaxDistance: 6
