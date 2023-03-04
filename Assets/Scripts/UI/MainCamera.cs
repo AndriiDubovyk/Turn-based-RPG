@@ -44,10 +44,10 @@ public class MainCamera : MonoBehaviour
         if (player.GetComponent<PlayerUnit>().GetState() == Unit.State.IsMakingTurn)
         {
             lastMoveTime = Time.time;
-            CenterOnPlayer();
+            SmoothCenterOnPlayer();
         } else if(Time.time - lastMoveTime < additionalFollowTime)
         {
-            CenterOnPlayer();
+            SmoothCenterOnPlayer();
         }
 
 
@@ -72,10 +72,16 @@ public class MainCamera : MonoBehaviour
         Zoom(GetPinchInput());
     }
 
-    public void CenterOnPlayer()
+    public void SmoothCenterOnPlayer()
     {
         Vector3 targetPosition = player.transform.position + offset;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+    }
+
+    public void CenterOnPlayer()
+    {
+        Vector3 targetPosition = player.transform.position + offset;
+        transform.position = targetPosition;
     }
 
     private float GetPinchInput()
