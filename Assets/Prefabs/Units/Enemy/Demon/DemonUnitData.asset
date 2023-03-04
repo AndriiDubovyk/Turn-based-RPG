@@ -24,7 +24,7 @@ MonoBehaviour:
   sprite: {fileID: 430144508, guid: 868c16190b1c62c4a9a6422cf2f9696b, type: 3}
   drops:
   - itemData: {fileID: 11400000, guid: e8304b5f751b74241b8f4272921c9065, type: 2}
-    dropChance: 15
+    dropChance: 50
   - itemData: {fileID: 11400000, guid: 7c3de5e623443994589deddb22054ea7, type: 2}
     dropChance: 75
   - itemData: {fileID: 11400000, guid: 0ac3d2306801240418ea182e912734d8, type: 2}

@@ -18,19 +18,19 @@ MonoBehaviour:
   - enemyUnitData: {fileID: 11400000, guid: 2f2d94f7abaa1ac419d3713dd60c92ab, type: 2}
     minQuantity: 1
     maxQuantity: 2
-    minQuantityIncreasePerLevel: 0
-    maxQuantityIncreasePerLevel: 0.5
+    minQuantityIncreasePerLevel: 1
+    maxQuantityIncreasePerLevel: 1
     minLevel: 1
-    maxLevel: 5
+    maxLevel: 2
     spawnChance: 35
   - enemyUnitData: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
     minQuantity: 1
     maxQuantity: 2
-    minQuantityIncreasePerLevel: 0
+    minQuantityIncreasePerLevel: 0.5
     maxQuantityIncreasePerLevel: 0.5
-    minLevel: 5
+    minLevel: 3
     maxLevel: 999
-    spawnChance: 35
+    spawnChance: 20
   bossRoomEnemiesGenerationData:
   - enemyUnitData: {fileID: 11400000, guid: 4493492c8a027414ab01dce285be55ce, type: 2}
     minQuantity: 1
@@ -42,12 +42,12 @@ MonoBehaviour:
     spawnChance: 50
   - enemyUnitData: {fileID: 11400000, guid: 98140845f9c356c4fbcc8277a3ac7acb, type: 2}
     minQuantity: 1
-    maxQuantity: 2
-    minQuantityIncreasePerLevel: 0.25
-    maxQuantityIncreasePerLevel: 0.25
-    minLevel: 5
+    maxQuantity: 1
+    minQuantityIncreasePerLevel: 1
+    maxQuantityIncreasePerLevel: 1
+    minLevel: 4
     maxLevel: 999
-    spawnChance: 50
+    spawnChance: 0
   - enemyUnitData: {fileID: 11400000, guid: 376e09dd9c4c6ca47bc3e6ccba2971ea, type: 2}
     minQuantity: 1
     maxQuantity: 1
