@@ -104,7 +104,7 @@ public class TurnManager : MonoBehaviour
             {
                 // Path has been blocked by enemy
                 // Clear path
-                playerUnit.ResetMovementPath();
+                playerUnit.InterruptMovement();
             }
         }
         else

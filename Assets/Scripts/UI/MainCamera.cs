@@ -22,11 +22,11 @@ public class MainCamera : MonoBehaviour
 
     // Player following
     private Vector3 offset = new Vector3(0, 0, -5);
-    private float smoothTime = 0.25f;
+    private float smoothTime = 0.18f;
     private Vector3 velocity = Vector3.zero;
     private float lastMoveTime = -1;
     // How many second camera continue to follow the player after end of movement
-    private float additionalFollowTime = 0.7f;
+    private float additionalFollowTime = 0.35f;
 
 
     void Start()
@@ -75,14 +75,7 @@ public class MainCamera : MonoBehaviour
     public void CenterOnPlayer()
     {
         Vector3 targetPosition = player.transform.position + offset;
-        if(Time.time - lastMoveTime < additionalFollowTime * 0.95f)
-        {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-        } else
-        {
-            transform.position = targetPosition;
-        }
-
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
 
     private float GetPinchInput()
@@ -112,6 +105,9 @@ public class MainCamera : MonoBehaviour
             zoomLevel = Mathf.Clamp(zoomLevel, 1, maxZoom);
             ppc.refResolutionX = Mathf.FloorToInt(maxWidth / zoomLevel);
             ppc.refResolutionY = Mathf.FloorToInt(maxHeight / zoomLevel);
+            // Use only even numbers
+            if (ppc.refResolutionX % 2 != 0) ppc.refResolutionX++;
+            if (ppc.refResolutionY % 2 != 0) ppc.refResolutionY++;
         }
     }
 }

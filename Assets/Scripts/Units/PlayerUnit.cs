@@ -92,8 +92,16 @@ public class PlayerUnit : Unit
            VillageUpgradesData.SmithUpgrade upgrade = villageInfo.villageUpgradesData.smithUpgrades[i];
            if (villageInfo.GetSmithLevel()>i)
            {
-                if (upgrade.startWeapon != null) equipedWeapon = upgrade.startWeapon;
-                if (upgrade.startArmor != null) equipedArmor = upgrade.startArmor;
+                if (upgrade.startWeapon != null)
+                {
+                    equipedWeapon = upgrade.startWeapon;
+                    attack += equipedWeapon.attack;
+                }
+                if (upgrade.startArmor != null)
+                {
+                    equipedArmor = upgrade.startArmor;
+                    defense += equipedArmor.defense;
+                }
                 attack += upgrade.plusWeaponAttack;
                 defense += upgrade.plusArmorDefense;
            }
@@ -306,11 +314,11 @@ public class PlayerUnit : Unit
         if (state != State.IsThinking) return; // Can take item only on own turn
         if (HasFreeInventorySlots())
         {
-            SkipTurn();
             gridManager.RemoveItemPickup(itemPickup);
             Destroy(itemPickup.gameObject);
             AddItem(itemPickup.itemData);
             if (audioManager != null) audioManager.PlayTakeItemSound();
+            SkipTurn();
             GameObject.Find("UICanvas").GetComponent<UI>().UpdateItemTakeScrollItems();
         } else
         {
@@ -622,12 +630,19 @@ public class PlayerUnit : Unit
         gridManager.uiOverlayTilemap.SetTile(movementPath.Last(), selectionTile);
     }
 
-    public void ResetMovementPath()
+    private void ResetMovementPath()
     {
         SetMovementPathTo(GetCell());
         UpdateOverlayMarks();
+    }
+
+    public void InterruptMovement()
+    {
+        ResetMovementPath();
         SetState(Unit.State.IsThinking);
     }
+
+
 
     public override void Die()
     {
