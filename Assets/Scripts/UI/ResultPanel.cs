@@ -34,7 +34,7 @@ public class ResultPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    // true - win, false - lose
+    // Set game result: true - win, false - lose
     public void SetResult(bool result) 
     {
         if (isResultSetted) return;
@@ -58,6 +58,7 @@ public class ResultPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // Restart game
     public void Restart()
     {
         if (audioManager != null) audioManager.PlayDefaultUISound();
@@ -66,9 +67,10 @@ public class ResultPanel : MonoBehaviour
         GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Back to main menu
+    public void BackToMenu()
     {
-        
+        if (audioManager != null) audioManager.PlayDefaultUISound();
+        GameObject.Find("LoadingScene").GetComponent<LoadingScene>().LoadScene(0);
     }
 }
