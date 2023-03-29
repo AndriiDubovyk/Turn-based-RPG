@@ -11,6 +11,8 @@ public class MenuUI : MonoBehaviour
     private SettingsPanel settingsPanel;
     [SerializeField]
     private VillagePannel villagePanel;
+    [SerializeField]
+    private TutorialPanel tutorialPanel;
 
     void Start()
     {
@@ -28,6 +30,13 @@ public class MenuUI : MonoBehaviour
         if (audioManager != null) audioManager.PlayDefaultUISound();
         settingsPanel.Toggle();
     }
+
+    public void ToggleTutorialPanel()
+    {
+        if (audioManager != null) audioManager.PlayDefaultUISound();
+        tutorialPanel.Toggle();
+    }
+
 
     public void ToggleVillagePanel()
     {
